@@ -25,6 +25,7 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 0 10px;
 }
 
 nav > ul {
@@ -45,7 +46,7 @@ nav li {
 nav a {
     text-decoration: none;
     color: black;
-    padding: 30px 10px;
+    padding: 20px 10px;
     transition: border-bottom-color 250ms ease;
     border-bottom: 3px solid rgba(0, 0, 0, 0);
 }
@@ -57,3 +58,32 @@ nav a:hover {
 }
 
 /* NAVBAR END */
+
+
+/* <------ SEARCH ------> */
+
+#search {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+#search .line {
+    width: 100%;
+    background-color: rgb(145, 145, 145);
+    height: 3px;
+}
+
+#search_input {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background-color: inherit;
+    border: 3px solid rgba(0, 0, 0, 0);
+}
+
+#seach_input:hover {
+    border-color: red;
+}
+
+/* SEARCH END */
