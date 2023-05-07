@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: FoundersGrotesk;
+    src: url("/static/FoundersGrotesk-Regular.otf") format("opentype");
+}
+
+#container {
+    margin: 0px;
+}
+
+#header {
+    background-color: whitesmoke;
+    padding: 10px 0px;
+    box-shadow: 0 5px 15px rgba(92, 92, 92, 0.7);
+    font-family: "FoundersGrotesk";
+}
+
+/* <------- NAVBAR ------> */
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav > ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    text-transform: uppercase;
+}
+
+ul.nav-left {
+    align-items: center;
+}
+
+nav li {
+    vertical-align: center;
+    margin-left: 10px;
+}
+nav a {
+    text-decoration: none;
+    color: black;
+    padding: 30px 10px;
+    transition: border-bottom-color 250ms ease;
+    border-bottom: 3px solid rgba(0, 0, 0, 0);
+}
+nav a:hover {
+    border-bottom-color: black;
+}
+#nav-logo {
+    max-width: 150px;
+}
+
+/* NAVBAR END */

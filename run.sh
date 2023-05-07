@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# cd "/home/shail/Desktop/programming/freelancing/HealthCare"
+cd "$HOME/programming/freelancing/E-commerce-Fasion-WebApp"
 while :
 do
 	python3 web.py
