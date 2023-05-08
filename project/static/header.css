@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+html, body {
+    height: 100%;
+}
 @font-face {
     font-family: FoundersGrotesk;
     src: url("/static/FoundersGrotesk-Regular.otf") format("opentype");
@@ -71,7 +74,7 @@ nav a:hover {
     /* visibility: hidden; */
     display: flex;
     flex-direction: column;
-    position: relative;
+    position: absolute;
     padding: 0 10px;
     background-color: whitesmoke;
     width: 100%;
