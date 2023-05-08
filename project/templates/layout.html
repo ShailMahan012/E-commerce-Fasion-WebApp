@@ -28,7 +28,15 @@
         </nav>
         <div id="search">
             <div class="line"></div>
-            <input type="text" placeholder="SEARCH" id="search_input">
+            <div class="row">
+                <div class="column-2">
+                    <input type="text" placeholder="SEARCH" id="search_input">
+                </div>
+                <div class="column-1" onclick="show_search()">
+                    <a href='#search' id="btn-search"><i class="far fa-search"></i></a>
+                </div>
+                <div class="column-3"><a href="#close" onclick="hide_search()"><i class="fal fa-times"></i></a></div>
+            </div>
         </div>
     </section>
 <main id="container">
@@ -36,5 +44,6 @@
     {% endblock %}
 </main>
     <section id="footer"></section>
+    <script src="/static/nav.js"></script>
 </body>
 </html>

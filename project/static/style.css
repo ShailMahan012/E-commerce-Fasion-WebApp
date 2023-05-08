@@ -14,7 +14,8 @@
 
 #header {
     background-color: whitesmoke;
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
+    padding-top: 10px;
     box-shadow: 0 5px 15px rgba(92, 92, 92, 0.7);
     font-family: "FoundersGrotesk";
 }
@@ -61,29 +62,65 @@ nav a:hover {
 
 
 /* <------ SEARCH ------> */
+.fa-search, .fa-times {
+    font-size: 20px;
+    color: black;
+}
 
 #search {
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     margin-top: 10px;
     padding: 0 10px;
+    position: relative;
+    width: 100%;
+    top: -30px;
+    z-index: -1;
 }
+
 #search .line {
     width: 100%;
     background-color: rgb(145, 145, 145);
     height: 3px;
 }
 
-#search_input {
-    margin-top: 20px;
-    padding: 10px;
-    border: none;
-    background-color: inherit;
-    border: 3px solid rgba(0, 0, 0, 0);
+#search .row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    align-items: center;
+    margin: 10px;
 }
 
-#seach_input:hover {
-    border-color: red;
+#search .column-1, .column-3 {
+    margin-left: 10px;
+}
+#search .column-2 {
+    width: 100%;
+}
+
+#btn-search {
+    outline: none;
+    background-color: inherit;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+#search_input {
+    padding: 10px;
+    border: none;
+    width: 100%;
+    background-color: inherit;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: border-color 200ms ease;
+    outline: none;
+}
+
+
+#search_input:focus {
+    border-color: rgba(0, 0, 0, 1);
 }
 
 /* SEARCH END */
