@@ -10,5 +10,10 @@
 <p>
     Client want a simple and easy to use Ecommerce website for his fasion products <br>
     <b>Previous Site:</b> https://grabalty.myshopify.com <br>
-    <b>Want something like that:</b> https://Fendi.com/ca-en <br>
+    <b>Want something like these: 
+    <ul>
+    <li>https://Fendi.com/ca-en</li>
+    <li>https://asrv.com/</li>
+    <li>https://www.zara.com/ca/</li>
+    </ul>
 </p>
