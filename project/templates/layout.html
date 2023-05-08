@@ -12,7 +12,7 @@
 </head>
 <body>
     <section id="header">
-        <nav>
+        <nav id="nav">
             <ul class="nav-left">
                 <li><a href="#home" style="border: none;"><img src="/static/GRABALTY.png" id="nav-logo" alt="LOGO"></a></li>
                 <li><a href="#women">women</a></li>
@@ -20,19 +20,19 @@
                 <li><a href="#kids">kids</a></li>
             </ul>
             <ul class="id-right">
-                <li><a href="#search">search</a></li>
+                <li><a href="#search" onclick="show_search()">search</a></li>
                 <li><a href="#cart">
                     <i class="fa-regular fa-bag-shopping fa-lg"></i>
                 </a></li>
             </ul>
         </nav>
         <div id="search">
-            <div class="line"></div>
+            <!-- <div class="line"></div> -->
             <div class="row">
                 <div class="column-2">
                     <input type="text" placeholder="SEARCH" id="search_input">
                 </div>
-                <div class="column-1" onclick="show_search()">
+                <div class="column-1">
                     <a href='#search' id="btn-search"><i class="far fa-search"></i></a>
                 </div>
                 <div class="column-3"><a href="#close" onclick="hide_search()"><i class="fal fa-times"></i></a></div>
