@@ -1,6 +1,8 @@
 #container {
-    margin-top: 5px;
+    margin-top: 0px;
     height: 100%;
+    z-index: -2;
+    position: relative;
 }
 
 a {
@@ -14,21 +16,25 @@ a {
 }
 
 .column {
-    width: 50%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* height: 100%; */
     /* border: 10px solid red; */
     border: none;
     overflow: hidden;
     object-fit: cover;
+    position: relative;
 }
 
 .column img {
     width: 100%;
+    height: 100%;
+    opacity: 1;
 }
 .column h1 {
     font-size: 4em;
     padding: 20px;
     color: white;
-    position: relative;
-    bottom: 150px;
+    position: absolute;
+    bottom: 10px;
 }
