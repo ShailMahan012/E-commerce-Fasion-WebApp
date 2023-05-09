@@ -3,39 +3,45 @@
     <link rel="stylesheet" href="/static/home.css">
 {% endblock %}
 {% block main %}
+
 <div class="row">
     <div class="column women-column">
     <a href="#women">
         <img src="/static/home/fendi-girls.avif" alt="WOMEN" srcset="">
-        <h1>Shop Women</h1>
+        <div class="left-bottom">
+            <h1>Shop Women</h1>
+        </div>
     </a>
     </div>
     <div class="column men-column">
         <a href="#men">
             <img src="/static/home/fendi-boy.avif" alt="MEN" srcset="">
+        <div class="left-bottom">
             <h1>Shop Men</h1>
+        </div>
         </a>
     </div>
 </div>
+
 <div class="row">
-    <div class="column women-column">
-    <a href="#women">
-        <img src="/static/home/fendi-girls.avif" alt="WOMEN" srcset="">
-        <h1>Shop Women</h1>
-    </a>
+    <div class="column">
+        <h3 style="text-align: center;">Featured Items</h3>
     </div>
-    <div class="column women-column">
-    <a href="#women">
-        <img src="/static/home/fendi-girls.avif" alt="WOMEN" srcset="">
-        <h1>Shop Women</h1>
-    </a>
+</div>
+<div class="row">
+    <div class="column">
+        <button class="btn btn-black">VIEW ALL</button>
     </div>
- 
-    <div class="column men-column">
-        <a href="#men">
-            <img src="/static/home/fendi-boy.avif" alt="MEN" srcset="">
-            <h1>Shop Men</h1>
-        </a>
+</div>
+
+<div class="row">
+    <div class="column">
+        <img src="/static/home/asrv_runner.webp" alt="RUNNER">
+        <div class="left-bottom">
+            <h1>CORE COLLECTION</h1>
+            <label>TECHNICAL. VERSATILE. DURABLE</label><br>
+            <button class="btn best-seller">SHOP BESTSELLERS</button>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -12,19 +12,19 @@ a {
 .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
+    align-items: center;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    /* height: 100%; */
-    /* border: 10px solid red; */
     border: none;
-    overflow: hidden;
-    object-fit: cover;
+    /* overflow: hidden; */
     position: relative;
 }
+
 
 .column img {
     width: 100%;
@@ -33,8 +33,40 @@ a {
 }
 .column h1 {
     font-size: 4em;
+}
+ .column .left-bottom {
     padding: 20px;
     color: white;
     position: absolute;
     bottom: 10px;
+ }
+
+.btn {
+    border: none;
+    margin: 0;
+    padding: 15px;
+    text-transform: capitalize;
+    transition-duration: 300ms;
 }
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-black {
+    color: white;
+    background-color: #323232;
+}
+
+.btn-black:hover {
+    background-color: rgb(14, 14, 14);
+}
+
+.best-seller {
+    margin-top: 20px;
+}
+
+.best-seller:hover {
+    background-color: rgb(204, 204, 204);
+}
+
