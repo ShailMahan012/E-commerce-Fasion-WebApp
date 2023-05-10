@@ -2,7 +2,7 @@
     margin-top: 0px;
     height: 100%;
     z-index: -2;
-    position: relative;
+    position: absolute;
 }
 
 a {
@@ -15,13 +15,13 @@ a {
     flex-direction: row;
     /* justify-content: space-between; */
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     border: none;
     position: relative;
 }
@@ -33,7 +33,7 @@ a {
 .column img {
     width: 100%;
     height: 100%;
-    opacity: 0.1;
+    opacity: 0.07;
 }
 
 .column h1 {

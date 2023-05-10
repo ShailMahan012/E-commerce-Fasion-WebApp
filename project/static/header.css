@@ -97,6 +97,7 @@ nav a:hover {
     margin-top: 10px;
     align-items: center;
     margin: 10px;
+    background-color: inherit;
 }
 
 #search .column-1, .column-3 {
