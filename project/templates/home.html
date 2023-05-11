@@ -1,56 +1,69 @@
-{% extends "layout.html" %}
-{% block head %}
-    <link rel="stylesheet" href="/static/home.css">
-    <link rel="stylesheet" href="/static/card.css">
-{% endblock %}
-{% block main %}
+{% extends "layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/home.css" />
+<link rel="stylesheet" href="/static/card.css" />
+{% endblock %} {% block main %}
 
 <div class="row">
-    <div class="column women-column">
+  <div class="column women-column">
     <a href="#women">
-        <img src="/static/home/fendi-girls.avif" alt="WOMEN" srcset="">
-        <div class="left-bottom">
-            <h1>Shop Women</h1>
-        </div>
+      <img src="/static/home/fendi-girls.avif" alt="WOMEN" srcset="" />
+      <div class="left-bottom">
+        <h1>Shop Women</h1>
+      </div>
     </a>
-    </div>
-    <div class="column men-column">
-        <a href="#men">
-            <img src="/static/home/fendi-boy.avif" alt="MEN" srcset="">
-        <div class="left-bottom">
-            <h1>Shop Men</h1>
-        </div>
-        </a>
-    </div>
+  </div>
+  <div class="column men-column">
+    <a href="#men">
+      <img src="/static/home/fendi-boy.avif" alt="MEN" srcset="" />
+      <div class="left-bottom">
+        <h1>Shop Men</h1>
+      </div>
+    </a>
+  </div>
 </div>
 
 <!-- Featured Items -->
 <div class="row">
-    <div class="column">
-        <h3 style="text-align: center;">Featured Items</h3>
-    </div>
+  <div class="column">
+    <h3 style="text-align: center">Featured Items</h3>
+  </div>
 </div>
 
-<div class="row" style="background-color: white;">
-    <div class="column">
-        df
+
+<div class="row" style="flex-grow: 0;">
+    <div class="card">
+      <img src="/static/img_avatar2.png" alt="Avatar"/>
+      <div class="card-container">
+        <h4><b>Jane Doe</b></h4>
+        <p>Interior Designer</p>
+      </div>
     </div>
-</div>
-<div class="row" style="background-color: white;">
-    <div class="column clm-center">
-        <button class="btn btn-black">VIEW ALL</button>
+
+
+    <div class="card">
+      <img src="/static/img_avatar2.png" alt="Avatar"/>
+      <div class="card-container">
+        <h4><b>Jane Doe</b></h4>
+        <p>Interior Designer</p>
+      </div>
     </div>
+
 </div>
-<!-- Featured Items -->
+<div class="row" style="background-color: white">
+  <div class="column clm-center">
+    <button class="btn btn-black">VIEW ALL</button>
+  </div>
+</div>
+<!-- Featured Items END -->
 
 <div class="row">
-    <div class="column">
-        <img src="/static/home/asrv_runner.webp" alt="RUNNER">
-        <div class="left-bottom">
-            <h1>CORE COLLECTION</h1>
-            <label>TECHNICAL. VERSATILE. DURABLE</label><br>
-            <button class="btn best-seller">SHOP BESTSELLERS</button>
-        </div>
+  <div class="column">
+    <img src="/static/home/asrv_runner.webp" alt="RUNNER" />
+    <div class="left-bottom">
+      <h1>CORE COLLECTION</h1>
+      <label>TECHNICAL. VERSATILE. DURABLE</label><br />
+      <button class="btn best-seller">SHOP BESTSELLERS</button>
     </div>
+  </div>
 </div>
 {% endblock %}
