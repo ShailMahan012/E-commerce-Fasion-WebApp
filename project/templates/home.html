@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block head %}
 <link rel="stylesheet" href="/static/home.css" />
-<link rel="stylesheet" href="/static/card.css" />
+<link rel="stylesheet" href="/static/items.css" />
 {% endblock %} {% block main %}
 
 <div class="row">
@@ -30,24 +30,18 @@
 </div>
 
 
-<div class="row" style="flex-grow: 0;">
-    <div class="card">
-      <img src="/static/img_avatar2.png" alt="Avatar"/>
-      <div class="card-container">
-        <h4><b>Jane Doe</b></h4>
-        <p>Interior Designer</p>
-      </div>
-    </div>
-
-
-    <div class="card">
-      <img src="/static/img_avatar2.png" alt="Avatar"/>
-      <div class="card-container">
-        <h4><b>Jane Doe</b></h4>
-        <p>Interior Designer</p>
-      </div>
-    </div>
-
+<div class="row" id="featured_items">
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
+  {% include 'card.html' %}
 </div>
 <div class="row" style="background-color: white">
   <div class="column clm-center">
