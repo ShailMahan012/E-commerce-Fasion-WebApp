@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/header.css">
     <link rel="stylesheet" href="/static/footer.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
+    <script src="/static/jquery.min.js"></script>
     <title>{{TITLE}}</title>
     {% block head %}
     {% endblock %}
@@ -44,7 +45,31 @@
     {% block main %}
     {% endblock %}
 </main>
-    <section id="footer"></section>
+    <section id="footer">
+        <div class="paragraph">
+            <h2>About Us:</h2>
+            <em>
+                To radiate a lifestyle worthy of Prestige and Royalty. Our priorities are to cater to a growing generation with shared cultures and values. Grabalty takes pride in creating products with impeccable craftsmanship, artistry and attention to detail.
+            </em>
+        </div>
+        <div class="paragraph">
+            <h3 class="contact_us">Contact us:</h3>
+            <a href="grabaltyofficial@gmail.com">grabaltyofficial@gmail.com</a> <br>
+            <a href="Instagram@grabaltyofficial">Instagram@grabaltyofficial</a>
+        </div>
+        <div class="paragraph"></div>
+        <div class="copyright">
+            © <span id="copyright-year"></span>, Grabalty
+        </div>
+    </section>
+    <script>
+        function setCopyrightYear() {
+            const d = new Date();
+            let year = d.getFullYear();
+            $("#copyright-year")[0].innerText = year
+        }
+        setCopyrightYear()
+    </script>
     <script src="/static/header.js"></script>
 </body>
 </html>

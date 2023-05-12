@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/static/items.css" />
 {% endblock %} {% block main %}
 
-<div class="row">
+<div class="row" id="top-row">
   <div class="column women-column">
     <a href="#women">
       <img src="/static/home/fendi-girls.avif" alt="WOMEN" srcset="" />
@@ -60,4 +60,14 @@
     </div>
   </div>
 </div>
+<!-- <script>
+  $(function() {
+  $('#top-row').hover(function() {
+    $('#featured_items').css('background-color', 'yellow');
+  }, function() {
+    // on mouseout, reset the background colour
+    $('#featured_items').css('background-color', '');
+  });
+});
+</script> -->
 {% endblock %}
