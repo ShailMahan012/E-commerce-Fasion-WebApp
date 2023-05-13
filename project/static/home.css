@@ -82,3 +82,21 @@ a {
     background-color: rgb(204, 204, 204);
 }
 
+
+.btn-transparent {
+    width: 300px;
+    color: white;
+    background-color:rgba(0, 0, 0, 0);
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 100px;
+    margin-top: 40px;
+    padding: 10px 40px;
+    transition-duration: 300ms;
+}
+
+.btn-transparent:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
