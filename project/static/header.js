@@ -23,3 +23,7 @@ function hide_search() {
         nav.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
     })
 }
+
+function toggleNav() {
+    alert(1)
+}

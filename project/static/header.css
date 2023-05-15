@@ -38,15 +38,15 @@ nav > ul {
     display: flex;
     flex-direction: row;
     list-style-type: none;
+    align-items: center;
     text-transform: uppercase;
 }
 
-ul.nav-left {
+/* ul.nav-left {
     align-items: center;
-}
+} */
 
 nav li {
-    vertical-align: center;
     margin-left: 10px;
 }
 nav a {
@@ -133,3 +133,32 @@ nav a:hover {
 }
 
 /* SEARCH END */
+
+#btn-toogle-nav {
+    display: none;
+    color: black;
+}
+
+/* Responivness */
+
+@media screen and (max-width: 560px) {
+    #nav {
+        flex-direction: column;
+        align-items: inherit;
+    }
+    #nav ul {
+        flex-direction: column;
+    }
+    #nav ul li {
+        text-align: center;
+        width: 100%;
+        margin: 20px 0px;
+    }
+    #btn-toogle-nav {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 101;
+    }
+}
