@@ -34,6 +34,12 @@ nav {
     z-index: 99;
 }
 
+#nav2 {
+    position: absolute;
+    display: none;
+    z-index: 99;
+}
+
 nav > ul {
     display: flex;
     flex-direction: row;
@@ -42,7 +48,7 @@ nav > ul {
     text-transform: uppercase;
 }
 
-#nav-item-logo {
+.nav-item-logo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -66,7 +72,7 @@ nav a {
 nav a:hover {
     border-bottom-color: black;
 }
-#nav-logo {
+.nav-logo {
     max-width: 150px;
 }
 
@@ -141,7 +147,7 @@ nav a:hover {
 
 /* SEARCH END */
 
-#btn-toogle-nav {
+.btn-toogle-nav {
     display: none;
     color: black;
 }
@@ -149,29 +155,29 @@ nav a:hover {
 /* Responivness */
 
 @media screen and (max-width: 560px) {
-    #nav {
+    nav {
         flex-direction: column;
         align-items: inherit;
     }
-    #nav ul {
+    nav ul {
         flex-direction: column;
     }
-    #nav ul li {
+    nav ul li {
         text-align: center;
         width: 100%;
         margin: 20px 0px;
     }
-    #btn-toogle-nav {
+    .btn-toogle-nav {
         display: block;
         /* position: absolute;
         top: 15px;
         right: 15px; */
         /* z-index: 101; */
     }
-    #nav-item-logo {
+    .nav-item-logo {
         margin: 0 !important;
     }
-    #nav-item-logo a {
+    .nav-item-logo a {
         padding: 0;
     }
 }
