@@ -16,7 +16,13 @@
     <section id="header">
         <nav id="nav">
             <ul class="nav-left">
-                <li><a href="#home" style="border: none;"><img src="/static/GRABALTY.png" id="nav-logo" alt="LOGO"></a></li>
+                <li id="nav-item-logo">
+                    <span></span>
+                    <a href="#home" style="border: none;padding: 0;">
+                        <img src="/static/GRABALTY.png" id="nav-logo" alt="LOGO">
+                    </a>
+                    <a href='#nav-toogle' id="btn-toogle-nav" onclick="toggleNav()"><i class="far fa-bars"></i></a>
+                </li>
                 <li><a href="#women">women</a></li>
                 <li><a href="#men">men</a></li>
                 <li><a href="#kids">kids</a></li>

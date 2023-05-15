@@ -42,6 +42,13 @@ nav > ul {
     text-transform: uppercase;
 }
 
+#nav-item-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* ul.nav-left {
     align-items: center;
 } */
@@ -156,9 +163,15 @@ nav a:hover {
     }
     #btn-toogle-nav {
         display: block;
-        position: absolute;
+        /* position: absolute;
         top: 15px;
-        right: 15px;
-        z-index: 101;
+        right: 15px; */
+        /* z-index: 101; */
+    }
+    #nav-item-logo {
+        margin: 0 !important;
+    }
+    #nav-item-logo a {
+        padding: 0;
     }
 }
