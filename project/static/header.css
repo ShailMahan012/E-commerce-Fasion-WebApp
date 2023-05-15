@@ -37,7 +37,9 @@ nav {
 #nav2 {
     position: absolute;
     display: none;
+    top: 0;
     z-index: 99;
+    box-shadow: none;
 }
 
 nav > ul {
@@ -156,8 +158,17 @@ nav a:hover {
 
 @media screen and (max-width: 560px) {
     nav {
+        position: absolute;
         flex-direction: column;
         align-items: inherit;
+        width: 100%;
+        top: -300px;
+        transition-duration: 500ms;
+        transition-property: top;
+    }
+    #nav2 {
+        display: flex;
+        width: 100%;
     }
     nav ul {
         flex-direction: column;
