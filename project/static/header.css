@@ -149,10 +149,31 @@ nav a:hover {
 
 /* SEARCH END */
 
-.btn-toogle-nav {
+.btn-toggle-nav {
     display: none;
     color: black;
+    transition-duration: 1s;
 }
+
+/* Animation */
+
+@keyframes nav-show {
+    from {
+        color: black;
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Animation END */
+
+.btn-toggle-nav:focus {
+    animation-name: nav-show;
+    animation-duration: 1s;
+}
+
 
 /* Responivness */
 
@@ -178,7 +199,7 @@ nav a:hover {
         width: 100%;
         margin: 20px 0px;
     }
-    .btn-toogle-nav {
+    .btn-toggle-nav {
         display: block;
         /* position: absolute;
         top: 15px;
@@ -191,4 +212,5 @@ nav a:hover {
     .nav-item-logo a {
         padding: 0;
     }
+
 }
