@@ -24,3 +24,15 @@
     padding: 10px 200px;
     border-top: 1px solid #e0e0e0;
 }
+
+
+/* Responsive */
+@media screen and (max-width: 560px) {
+    #footer > .paragraph {
+        padding: 0;
+    }
+    .copyright {
+        padding: 0;
+    }
+}
+/* Responsive END */

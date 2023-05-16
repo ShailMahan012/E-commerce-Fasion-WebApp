@@ -11,7 +11,8 @@ var container = get("container")
 var btn_toggle_nav = get("btn-toggle-nav")
 
 function after_load() {
-    container.style.top = nav2.clientHeight + "px"
+    // container.style.top = nav2.clientHeight + "px"
+    container.style.marginTop = nav2.clientHeight + "px"
 }
 
 
@@ -44,7 +45,8 @@ function toggleNav() {
 
         // Show NAV
         nav.style.top = "0px"
-        container.style.top = "0px"
+        // container.style.top = "0px"
+        container.style.marginTop = "0px"
         setTimeout(()=>{nav.style.position = "relative"}, 510)
     }
     else {
@@ -57,6 +59,7 @@ function toggleNav() {
         nav.style.top = "-300px"
         nav.style.position = "absolute"
         setTimeout(()=>{nav.style.position = "absolute"}, 510)
-        container.style.top = nav2.clientHeight + "px"
+        // container.style.top = nav2.clientHeight + "px"
+        container.style.marginTop = nav2.clientHeight + "px"
     }
 }
