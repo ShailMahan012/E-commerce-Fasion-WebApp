@@ -156,24 +156,29 @@ nav a:hover {
 }
 
 /* Animation */
-
 @keyframes nav-show {
-    from {
-        color: black;
+    from {}
+    to {
+        transform: rotate(-360deg);
     }
+}
+
+@keyframes nav-hide {
+    from {}
     to {
         transform: rotate(360deg);
     }
 }
 
-
-/* Animation END */
-
-.btn-toggle-nav:focus {
+.nav-show-rotate {
     animation-name: nav-show;
     animation-duration: 1s;
 }
-
+.nav-hide-rotate {
+    animation-name: nav-hide;
+    animation-duration: 1s;
+}
+/* Animation END */
 
 /* Responivness */
 
@@ -201,6 +206,8 @@ nav a:hover {
     }
     .btn-toggle-nav {
         display: block;
+        padding: 0;
+        border-bottom: 0px;
         /* position: absolute;
         top: 15px;
         right: 15px; */
@@ -209,8 +216,4 @@ nav a:hover {
     .nav-item-logo {
         margin: 0 !important;
     }
-    .nav-item-logo a {
-        padding: 0;
-    }
-
 }
