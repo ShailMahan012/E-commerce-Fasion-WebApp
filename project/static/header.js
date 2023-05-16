@@ -40,11 +40,12 @@ function toggleNav() {
         setTimeout(()=>{nav.style.position = "relative"}, 510)
     }
     else {
+        // Also hide search just in case if it might be opened. It just look ugly when nav is closed and search is still showing
+        hide_search()
         // Hide NAV
         nav.style.top = "-300px"
         nav.style.position = "absolute"
+        setTimeout(()=>{nav.style.position = "absolute"}, 510)
         container.style.top = nav2.clientHeight + "px"
-        // Also hide search just in case if it might be opened. It just look ugly when nav is closed and search is still showing
-        hide_search()
     }
 }
