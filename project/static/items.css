@@ -75,3 +75,13 @@
 }
 
 /* FLIP CARD END */
+
+
+@media screen and (max-width: 560px) {
+  .card {
+    width: 140px !important;
+  }
+  .card-container {
+    margin-top: 135px;
+  }
+}
