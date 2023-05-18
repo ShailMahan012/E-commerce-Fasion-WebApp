@@ -19,3 +19,8 @@ def login_required(f):
 @app.route("/")
 def index():
     return render_template("home.html", TITLE=TITLE)
+
+
+@app.route("/items")
+def items():
+       return render_template("items.html", TITLE=TITLE)
