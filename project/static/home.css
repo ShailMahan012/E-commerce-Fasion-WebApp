@@ -68,6 +68,7 @@ a {
 .btn-black {
     color: white;
     background-color: #323232;
+    margin: 20px 0;
 }
 
 .btn-black:hover {
