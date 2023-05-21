@@ -4,11 +4,33 @@
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 {% endblock %} {% block main %}
 
-<div class="row">
-    <div class="column">Left</div>
-    <div class="column">Right</div>
+<div class="row" style="margin-bottom: 50px;">
+    <div class="column column-left">
+        <div class="carousel" onload="()=> {alert(1)}">
+            <div class="carousel-cell"><img data-flickity-lazyload="/static/products/Shirt_Ivory1.webp" alt=""></div>
+            <div class="carousel-cell"><img data-flickity-lazyload="/static/products/Shirt_Ivory2.webp" alt=""></div>
+            <div class="carousel-cell"><img data-flickity-lazyload="/static/products/Shirt_Ivory3.webp" alt=""></div>
+            <div class="carousel-cell"><img data-flickity-lazyload="/static/products/Shirt_Ivory4.webp" alt=""></div>
+        </div>
+
+    </div>
+    <div class="column column-right">
+        <div class="title">0822. Silver-Lite™ 2.0 Oversized Tee - Ivory Cream</div>
+        <div class="price">100 CAD</div>
+        <div class="details"></div>
+        <button class="btn btn-black">ADD TO CART</button>
+    </div>
 </div>
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script>
+    
+    var elem = document.querySelector('.carousel');
+    var flkty = new Flickity( elem, {
+        // options
+        lazyLoad: true,
+        cellAlign: 'center',
+        contain: true
+    });
+</script>
 {% endblock %}
-

@@ -1,0 +1,36 @@
+.row {
+}
+
+.column {
+    border: 1px solid red;
+    /* flex-grow: 1;
+    flex-basis: 0; */
+}
+
+.column-left {
+    width: 55%;
+    padding: 10px;
+}
+
+.column-right {
+    padding: 20px;
+}
+
+.carousel-cell {
+    width: 100%;
+}
+
+.btn-black {
+    width: 100%;
+}
+
+
+.column-right > div {
+    margin: 10px 0;
+}
+.title {
+}
+.price {
+}
+.details {
+}

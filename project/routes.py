@@ -1,7 +1,8 @@
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, send_file
 from functools import wraps
 from project import app, db
 from project.models import Users
+from time import sleep
 
 # db.create_all()
 
@@ -30,3 +31,8 @@ def items():
 def product(id):
         # print(f"PRODUCT: {id}")
         return render_template("product.html", TITLE=TITLE)
+
+# @app.route("/static/products/<src>")
+# def product_src(src):
+#         sleep(4)
+#         return send_file(f"static/products/{src}")
