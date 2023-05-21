@@ -1,4 +1,5 @@
 #footer {
+    font-size: 16px;
     border-top: 1px solid #e0e0e0;
     background-color: #f4f4f4;
     padding: 40px;
@@ -19,7 +20,7 @@
     font-weight: bold;
 }
 .copyright {
-    font-size: small;
+    font-size: 13px;
     margin-top: 20px;
     padding: 10px 200px;
     border-top: 1px solid #e0e0e0;
@@ -28,6 +29,9 @@
 
 /* Responsive */
 @media screen and (max-width: 560px) {
+    #footer {
+        font-size: 13px;
+    }
     #footer > .paragraph {
         padding: 0;
     }
@@ -35,6 +39,7 @@
         padding: 10px;
     }
     .copyright {
+        font-size: 10px;
         padding: 10px 0px;
     }
 }

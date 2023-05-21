@@ -63,3 +63,7 @@ function toggleNav() {
         container.style.marginTop = nav2.clientHeight + "px"
     }
 }
+
+function go(url) {
+    window.location.href = url
+}

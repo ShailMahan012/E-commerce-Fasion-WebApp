@@ -24,3 +24,9 @@ def index():
 @app.route("/items")
 def items():
        return render_template("items.html", TITLE=TITLE)
+
+
+@app.route("/product/<int:id>")
+def product(id):
+        # print(f"PRODUCT: {id}")
+        return render_template("product.html", TITLE=TITLE)
