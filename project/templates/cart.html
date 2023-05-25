@@ -1,5 +1,23 @@
 {% extends "layout.html" %} {% block head %}
-
+<link rel="stylesheet" href="/static/css/home.css" />
+<link rel="stylesheet" href="/static/css/cart.css" />
 {% endblock %} {% block main %}
+
+<div class="row">
+<div class="column product-col">
+    <img class="product-img" src="/static/hoodie_black.webp" alt="Hoodie">
+    <div>
+        asdf<br>123<br>123
+    </div>
+</div>
+<div class="column">
+    <button>-</button>
+    <input type="text" name="quantity" id="quantity" value="1">
+    <button>+</button>
+</div>
+<div class="column">
+    $200
+</div>
+</div>
 
 {% endblock %}
