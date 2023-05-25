@@ -36,3 +36,9 @@ def product(id):
 # def product_src(src):
 #         sleep(4)
 #         return send_file(f"static/products/{src}")
+
+
+@app.route("/cart")
+def checkout():
+       return render_template("cart.html", TITLE="YOUR CART")
+
