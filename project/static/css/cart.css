@@ -1,22 +1,45 @@
 main {
-
+    padding: 30px;
 }
 
-.row {
-    align-items: center;
+#cart {
+    width: 100%;
 }
 
-.column {
-    flex-direction: row;
-    justify-content: center;
-}
 
 .product-img {
     width: 150px;
 }
 
-.product-col {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.product-head {
+    text-align: left;
+    padding-left: 40px;
+}
+
+.img-cell {
+    width: 0;
+}
+.info-cell {
+    text-align: left;
+}
+.quantity-cell{
+    text-align: center;
+}
+.total-cell {
+    text-align: right;
+}
+
+.quantity-cell > button {
+    text-align: center;
+    width: 30px;
+    height: 40px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+#quantity {
+    text-align: center;
+    width: 50px;
+    height: 40px;
+    padding: 10px;
 }

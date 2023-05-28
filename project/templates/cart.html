@@ -3,21 +3,32 @@
 <link rel="stylesheet" href="/static/css/cart.css" />
 {% endblock %} {% block main %}
 
-<div class="row">
-<div class="column product-col">
-    <img class="product-img" src="/static/hoodie_black.webp" alt="Hoodie">
-    <div>
-        asdf<br>123<br>123
-    </div>
-</div>
-<div class="column">
-    <button>-</button>
-    <input type="text" name="quantity" id="quantity" value="1">
-    <button>+</button>
-</div>
-<div class="column">
-    $200
-</div>
-</div>
+<table id="cart">
+    <thead>
+        <tr>
+            <td colspan="2" class="product-head">Product</td>
+            <td class="quantity-cell">Quantity</td>
+            <td class="total-cell">Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="img-cell">
+                <img class="product-img" src="/static/hoodie_black.webp" alt="Hoodie">
+            </td>
+            <td class="info-cell">
+                asdf<br>asdf<br>asdf
+            </td>
+            <td class="quantity-cell">
+                <button>-</button>
+                <input type="text" name="quantity" id="quantity" value="1">
+                <button>+</button>
+            </td>
+            <td class="total-cell">
+                $200
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 {% endblock %}
