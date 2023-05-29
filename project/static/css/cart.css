@@ -7,7 +7,7 @@ main {
     border-collapse: collapse;
 }
 
-#cart > thead {
+#cart > thead, #cart {
     border-bottom: 1px solid rgb(137, 137, 137);
 }
 
