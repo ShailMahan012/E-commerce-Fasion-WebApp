@@ -4,8 +4,16 @@ main {
 
 #cart {
     width: 100%;
+    border-collapse: collapse;
 }
 
+#cart > thead {
+    border-bottom: 1px solid rgb(137, 137, 137);
+}
+
+#cart td {
+    padding-bottom: 20px;
+}
 
 .product-img {
     width: 150px;
@@ -13,7 +21,7 @@ main {
 
 .product-head {
     text-align: left;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .img-cell {
@@ -29,16 +37,30 @@ main {
     text-align: right;
 }
 
-.quantity-cell > button {
+.quantity-btn {
     text-align: center;
+    font-size: 15px;
     width: 30px;
     height: 40px;
-    padding: 7px;
+    padding: 0px;
+    border: 1px solid rgb(145, 145, 145);
+    background-color: white;
+    outline: none;
     cursor: pointer;
+    transition-duration: 400ms;
+}
+.quantity-btn:hover {
+    background-color: rgb(223, 223, 223);
+}
+
+.quantity-cell > * {
+    margin-right: -4px;
 }
 
 #quantity {
     text-align: center;
+    outline: none;
+    font-size: 15px;
     width: 50px;
     height: 40px;
     padding: 10px;
