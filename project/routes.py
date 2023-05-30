@@ -39,6 +39,10 @@ def product(id):
 
 
 @app.route("/cart")
-def checkout():
+def cart():
        return render_template("cart.html", TITLE="YOUR CART")
 
+
+@app.route("/checkout")
+def checkout():
+       return render_template("checkout.html", TITLE="CHECKOUT HERE")
