@@ -2,13 +2,37 @@
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/checkout.css" />
 {% endblock %} {% block main %}
-<div class="form">
-<div class="row">
-    <div class="column">First Name</div>
-    <div class="column">Last Name</div>
-</div>
-<div class="row">
-    <div class="column">Address</div>
-</div>
+<div id="form">
+    <div class="row">
+        <h2>Shop</h2>
+    </div>
+    <div class="row">
+        <div class="column"><input type="text" id="f_name" placeholder="First Name"></div>
+        <div class="column"><input type="text" id="l_name" placeholder="Last Name"></div>
+    </div>
+    <div class="row">
+        <div class="column"><input type="email" id="email" placeholder="Email Address"></div>
+    </div>
+    <div class="row">
+        <div class="column"><input type="text" id="address" placeholder="Full Address"></div>
+    </div>
+    <div class="row">
+        <div class="column"><input type="text" id="city" placeholder="City"></div>
+        <div class="column"><input type="text" id="post_code" placeholder="Postal Code"></div>
+    </div>
+    <div class="row">
+        <div class="column"><input type="text" id="phone" placeholder="Phone"></div>
+    </div>
+    <div class="row" style="margin: 8px 3px;">
+        <div class="column">
+            <a href="/cart">
+                <i class="fa-thin fa-arrow-left"></i>
+                Return to cart
+            </a>
+        </div>
+        <div class="column" style="align-items: last baseline;">
+            <button class="btn btn-black" id="shop">SHOP</button>
+        </div>
+    </div>
 </div>
 {% endblock %}
