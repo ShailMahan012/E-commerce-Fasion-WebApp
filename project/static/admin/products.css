@@ -1,0 +1,13 @@
+main {
+    padding: 30px;
+}
+
+
+h2 {
+    text-align: center;
+}
+
+table, input, textarea {
+    min-width: 100%;
+    max-width: 100%;
+}

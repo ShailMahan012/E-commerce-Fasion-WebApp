@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
+
+    <script src="/static/js/jquery.min.js"></script>
+    <title>{{TITLE}}</title>
+    {% block head %}
+    {% endblock %}
+</head>
+<body onload="after_load()">
+    <section id="header">
+        <nav id="nav" class="nav">
+            <ul class="nav-left">
+                <li class="nav-item-logo">
+                    <span></span>
+                    <a href="#home" style="border: none;padding: 0;">
+                        <img src="/static/GRABALTY.png" class="nav-logo" alt="LOGO">
+                    </a>
+                </li>
+                <li><a href="/new_product">New Product</a></li>
+                <!-- <li><a href="#men">men</a></li>
+                <li><a href="#kids">kids</a></li> -->
+            </ul>
+            <ul class="nav-right">
+                <li><a href="/logout">Logout</a></li>
+                <!-- <li><a href="#cart">
+                    <i class="fa-regular fa-bag-shopping fa-lg"></i>
+                </a></li> -->
+            </ul>
+        </nav>
+        <div id="search">
+            <!-- <div class="line"></div> -->
+            <div class="row">
+                <div class="column-2">
+                    <input type="text" placeholder="SEARCH" id="search_input">
+                </div>
+                <div class="column-1">
+                    <a href='#search' id="btn-search"><i class="far fa-search"></i></a>
+                </div>
+                <div class="column-3"><a href="#close" onclick="hide_search()"><i class="fal fa-times"></i></a></div>
+            </div>
+        </div>
+        <nav id="nav2" class="nav">
+            <ul class="nav-left">
+                <li class="nav-item-logo">
+                    <span></span>
+                    <a href="#home" style="border: none;padding: 0;">
+                        <img src="/static/GRABALTY.png" class="nav-logo" alt="LOGO">
+                    </a>
+                    <a id="btn-toggle-nav" href='#nav-toogle' class="btn-toggle-nav" onclick="toggleNav()"><i class="far fa-bars"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+<main id="container">
+    {% block main %}
+    {% endblock %}
+</main>
+    <script src="/static/js/header.js"></script>
+</body>
+</html>

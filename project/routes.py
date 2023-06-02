@@ -8,13 +8,14 @@ from time import sleep
 
 TITLE = "Fashion"
 
+
 def login_required(f):
-        @wraps(f)
-        def decorated_function(*args, **kwargs):
-                if session.get("id") is None:
-                        return redirect("/login")
-                return f(*args, **kwargs)
-        return decorated_function
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("id") is None:
+            return redirect("/login")
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 @app.route("/")
@@ -24,25 +25,41 @@ def index():
 
 @app.route("/items")
 def items():
-       return render_template("items.html", TITLE=TITLE)
+    return render_template("items.html", TITLE=TITLE)
 
 
 @app.route("/product/<int:id>")
 def product(id):
-        # print(f"PRODUCT: {id}")
-        return render_template("product.html", TITLE=TITLE)
+    # print(f"PRODUCT: {id}")
+    return render_template("product.html", TITLE=TITLE)
 
 # @app.route("/static/products/<src>")
 # def product_src(src):
-#         sleep(4)
-#         return send_file(f"static/products/{src}")
+#     sleep(4)
+#     return send_file(f"static/products/{src}")
 
 
 @app.route("/cart")
 def cart():
-       return render_template("cart.html", TITLE="YOUR CART")
+    return render_template("cart.html", TITLE="YOUR CART")
 
 
 @app.route("/checkout")
 def checkout():
-       return render_template("checkout.html", TITLE="CHECKOUT HERE")
+    return render_template("checkout.html", TITLE="CHECKOUT HERE")
+
+
+@app.route("/admin")
+def admin():
+    return render_template("admin/products.html")
+
+
+@app.route("/new_product")
+def new_product():
+    return render_template("admin/new_product.html")
+
+
+@app.route("/logout")
+def logout():
+    return redirect("/admin")
+
