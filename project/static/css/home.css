@@ -63,11 +63,9 @@ a {
     width: fit-content;
     text-transform: capitalize;
     transition-duration: 300ms;
-}
-
-.btn:hover {
     cursor: pointer;
 }
+
 
 .btn-black {
     color: white;
