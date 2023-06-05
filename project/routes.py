@@ -54,8 +54,11 @@ def admin():
     return render_template("admin/products.html")
 
 
-@app.route("/new_product")
+@app.route("/new_product", methods=["GET", "POST"])
 def new_product():
+    if request.method == "POST":
+        for i in request.form:
+            print(i, request.form[i])
     return render_template("admin/new_product.html")
 
 

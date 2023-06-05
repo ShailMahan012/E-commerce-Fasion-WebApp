@@ -8,7 +8,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-table, input, textarea {
+table, textarea, input:not([type=radio]) {
     border: 2px solid rgb(122, 122, 122);
     border-radius: 5px;
     min-width: 100%;
@@ -19,6 +19,7 @@ table, input, textarea {
 
 td {
     padding: 10px;
+    text-align: center;
     /* border: 1px solid red; */
 }
 
@@ -80,4 +81,13 @@ td {
 
 .img_file {
     display: none;
+}
+
+/* input[type=radio] {
+    padding: 100px;
+} */
+
+label {
+    cursor: pointer;
+    user-select: none;
 }

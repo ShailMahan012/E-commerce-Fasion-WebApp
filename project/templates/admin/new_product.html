@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/static/admin/products.css">
 {% endblock %} {% block main %}
 <h2>Add New Product</h2>
+<form action="" method="POST">
 <table>
     <tr><td colspan="4"><input type="text" name="title" id="" placeholder="Title"></td></tr>
     <tr><td colspan="4"><input type="number" name="price" id="" placeholder="Price"></td></tr>
@@ -9,48 +10,61 @@
     <tr style="border: 0 1px solid black 0 1 px solid black;">
         <td>
             <div class="img_div">
-                <img src="#" alt="" class="img"/>
+                <img src="#" alt=" " class="img"/>
             </div>
         </td>
         <td>
             <div class="img_div">
-                <img src="#" alt="" class="img"/>
+                <img src="#" alt=" " class="img"/>
             </div>
         </td>
         <td>
             <div class="img_div">
-                <img src="#" alt="" class="img"/>
+                <img src="#" alt=" " class="img"/>
             </div>
         </td>
         <td>
             <div class="img_div">
-                <img src="#" alt="" class="img" />
+                <img src="#" alt=" " class="img" />
             </div>
         </td>
     </tr>
     <tr>
         <td>
             <input type="file" class="img_file" id="img0" name="image_file0" accept="image/*" onchange="img_change(0)">
-            <button class="btn btn-icon btn-upload" onclick="upload(0)"><i class="fal fa-upload"></i></button>
-            <button class="btn btn-icon btn-del" onclick="del_image(0)"><i class="fa-regular fa-trash"></i></button>
+            <button type="button" class="btn btn-icon btn-upload" onclick="upload(0)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="del_image(0)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
             <input type="file" class="img_file" id="img1" name="image_file1" accept="image/*" onchange="img_change(1)">
-            <button class="btn btn-icon btn-upload" onclick="upload(1)"><i class="fal fa-upload"></i></button>
-            <button class="btn btn-icon btn-del" onclick="del_image(1)"><i class="fa-regular fa-trash"></i></button>
+            <button type="button" class="btn btn-icon btn-upload" onclick="upload(1)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="del_image(1)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
             <input type="file" class="img_file" id="img2" name="image_file2" accept="image/*" onchange="img_change(2)">
-            <button class="btn btn-icon btn-upload" onclick="upload(2)"><i class="fal fa-upload"></i></button>
-            <button class="btn btn-icon btn-del" onclick="del_image(2)"><i class="fa-regular fa-trash"></i></button>
+            <button type="button" class="btn btn-icon btn-upload" onclick="upload(2)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="del_image(2)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
             <input type="file" class="img_file" id="img3" name="image_file3" accept="image/*" onchange="img_change(3)">
-            <button class="btn btn-icon btn-upload" onclick="upload(3)"><i class="fal fa-upload"></i></button>
-            <button class="btn btn-icon btn-del" onclick="del_image(3)"><i class="fa-regular fa-trash"></i></button>
+            <button type="button" class="btn btn-icon btn-upload" onclick="upload(3)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="del_image(3)"><i class="fa-regular fa-trash"></i></button>
         </td>
     </tr>
-    <tr><td colspan="4"><button class="btn" id="save">SAVE</button></td></tr>
+    <tr>
+        <td><label>Primary: <input type="radio" name="primary" value="0"></label></td>
+        <td><label>Primary: <input type="radio" name="primary" value="1"></label></td>
+        <td><label>Primary: <input type="radio" name="primary" value="2"></label></td>
+        <td><label>Primary: <input type="radio" name="primary" value="3"></label></td>
+    </tr>
+    <tr>
+        <td><label>Secondary: <input type="radio" name="secondary" value="0"></label></td>
+        <td><label>Secondary: <input type="radio" name="secondary" value="1"></label></td>
+        <td><label>Secondary: <input type="radio" name="secondary" value="2"></label></td>
+        <td><label>Secondary: <input type="radio" name="secondary" value="3"></label></td>
+    </tr>
+    <tr><td colspan="4"><button type="submit" class="btn" id="save">SAVE</button></td></tr>
 </table>
+</form>
 <script src="/static/admin/new_product.js"></script>
 {% endblock %}
