@@ -24,4 +24,4 @@ class Images(db.Model):
     __tablename__ = 'Images'
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer)
-    path = db.Column(db.Text)
+    filename = db.Column(db.Text)

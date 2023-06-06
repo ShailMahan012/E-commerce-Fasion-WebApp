@@ -3,12 +3,13 @@ from functools import wraps
 from project import app, db
 from project.models import Users, Products, Images
 from werkzeug.utils import secure_filename
+import os
 from time import time
 
 db.create_all()
 
 TITLE = "Fashion"
-
+IMAGE_DIR = 'project/static/product_images'
 
 def login_required(f):
     @wraps(f)
@@ -69,13 +70,18 @@ def new_product():
         db.session.add(product)
         db.session.commit()
 
-        # images = []
-        # for i in request.files:
-        #     file = request.files.get(i)
-        #     if file.filename:
-        #         images.append(file)
+        for i in request.files:
+            file = request.files.get(i)
+            filename = file.filename
+            if filename:
+                filename = str(time()) + secure_filename(filename)
+                path = os.path.join(IMAGE_DIR, filename)
+                file.save(path)
 
-    # Images(product_id=product.id)
+                image = Images(product_id=product.id, filename=filename)
+                db.session.add(image)
+
+        db.session.commit()
     return render_template("admin/new_product.html", time=time)
 
 
