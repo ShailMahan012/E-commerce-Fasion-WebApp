@@ -8,6 +8,7 @@
     <th>#</th>
     <th>IMAGE</th>
     <th>TITLE</th>
+    <th>PRICE</th>
     <th>ACTIONS</th>
 </tr>
 </thead>
@@ -17,6 +18,7 @@
     <td>{{i+1}}</td>
     <td><img src="/static/product_images/{{images[i]}}" alt=" " class="img"></td>
     <td>{{products[i].title}}</td>
+    <td>{{products[i].price}}</td>
     <td>
         <button onclick="go_url('/admin/edit/product/{{products[i].id}}')" class="btn edit">EDIT</button><br>
         <button onclick="delete_product('{{products[i].id}}')" class="btn delete">DELETE</button>
