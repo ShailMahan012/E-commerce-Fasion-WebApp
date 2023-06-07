@@ -15,10 +15,15 @@
     <td><img src="/static/product_images/{{images[i]}}" alt=" " class="img"></td>
     <td>{{products[i].title}}</td>
     <td>
-        <button class="btn edit">EDIT</button><br>
-        <button class="btn delete">DELETE</button>
+        <button onclick="go_url('/admin/edit/product/{{products[i].id}}')" class="btn edit">EDIT</button><br>
+        <button onclick="go_url('/admin/delete/product/{{products[i].id}}')" class="btn delete">DELETE</button>
     </td>
 </tr>
 {% endfor %}
 </table>
+<script>
+    function go_url(url) {
+        window.location.href = url;
+    }
+</script>
 {% endblock %}
