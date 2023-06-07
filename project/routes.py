@@ -95,6 +95,23 @@ def new_product():
     return render_template("admin/new_product.html", time=time)
 
 
+@app.route("/admin/delete/product/<int:ID>")
+def delete_product(ID):
+    product = Products.query.get(ID)
+    if product:
+        db.session.delete(product)
+        images = Images.query.filter_by(product_id=ID).all()
+        for img in images:
+            file = os.path.join(IMAGE_DIR, img.filename)
+            if os.path.isfile(file):
+                os.remove(file)
+            else:
+                print(file, "IMG NOT FOUND DEL")
+            db.session.delete(img)
+    db.session.commit()
+    return redirect("/admin")
+
+
 @app.route("/logout")
 def logout():
     return redirect("/new_product")
