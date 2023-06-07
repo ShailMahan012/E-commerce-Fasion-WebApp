@@ -113,6 +113,12 @@ def delete_product(ID):
     return redirect("/admin")
 
 
+@app.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
+def update_product(ID):
+    product = Products.query.get(ID)
+    return render_template("admin/update_product.html", product=product)
+
+
 @app.route("/logout")
 def logout():
     return redirect("/new_product")
