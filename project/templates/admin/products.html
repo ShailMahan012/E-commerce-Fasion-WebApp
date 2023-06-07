@@ -3,12 +3,15 @@
 {% endblock %} {% block main %}
 <h2>All Products</h2>
 <table class="product_list" border="1">
+<thead>
 <tr>
     <th>#</th>
     <th>IMAGE</th>
     <th>TITLE</th>
     <th>ACTIONS</th>
 </tr>
+</thead>
+<tbody>
 {% for i in range(products|length) %}
 <tr>
     <td>{{i+1}}</td>
@@ -16,12 +19,19 @@
     <td>{{products[i].title}}</td>
     <td>
         <button onclick="go_url('/admin/edit/product/{{products[i].id}}')" class="btn edit">EDIT</button><br>
-        <button onclick="go_url('/admin/delete/product/{{products[i].id}}')" class="btn delete">DELETE</button>
+        <button onclick="delete_product('{{products[i].id}}')" class="btn delete">DELETE</button>
     </td>
 </tr>
 {% endfor %}
+</tbody>
 </table>
 <script>
+    function delete_product(id) {
+        let del = confirm("Do you wants to delete this product?")
+        if (del) {
+            go_url("/admin/delete/product/" + id)
+        }
+    }
     function go_url(url) {
         window.location.href = url;
     }
