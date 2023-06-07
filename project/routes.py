@@ -54,10 +54,20 @@ def checkout():
 
 @app.route("/admin")
 def admin():
-    return render_template("admin/products.html")
+    products = Products.query.all()
+    images = []
+    for prd in products:
+        product_id = prd.id
+        primary = prd.primary
+        prd_images = Images.query.filter_by(product_id=product_id).all()
+        if (len(prd_images) <= 0) or len(prd_images) - 1 < primary:
+            images.append("None")
+        else:
+            images.append(prd_images[primary].filename)
+    return render_template("admin/products.html", products=products, images=images)
 
 
-@app.route("/new_product", methods=["GET", "POST"])
+@app.route("/admin/new_product", methods=["GET", "POST"])
 def new_product():
     if request.method == "POST":
         title = request.form.get("title")

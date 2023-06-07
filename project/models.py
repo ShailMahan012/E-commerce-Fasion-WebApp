@@ -17,7 +17,7 @@ class Products(db.Model):
     details = db.Column(db.Text, nullable=False)
     core_collection = db.Column(db.Boolean, nullable=False)
 
-    primary = db.Column(db.Integer, nullable=False)
+    primary = db.Column(db.Integer, nullable=True)
     secondary = db.Column(db.Integer, nullable=True)
 
 class Images(db.Model):

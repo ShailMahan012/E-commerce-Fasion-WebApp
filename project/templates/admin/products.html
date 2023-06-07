@@ -2,7 +2,23 @@
 <link rel="stylesheet" href="/static/admin/products.css">
 {% endblock %} {% block main %}
 <h2>All Products</h2>
-<table class="product_list">
-
+<table class="product_list" border="1">
+<tr>
+    <th>#</th>
+    <th>IMAGE</th>
+    <th>TITLE</th>
+    <th>ACTIONS</th>
+</tr>
+{% for i in range(products|length) %}
+<tr>
+    <td>{{i+1}}</td>
+    <td><img src="/static/product_images/{{images[i]}}" alt=" " class="img"></td>
+    <td>{{products[i].title}}</td>
+    <td>
+        <button class="btn edit">EDIT</button><br>
+        <button class="btn delete">DELETE</button>
+    </td>
+</tr>
+{% endfor %}
 </table>
 {% endblock %}

@@ -41,14 +41,13 @@ td {
     transition-duration: 300ms;
     cursor: pointer;
     outline: none;
-    width: fit-content;
+    width: 100%;
 }
 
 .btn-icon {
     font-size: 1.1em;
     color: white;
     background-color:rgb(122, 122, 122);
-    width: 100%;
 }
 
 .btn-upload {
@@ -82,10 +81,6 @@ td {
 .img_file {
     display: none;
 }
-
-/* input[type=radio] {
-    padding: 100px;
-} */
 
 label {
     cursor: pointer;
