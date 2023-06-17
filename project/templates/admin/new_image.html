@@ -1,0 +1,23 @@
+
+{% extends "admin/layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/admin/form.css">
+{% endblock %} {% block main %}
+<h2>Add New Image</h2>
+<form action="" method="POST" enctype="multipart/form-data">
+<table>
+    <tr><td><input type="text" name="title" id="" placeholder="Title" value="{{time()}}"></td></tr>
+    <tr><td>
+        <div class="img_div">
+            <img src="#" alt=" " class="img" style="height: 400px;"/>
+        </div>
+    </td></tr>
+    <tr><td>
+        <input type="file" class="img_file" id="img0" name="image_file0" accept="image/*" onchange="img_change(0)">
+        <button type="button" class="btn btn-icon btn-upload" onclick="upload(0)"><i class="fal fa-upload"></i></button>
+        <button type="button" class="btn btn-icon btn-del" onclick="del_image(0)"><i class="fa-regular fa-trash"></i></button>
+    </td></tr>
+    <tr><td><button type="submit" class="btn" id="save">SAVE</button></td></tr>
+</table>
+</form>
+<script src="/static/admin/new_image.js"></script>
+{% endblock %}

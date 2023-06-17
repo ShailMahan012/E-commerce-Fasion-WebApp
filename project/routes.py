@@ -67,6 +67,11 @@ def admin():
     return render_template("admin/products.html", products=products, images=images)
 
 
+@app.route("/admin/new_image", methods=["GET", "POST"])
+def new_image():
+    return render_template("admin/new_image.html", time=time)
+
+
 @app.route("/admin/new_product", methods=["GET", "POST"])
 def new_product():
     if request.method == "POST":
