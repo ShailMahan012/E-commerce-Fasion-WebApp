@@ -1,0 +1,37 @@
+{% extends "admin/layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/admin/form.css">
+{% endblock %} {% block main %}
+<h2>All Products</h2>
+<table class="product_list" border="1">
+<thead>
+<tr>
+    <th>#</th>
+    <th>IMAGE</th>
+    <th>TITLE</th>
+    <th>ACTIONS</th>
+</tr>
+</thead>
+<tbody>
+{% for i in range(images|length) %}
+<tr>
+    <td>{{i+1}}</td>
+    <td><img src="/static/product_images/{{images[i].filename}}" alt=" " class="img"></td>
+    <td>{{images[i].title}}</td>
+    <td>
+        <button onclick="go_url('/admin/update/image/{{images[i].id}}')" class="btn edit">UPDATE</button><br>
+        <button onclick="delete_image('{{images[i].id}}')" class="btn delete">DELETE</button>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<script src="/static/js/go_url.js"></script>
+<script>
+    function delete_image(id) {
+        let del = confirm("Do you wants to delete this image?")
+        if (del) {
+            go_url("/admin/delete/image/" + id)
+        }
+    }
+</script>
+{% endblock %}

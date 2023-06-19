@@ -53,6 +53,7 @@ def checkout():
 
 
 @app.route("/admin")
+@app.route("/products")
 def admin():
     products = Products.query.all()
     images = []
@@ -65,6 +66,12 @@ def admin():
         else:
             images.append(prd_images[primary].filename)
     return render_template("admin/products.html", products=products, images=images)
+
+
+@app.route("/admin/images")
+def images():
+    images = Images.query.all()
+    return render_template("admin/images.html", images=images)
 
 
 @app.route("/admin/new_image", methods=["GET", "POST"])
