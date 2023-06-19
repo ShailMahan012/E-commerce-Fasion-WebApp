@@ -24,5 +24,6 @@ class Products(db.Model):
 class Images(db.Model):
     __tablename__ = 'Images'
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer)
-    filename = db.Column(db.Text)
+    product_id = db.Column(db.Integer, default=None)
+    title = db.Column(db.Text, nullable=False)
+    filename = db.Column(db.Text, nullable=False)

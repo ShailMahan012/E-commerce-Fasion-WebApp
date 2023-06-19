@@ -14,7 +14,7 @@ function del_image(file_img_id) {
     let image = images[file_img_id]
 
     img_file.value = null
-    image.src = "#"
+    if (!image.src.endsWith("#")) image.src = "#"
 }
 
 

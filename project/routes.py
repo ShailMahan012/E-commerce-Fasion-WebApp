@@ -69,6 +69,21 @@ def admin():
 
 @app.route("/admin/new_image", methods=["GET", "POST"])
 def new_image():
+    if request.method == "POST":
+        title = request.form.get("title")
+        for i in request.files:
+            file = request.files.get(i)
+            filename = file.filename
+            if filename:
+                filename = str(time()) + secure_filename(filename)
+                path = os.path.join(IMAGE_DIR, filename)
+                file.save(path)
+
+                image = Images(title=title, filename=filename)
+                db.session.add(image)
+        db.session.commit()
+
+
     return render_template("admin/new_image.html", time=time)
 
 
