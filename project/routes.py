@@ -74,6 +74,20 @@ def images():
     return render_template("admin/images.html", images=images)
 
 
+@app.route("/admin/delete/image/<int:ID>")
+def delete_image(ID):
+    image = Images.query.get(ID)
+    if image:
+        file = os.path.join(IMAGE_DIR, image.filename)
+        if os.path.isfile(file):
+            os.remove(file)
+        else:
+            print(file, "IMG NOT FOUND DEL")
+        db.session.delete(image)
+        db.session.commit()
+    return redirect("/admin/images")
+
+
 @app.route("/admin/new_image", methods=["GET", "POST"])
 def new_image():
     if request.method == "POST":
