@@ -8,7 +8,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-table, textarea, input:not([type=radio], [type=checkbox]) {
+table, textarea, input:not([type=radio], [type=checkbox]), select{
     border: 2px solid rgb(122, 122, 122);
     border-radius: 5px;
     min-width: 100%;

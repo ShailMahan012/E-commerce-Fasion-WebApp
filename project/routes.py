@@ -112,13 +112,14 @@ def admin():
 def new_product():
     if request.method == "POST":
         title = request.form.get("title")
+        category = request.form.get("category")
         details = request.form.get("details")
         price = request.form.get("price")
         primary = 0 if not request.form.get("primary") else request.form.get("primary")
         secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
         core_collection = True if request.form.get("core_collection") else False
 
-        product = Products(title=title, details=details, price=price, primary=primary, secondary=secondary, core_collection=core_collection)
+        product = Products(title=title, category=category, details=details, price=price, primary=primary, secondary=secondary, core_collection=core_collection)
         db.session.add(product)
         db.session.commit()
 
