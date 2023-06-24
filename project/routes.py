@@ -163,5 +163,5 @@ def delete_product(ID):
 
 @app.route("/logout")
 def logout():
-    return redirect("/new_product")
+    return redirect("/admin")
 
