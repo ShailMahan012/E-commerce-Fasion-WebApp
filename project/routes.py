@@ -22,6 +22,8 @@ def login_required(f):
 
 @app.route("/")
 def index():
+    core_collection = Products.query.filter_by(core_collection=True).all()
+    print(core_collection)
     return render_template("home.html", TITLE=TITLE)
 
 
