@@ -39,8 +39,6 @@ def index():
             secondary = "None"
         images_list.append((primary, secondary))
 
-    print(images_list)
-
     return render_template("home.html", TITLE=TITLE, core_collection=core_collection, images=images_list)
 
 
@@ -52,7 +50,11 @@ def items():
 @app.route("/product/<int:id>")
 def product(id):
     # print(f"PRODUCT: {id}")
-    return render_template("product.html", TITLE=TITLE)
+    product = Products.query.get(id)
+    if product:
+        images = Images.query.filter_by(product_id=id)
+        return render_template("product.html", TITLE=TITLE, product=product, images=images)
+    return redirect("/")
 
 
 # @app.route("/static/products/<src>")
