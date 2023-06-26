@@ -22,7 +22,8 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    core_collection = Products.query.filter_by(core_collection=True)
+    core_collection = Products.query.filter_by(core_collection=True).limit(13)
+
     images_list = []
     for i in core_collection:
         product_id = i.id
