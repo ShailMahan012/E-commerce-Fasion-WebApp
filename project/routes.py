@@ -22,9 +22,26 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    core_collection = Products.query.filter_by(core_collection=True).all()
-    print(core_collection)
-    return render_template("home.html", TITLE=TITLE)
+    core_collection = Products.query.filter_by(core_collection=True)
+    images_list = []
+    for i in core_collection:
+        product_id = i.id
+        primary = i.primary
+        secondary = i.secondary
+        images = Images.query.filter_by(product_id=product_id)
+        if images.count() - 1 >= primary:
+            primary = images[primary].filename
+        else:
+            primary = "None"
+        if images.count() - 1 >= secondary:
+            secondary = images[secondary].filename
+        else:
+            secondary = "None"
+        images_list.append((primary, secondary))
+
+    print(images_list)
+
+    return render_template("home.html", TITLE=TITLE, core_collection=core_collection, images=images_list)
 
 
 @app.route("/items")

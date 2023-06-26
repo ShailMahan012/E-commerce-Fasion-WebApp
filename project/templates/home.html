@@ -31,6 +31,24 @@
 
 
 <div class="row" id="featured_items">
+{% for i in range(core_collection.count()) %}
+  <div class="card" onclick="go('/product/{{core_collection[i].id}}')">
+      <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+      <img src="/static/product_images/{{images[i][0]}}" alt="Avatar" />
+              </div>
+              <div class="flip-card-back">
+      <img src="/static/product_images/{{images[i][1]}}" alt="Avatar" />
+              </div>
+          </div>
+      </div>
+      <div class="card-container" style="text-align: center;">
+          <p>{{core_collection[i].title}}</p>
+          <p class="price">${{core_collection[i].price}} CAD</p>
+      </div>
+  </div>
+{% endfor %}
   {% include 'card.html' %}
   {% include 'card.html' %}
   {% include 'card.html' %}

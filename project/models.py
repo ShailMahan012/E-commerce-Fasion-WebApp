@@ -13,7 +13,7 @@ class Users(db.Model):
 class Products(db.Model):
     __tablename__ = 'Products'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Text, unique=True, nullable=False)
+    title = db.Column(db.Text, nullable=False)
     category = db.Column(db.Text)
     price = db.Column(db.Integer)
     details = db.Column(db.Text, nullable=False)
