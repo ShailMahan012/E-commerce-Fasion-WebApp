@@ -50,10 +50,10 @@ def items():
 
 @app.route("/product/<int:id>")
 def product(id):
-    # print(f"PRODUCT: {id}")
     product = Products.query.get(id)
     if product:
-        images = Images.query.filter_by(product_id=id)
+        images = Images.query.with_entities(Images.filename).filter_by(product_id=id).all()
+        images = [img[0] for img in images]
         return render_template("product.html", TITLE=TITLE, product=product, images=images)
     return redirect("/")
 

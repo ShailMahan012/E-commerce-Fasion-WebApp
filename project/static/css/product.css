@@ -20,7 +20,9 @@
 .carousel-cell {
     width: 100%;
 }
-
+.cell-img {
+    width: 100%;
+}
 .btn-black {
     width: 100%;
 }
