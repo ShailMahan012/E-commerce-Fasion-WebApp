@@ -37,3 +37,12 @@
 }
 .details {
 }
+
+@media screen and (max-width: 560px) {
+    .row {
+        flex-direction: column;
+    }
+    .column {
+        width: 100%;
+    }
+}
