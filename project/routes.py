@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect, send_file
+from flask import render_template, request, session, redirect, send_file, Markup
 from functools import wraps
 from project import app, db
 from project.models import Users, Products, Images
@@ -54,7 +54,7 @@ def product(id):
     if product:
         images = Images.query.with_entities(Images.filename).filter_by(product_id=id).all()
         images = [img[0] for img in images]
-        return render_template("product.html", TITLE=TITLE, product=product, images=images)
+        return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup)
     return redirect("/")
 
 
