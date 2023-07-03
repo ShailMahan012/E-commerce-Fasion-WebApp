@@ -13,7 +13,7 @@ IMAGE_DIR = 'project/static/product_images'
 
 def get_images(products):
     images_list = []
-    for i in core_collection:
+    for i in products:
         product_id = i.id
         primary = i.primary
         secondary = i.secondary
