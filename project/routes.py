@@ -11,19 +11,7 @@ db.create_all()
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
 
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if session.get("id") is None:
-            return redirect("/login")
-        return f(*args, **kwargs)
-    return decorated_function
-
-
-@app.route("/")
-def index():
-    core_collection = Products.query.filter_by(core_collection=True).limit(13)
-
+def get_images(products):
     images_list = []
     for i in core_collection:
         product_id = i.id
@@ -39,13 +27,35 @@ def index():
         else:
             secondary = "None"
         images_list.append((primary, secondary))
+    return images_list
 
-    return render_template("home.html", TITLE=TITLE, core_collection=core_collection, images=images_list)
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("id") is None:
+            return redirect("/login")
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+@app.route("/")
+def index():
+    core_collection = Products.query.filter_by(core_collection=True).limit(13)
+    images = get_images(core_collection)
+    return render_template("home.html", TITLE=TITLE, core_collection=core_collection, images=images)
 
 
 @app.route("/items")
 def items():
     return render_template("items.html", TITLE=TITLE)
+
+
+@app.route("/core_collection")
+def core_collection():
+    core_collection = Products.query.filter_by(core_collection=True)
+    images = get_images(core_collection)
+    return render_template("items.html", TITLE=TITLE, core_collection=core_collection, images=images)
 
 
 @app.route("/product/<int:id>")
@@ -78,15 +88,7 @@ def checkout():
 @app.route("/products")
 def admin():
     products = Products.query.all()
-    images = []
-    for prd in products:
-        product_id = prd.id
-        primary = prd.primary
-        prd_images = Images.query.filter_by(product_id=product_id).all()
-        if (len(prd_images) <= 0) or len(prd_images) - 1 < primary:
-            images.append("None")
-        else:
-            images.append(prd_images[primary].filename)
+    images = get_images(products)
     return render_template("admin/products.html", products=products, images=images)
 
 
