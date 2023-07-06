@@ -19,13 +19,12 @@
         <div class="details">
             {{Markup(product.details)}}
         </div>
-        <button class="btn btn-black">ADD TO CART</button>
+        <button class="btn btn-black" onclick="add_to_cart({{product.id}}, 44)">ADD TO CART</button>
     </div>
 </div>
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script>
-    
     var elem = document.querySelector('.carousel');
     var flkty = new Flickity( elem, {
         // options
@@ -34,4 +33,5 @@
         contain: true
     });
 </script>
+<script src="/static/js/cart.js"></script>
 {% endblock %}
