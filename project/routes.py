@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect, send_file, Markup
+from flask import render_template, request, session, redirect, send_file, json, Markup
 from functools import wraps
 from project import app, db
 from project.models import Users, Products, Images
@@ -183,6 +183,18 @@ def delete_product(ID):
 # def update_product(ID):
 #     product = Products.query.get(ID)
 #     return render_template("admin/update_product.html", product=product)
+
+
+@app.route("/fetch/products", methods=["POST"])
+def fetch_products():
+    products_id = request.form.get("id")
+    try:
+        products_id = json.loads(products_id)
+        products = Products.query.filter(Products.id.in_((products_id))).all()
+        print(products)
+    except ValueError:
+        print("fetch_products: JSON Decode ERROR")
+    return "Yo!"
 
 
 @app.route("/logout")
