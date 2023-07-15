@@ -42,26 +42,30 @@ function find_product_id(products, id) {
 }
 
 
-function make_product(id, title, description, img_src, quantity, price) {
+function make_product(id, title, description, img, quantity, price) {
+    var total = quantity * price
     var template = `
         <tr>
             <td class="img-cell">
-                <img class="product-img" src="/static/hoodie_black.webp" alt="Hoodie">
+                <img class="product-img" src="/static/${img}" alt="Hoodie">
             </td>
             <td class="info-cell">
-                TITLE<br>Description<br>200$<br>
+                ${title}<br>
+                ${description}<br>
+                ${price}<br>
                 <button class="clear-btn">clear</button>
             </td>
             <td class="quantity-cell">
                 <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="1">
+                <input type="text" name="quantity" id="quantity" value="${price}">
                 <button class="quantity-btn">+</button>
             </td>
             <td class="total-cell">
-                $200
+                ${total}
             </td>
         </tr>
     `
+    return template
 }
 
 
