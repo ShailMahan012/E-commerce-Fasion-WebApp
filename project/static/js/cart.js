@@ -42,22 +42,22 @@ function find_product_id(products, id) {
 }
 
 
-function make_product(id, title, description, img, quantity, price) {
-    var total = quantity * price
+function make_product(prd, quantity) {
+    var total = quantity * prd.price
     var template = `
         <tr>
             <td class="img-cell">
-                <img class="product-img" src="/static/${img}" alt="Hoodie">
+                <img class="product-img" src="/static/${prd.img}" alt="${prd.title}">
             </td>
             <td class="info-cell">
-                ${title}<br>
-                ${description}<br>
-                ${price}<br>
+                ${prd.title}<br>
+                ${prd.details}<br>
+                ${prd.price}<br>
                 <button class="clear-btn">clear</button>
             </td>
             <td class="quantity-cell">
                 <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="${price}">
+                <input type="text" name="quantity" id="quantity" value="${prd.price}">
                 <button class="quantity-btn">+</button>
             </td>
             <td class="total-cell">
@@ -71,14 +71,22 @@ function make_product(id, title, description, img, quantity, price) {
 
 function fetch_products() {
     let products = get_products()
-    let products_id = []
+    let products_id = [] // store cart products id in it and  send it to api
+    all_products = [] // empty all_products arraay
     for(let i=0;i<products.length;i++) {
         products_id.push(products[i].id)
     }
+
     if (products_id.length) {
-        products_id = JSON.stringify(products_id) // + "a"
+        products_id = JSON.stringify(products_id)
         $.post("/fetch/products", { id: products_id }, function (result) {
-            console.log(result)
+            // result is json array returned by server which contains data of all products availabe in cart
+            for (let i=0;i<result.length;i++) {
+                let prd = result[i]
+                all_products.push(prd)
+            }
         })
     }
 }
+
+fetch_products()

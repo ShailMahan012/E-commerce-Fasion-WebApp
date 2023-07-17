@@ -30,6 +30,24 @@ def get_images(products):
     return images_list
 
 
+def get_product_dict(products):
+    products_dict = []
+    for prd in products:
+        product = {
+            'id': prd.id,
+            'title': prd.title,
+            'category': prd.category,
+            'price': prd.price,
+            'details': prd.details,
+            'core_collection': prd.core_collection,
+
+            'primary': prd.primary,
+            'secondary': prd.secondary,
+        }
+        products_dict.append(product)
+    return products_dict
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -191,11 +209,15 @@ def fetch_products():
     try:
         products_id = json.loads(products_id)
         products = Products.query.filter(Products.id.in_((products_id))).all()
-        print(products)
+        images = [x[0] for x in get_images(products)]
+        products = get_product_dict(products)
+        for i in range(len(products)):
+            products[i]['img'] = images[i]
+        return json.jsonify(products)
     except ValueError:
         print("fetch_products: JSON Decode ERROR")
-    return "Yo!"
-
+        return "fetch_products: JSON Decode ERROR", 501
+    return 'fetch_products: This message should not be received', 501
 
 @app.route("/logout")
 def logout():
