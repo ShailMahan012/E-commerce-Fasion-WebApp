@@ -11,48 +11,12 @@
             <td class="total-cell">Total</td>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td class="img-cell">
-                <img class="product-img" src="/static/hoodie_black.webp" alt="Hoodie">
-            </td>
-            <td class="info-cell">
-                TITLE<br>Description<br>200$<br>
-                <button class="clear-btn">clear</button>
-            </td>
-            <td class="quantity-cell">
-                <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="1">
-                <button class="quantity-btn">+</button>
-            </td>
-            <td class="total-cell">
-                $200
-            </td>
-        </tr>
-
-        <tr>
-            <td class="img-cell">
-                <img class="product-img" src="/static/hoodie_black.webp" alt="Hoodie">
-            </td>
-            <td class="info-cell">
-                TITLE<br>Description<br>200$<br>
-                <button class="clear-btn">clear</button>
-            </td>
-            <td class="quantity-cell">
-                <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="1">
-                <button class="quantity-btn">+</button>
-            </td>
-            <td class="total-cell">
-                $200
-            </td>
-        </tr>
-
+    <tbody id="products">
     </tbody>
 </table>
 
 <div id="cart-bottom">
-    Total: 400$<br>
+    Total: <span id="total_price">400</span>$<br>
     <button class="btn btn-black" onclick="location.href='/checkout'">CHECKOUT</button>
 </div>
 

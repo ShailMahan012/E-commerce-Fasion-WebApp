@@ -1,3 +1,5 @@
+var tbody_prooducts = document.getElementById('products')
+var total_price = document.getElementById('total_price')
 var all_products = []
 
 // Check if products key exist in localStorage or not
@@ -42,30 +44,46 @@ function find_product_id(products, id) {
 }
 
 
-function make_product(prd, quantity) {
-    var total = quantity * prd.price
+function make_product(prd, quantity, net_price) {
     var template = `
         <tr>
             <td class="img-cell">
-                <img class="product-img" src="/static/${prd.img}" alt="${prd.title}">
+                <img class="product-img" src="/static/product_images/${prd.img}" alt="${prd.title}">
             </td>
             <td class="info-cell">
                 ${prd.title}<br>
-                ${prd.details}<br>
                 ${prd.price}<br>
                 <button class="clear-btn">clear</button>
             </td>
             <td class="quantity-cell">
                 <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="${prd.price}">
+                <input type="text" name="quantity" id="quantity" value="${quantity}">
                 <button class="quantity-btn">+</button>
             </td>
             <td class="total-cell">
-                ${total}
+                ${net_price}
             </td>
         </tr>
     `
     return template
+}
+
+
+function display_products() {
+    let total_products_price = 0
+
+    tbody_prooducts.innerHTML = '<tr style="height: 10px;"></tr>' // createing tr just for some margin at top
+
+    for (let i=0;i<all_products.length;i++) {
+        let prd = all_products[i]
+        let quantity = 2
+        let net_price = prd.price * quantity
+        total_products_price += net_price
+        let product = make_product(prd, quantity, net_price)
+        tbody_prooducts.innerHTML += product
+    }
+
+    total_price.innerText = total_products_price
 }
 
 
@@ -85,6 +103,7 @@ function fetch_products() {
                 let prd = result[i]
                 all_products.push(prd)
             }
+            display_products()
         })
     }
 }
