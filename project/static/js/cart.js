@@ -38,13 +38,13 @@ function remove_from_cart(id) {
 function find_product_id(products, id) {
     for (let i=0;i<products.length;i++) {
         if (products[i].id === id)
-            return true
+            return products[i]
     }
     return false
 }
 
 
-function make_product(prd, quantity, net_price) {
+function make_product(prd, net_price) {
     var template = `
         <tr>
             <td class="img-cell">
@@ -57,7 +57,7 @@ function make_product(prd, quantity, net_price) {
             </td>
             <td class="quantity-cell">
                 <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="${quantity}">
+                <input type="text" name="quantity" id="quantity" value="${prd.quantity}">
                 <button class="quantity-btn">+</button>
             </td>
             <td class="total-cell">
@@ -76,10 +76,9 @@ function display_products() {
 
     for (let i=0;i<all_products.length;i++) {
         let prd = all_products[i]
-        let quantity = 2
-        let net_price = prd.price * quantity
+        let net_price = prd.price * prd.quantity
         total_products_price += net_price
-        let product = make_product(prd, quantity, net_price)
+        let product = make_product(prd, net_price)
         tbody_prooducts.innerHTML += product
     }
 
@@ -90,9 +89,12 @@ function display_products() {
 function fetch_products() {
     let products = get_products()
     let products_id = [] // store cart products id in it and  send it to api
+    let products_quantity = {} // quantity of every product
     all_products = [] // empty all_products arraay
     for(let i=0;i<products.length;i++) {
-        products_id.push(products[i].id)
+        let prd = products[i]
+        products_id.push(prd.id)
+        products_quantity[prd.id] = prd.quantity
     }
 
     if (products_id.length) {
@@ -101,6 +103,7 @@ function fetch_products() {
             // result is json array returned by server which contains data of all products availabe in cart
             for (let i=0;i<result.length;i++) {
                 let prd = result[i]
+                prd['quantity'] = products_quantity[prd.id]
                 all_products.push(prd)
             }
             display_products()
@@ -108,4 +111,3 @@ function fetch_products() {
     }
 }
 
-fetch_products()
