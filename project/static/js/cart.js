@@ -8,17 +8,21 @@ if (!localStorage.getItem("products")) {
 }
 
 function get_products() {
-    var products = JSON.parse(localStorage.getItem("products"))
+    let products = JSON.parse(localStorage.getItem("products"))
     return products
 }
 
 
-function add_to_cart(id, quantity) {
-    var products = get_products()
-    if (find_product_id(products, id) === false)
-        products.push({id:id, quantity:quantity})
+function save_products(products) {
     localStorage.setItem("products", JSON.stringify(products))
-    console.log(products)
+}
+
+
+function add_to_cart(id, quantity) {
+    let products = get_products()
+    if (find_product(products, id) === -1) // if not found then store it
+        products.push({id:id, quantity:quantity})
+    save_products(products)
 }
 
 
@@ -31,16 +35,26 @@ function remove_from_cart(id) {
             break
         }
     }
-    console.log(products)
 }
 
 
-function find_product_id(products, id) {
+function find_product(products, id) {
     for (let i=0;i<products.length;i++) {
         if (products[i].id === id)
-            return products[i]
+            return i // found
     }
-    return false
+    return -1 // not found
+}
+
+
+function update_quantity(id, i) {
+    let products = get_products()
+    let prd_quantity = document.getElementById("quantity_" + id)
+    prd_id = find_product(products, id)
+    let quantity = products[prd_id].quantity += i
+    if (quantity<1) return null
+    prd_quantity.value = quantity
+    save_products(products)
 }
 
 
@@ -56,9 +70,9 @@ function make_product(prd, net_price) {
                 <button class="clear-btn">clear</button>
             </td>
             <td class="quantity-cell">
-                <button class="quantity-btn">-</button>
-                <input type="text" name="quantity" id="quantity" value="${prd.quantity}">
-                <button class="quantity-btn">+</button>
+                <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
+                <input type="text" name="quantity" class="quantity" id="quantity_${prd.id}" value="${prd.quantity}" disabled>
+                <button class="quantity-btn" onclick="update_quantity(${prd.id}, 1)">+</button>
             </td>
             <td class="total-cell">
                 ${net_price}

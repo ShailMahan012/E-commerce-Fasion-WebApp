@@ -58,7 +58,7 @@ main {
     margin-right: -4px;
 }
 
-#quantity {
+.quantity {
     text-align: center;
     outline: none;
     font-size: 15px;
