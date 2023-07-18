@@ -27,7 +27,7 @@ function add_to_cart(id, quantity) {
 
 
 function remove_from_cart(id) {
-    var products = get_products()
+    let products = get_products()
     for (let i=0;i<products.length;i++) {
         if (id === products[i].id) {
             products.splice(i, 1)
@@ -59,7 +59,7 @@ function update_quantity(id, i) {
 
 
 function make_product(prd, net_price) {
-    var template = `
+    let template = `
         <tr>
             <td class="img-cell">
                 <img class="product-img" src="/static/product_images/${prd.img}" alt="${prd.title}">
