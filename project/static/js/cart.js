@@ -56,6 +56,21 @@ function update_quantity(id, i) {
     if (quantity<1) return null
     prd_quantity.value = quantity
     save_products(products)
+    update_prices()
+}
+
+
+function update_prices() {
+    let products = get_products() // get all products stored in LocalStorage
+    let total = 0
+    for (let i=0;i<products.length;i++) {
+        let prd = products[i]
+        let prd_price_node = document.getElementById("price_" + prd.id) // Get element where price of current product is stored
+        let prd_price = prd.quantity * prd.price
+        prd_price_node.innerText = prd_price // update net price in table column for specific product
+        total += prd_price
+    }
+    total_price.innerText = total // Update total price of all elements
 }
 
 
@@ -75,7 +90,7 @@ function make_product(prd, net_price) {
                 <input type="text" name="quantity" class="quantity" id="quantity_${prd.id}" value="${prd.quantity}" disabled>
                 <button class="quantity-btn" onclick="update_quantity(${prd.id}, 1)">+</button>
             </td>
-            <td class="total-cell">
+            <td class="total-cell" id="price_${prd.id}">
                 ${net_price}
             </td>
         </tr>
