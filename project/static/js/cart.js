@@ -1,6 +1,6 @@
 var tbody_prooducts = document.getElementById('products')
 var total_price = document.getElementById('total_price')
-var all_products = []
+
 
 // Check if products key exist in localStorage or not
 if (!localStorage.getItem("products")) {
@@ -50,6 +50,7 @@ function find_product(products, id) {
 function update_quantity(id, i) {
     let products = get_products()
     let prd_quantity = document.getElementById("quantity_" + id)
+
     prd_id = find_product(products, id)
     let quantity = products[prd_id].quantity += i
     if (quantity<1) return null
@@ -60,7 +61,7 @@ function update_quantity(id, i) {
 
 function make_product(prd, net_price) {
     let template = `
-        <tr>
+        <tr id="product_${prd.id}">
             <td class="img-cell">
                 <img class="product-img" src="/static/product_images/${prd.img}" alt="${prd.title}">
             </td>
@@ -83,7 +84,7 @@ function make_product(prd, net_price) {
 }
 
 
-function display_products() {
+function display_products(all_products) {
     let total_products_price = 0
 
     tbody_prooducts.innerHTML = '<tr style="height: 10px;"></tr>' // createing tr just for some margin at top
@@ -101,10 +102,10 @@ function display_products() {
 
 
 function fetch_products() {
-    let products = get_products()
-    let products_id = [] // store cart products id in it and  send it to api
+    let products = get_products() // LocalStorage Products
+    let products_id = [] // store cart products id in it and send it to api
     let products_quantity = {} // quantity of every product
-    all_products = [] // empty all_products arraay
+    let all_products = [] // array of all products with all data to display to client
     for(let i=0;i<products.length;i++) {
         let prd = products[i]
         products_id.push(prd.id)
@@ -116,11 +117,14 @@ function fetch_products() {
         $.post("/fetch/products", { id: products_id }, function (result) {
             // result is json array returned by server which contains data of all products availabe in cart
             for (let i=0;i<result.length;i++) {
-                let prd = result[i]
+                let prd = result[i] // Get i element of product from given by server using API
                 prd['quantity'] = products_quantity[prd.id]
+                let localStorage_prd = products[find_product(products, prd.id)] // Get product with prd.id
+                localStorage_prd.price = prd.price // add or update price of products in localStorage
                 all_products.push(prd)
             }
-            display_products()
+            display_products(all_products) // Display all products in table
+            save_products(products) // Update products in LocalStorage
         })
     }
 }
