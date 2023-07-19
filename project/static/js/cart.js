@@ -94,7 +94,7 @@ function make_product(prd, net_price) {
             <td class="info-cell">
                 ${prd.title}<br>
                 ${prd.price}<br>
-                <button class="clear-btn" onclick="delete_product(${prd.id})">clear</button>
+                <button class="clear-btn" onclick="delete_product(${prd.id})">remove</button>
             </td>
             <td class="quantity-cell">
                 <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
