@@ -26,14 +26,13 @@ function add_to_cart(id, quantity) {
 }
 
 
+// Remove product from localStorage
 function remove_from_cart(id) {
     let products = get_products()
-    for (let i=0;i<products.length;i++) {
-        if (id === products[i].id) {
-            products.splice(i, 1)
-            localStorage.setItem("products", JSON.stringify(products))
-            break
-        }
+    let i = find_product(products, id)
+    if (i != -1) {
+        products.splice(i, 1)
+        save_products(products)
     }
 }
 
@@ -60,8 +59,9 @@ function update_quantity(id, i) {
 }
 
 
+// Update prices of each product with respect to quantity also total price of all products
 function update_prices() {
-    let products = get_products() // get all products stored in LocalStorage
+    let products = get_products() // get all products stored in localStorage
     let total = 0
     for (let i=0;i<products.length;i++) {
         let prd = products[i]
@@ -74,6 +74,17 @@ function update_prices() {
 }
 
 
+// remove row of product as well as from localStorage
+function delete_product(id) {
+    var prd_node = document.getElementById("product_" + id)
+    if (prd_node) {
+        remove_from_cart(id)
+        prd_node.remove()
+        update_prices()
+    }
+}
+
+
 function make_product(prd, net_price) {
     let template = `
         <tr id="product_${prd.id}">
@@ -83,7 +94,7 @@ function make_product(prd, net_price) {
             <td class="info-cell">
                 ${prd.title}<br>
                 ${prd.price}<br>
-                <button class="clear-btn">clear</button>
+                <button class="clear-btn" onclick="delete_product(${prd.id})">clear</button>
             </td>
             <td class="quantity-cell">
                 <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
@@ -117,7 +128,7 @@ function display_products(all_products) {
 
 
 function fetch_products() {
-    let products = get_products() // LocalStorage Products
+    let products = get_products() // localStorage Products
     let products_id = [] // store cart products id in it and send it to api
     let products_quantity = {} // quantity of every product
     let all_products = [] // array of all products with all data to display to client
@@ -139,7 +150,7 @@ function fetch_products() {
                 all_products.push(prd)
             }
             display_products(all_products) // Display all products in table
-            save_products(products) // Update products in LocalStorage
+            save_products(products) // Update products in localStorage
         })
     }
 }
