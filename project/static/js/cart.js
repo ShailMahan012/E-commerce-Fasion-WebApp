@@ -89,11 +89,15 @@ function make_product(prd, net_price) {
     let template = `
         <tr id="product_${prd.id}">
             <td class="img-cell">
+                <a href="/product/${prd.id}">
                 <img class="product-img" src="/static/product_images/${prd.img}" alt="${prd.title}">
+                </a>
             </td>
             <td class="info-cell">
+                <a href="/product/${prd.id}">
                 ${prd.title}<br>
                 ${prd.price}<br>
+                </a>
                 <button class="clear-btn" onclick="delete_product(${prd.id})">remove</button>
             </td>
             <td class="quantity-cell">
