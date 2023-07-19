@@ -11,22 +11,36 @@ db.create_all()
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
 
+
+# take a list and return list of unique items
+def unique(lst):
+    unique_lst = []
+    for i in lst:
+        if i not in unique_lst:
+            unique_lst.append(i)
+    return unique_lst
+
+
+# take products as list and return list of images in 2d list with first two indexes of primary and secondary images for each product
 def get_images(products):
-    images_list = []
+    images_list = [] # 2d array to store images of all products
     for i in products:
         product_id = i.id
-        primary = i.primary
-        secondary = i.secondary
-        images = Images.query.filter_by(product_id=product_id)
-        if images.count() - 1 >= primary:
-            primary = images[primary].filename
+        primary = i.primary # index of primary image
+        secondary = i.secondary # index of secondary image
+        images = Images.query.with_entities(Images.filename).filter_by(product_id=product_id).all()
+        images_count = len(images) # length of images
+        images = [i[0] for i in images] # save only first item of each row since we only need filename of images
+        if images_count - 1 >= primary:
+            primary = images[primary]
         else:
             primary = "None"
-        if images.count() - 1 >= secondary:
-            secondary = images[secondary].filename
+        if images_count - 1 >= secondary:
+            secondary = images[secondary]
         else:
             secondary = "None"
-        images_list.append((primary, secondary))
+        images = unique([primary, secondary] + images)
+        images_list.append(tuple(images))
     return images_list
 
 
@@ -80,8 +94,8 @@ def core_collection():
 def product(id):
     product = Products.query.get(id)
     if product:
-        images = Images.query.with_entities(Images.filename).filter_by(product_id=id).all()
-        images = [img[0] for img in images]
+        images = get_images([product]) # get_images accept list of prodoucts
+        if images: images = images[0] # save only first item because we only gave one product (2d list to 1d list)
         return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup)
     return redirect("/")
 
