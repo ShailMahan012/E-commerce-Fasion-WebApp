@@ -19,7 +19,8 @@
         <div class="details">
             {{Markup(product.details)}}
         </div>
-        <button class="btn btn-black" onclick="add_to_cart({{product.id}}, 1)">ADD TO CART</button>
+        <button class="btn btn-black" id="add_product" onclick="add_product({{product.id}})">ADD TO CART</button>
+        <button class="btn btn-black" id="remove_product" onclick="remove_product({{product.id}})">REMOVE FROM CART</button>
     </div>
 </div>
 
@@ -34,4 +35,29 @@
     });
 </script>
 <script src="/static/js/cart.js"></script>
+<script>
+    var btn_add_product = document.getElementById("add_product")
+    var btn_remove_product = document.getElementById("remove_product")
+    var prd_id = {{product.id}}
+
+    if (find_product(get_products(), prd_id) != -1) {
+        btn_add_product.style.display = "none"
+        btn_remove_product.style.display = "initial"
+    }
+    else {
+        btn_add_product.style.display = "initial"
+        btn_remove_product.style.display = "none"
+    }
+
+    function add_product(id) {
+        add_to_cart(id, 1)
+        btn_add_product.style.display = "none"
+        btn_remove_product.style.display = "initial"
+    }
+    function remove_product(id) {
+        remove_from_cart(id)
+        btn_add_product.style.display = "initial"
+        btn_remove_product.style.display = "none"
+    }
+</script>
 {% endblock %}
