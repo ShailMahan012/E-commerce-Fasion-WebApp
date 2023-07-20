@@ -7,21 +7,21 @@
         <h2>Shop</h2>
     </div>
     <div class="row">
-        <div class="column"><input type="text" name="f_name" placeholder="First Name" required></div>
-        <div class="column"><input type="text" name="l_name" placeholder="Last Name"></div>
+        <div class="column"><input type="text" name="f_name" id="f_name" placeholder="First Name" required></div>
+        <div class="column"><input type="text" name="l_name" id="l_name" placeholder="Last Name"></div>
     </div>
     <div class="row">
-        <div class="column"><input type="email" name="email" placeholder="Email Address" required></div>
+        <div class="column"><input type="email" name="email" id="email" placeholder="Email Address" required></div>
     </div>
     <div class="row">
-        <div class="column"><input type="text" name="address" placeholder="Full Address" required></div>
+        <div class="column"><input type="text" name="address" id="address" placeholder="Full Address" required></div>
     </div>
     <div class="row">
-        <div class="column"><input type="text" name="city" placeholder="City" required></div>
-        <div class="column"><input type="text" name="postal_code" placeholder="Postal Code" required></div>
+        <div class="column"><input type="text" name="city" id="city" placeholder="City" required></div>
+        <div class="column"><input type="text" name="postal_code" id="postal_code" placeholder="Postal Code" required></div>
     </div>
     <div class="row">
-        <div class="column"><input type="text" name="phone" placeholder="Phone" required></div>
+        <div class="column"><input type="text" name="phone" id="phone" placeholder="Phone" required></div>
     </div>
     <div class="row" style="margin: 8px 3px;">
         <div class="column">
@@ -31,8 +31,10 @@
             </a>
         </div>
         <div class="column" style="align-items: last baseline;">
-            <button class="btn btn-black" name="shop">SHOP</button>
+            <button class="btn btn-black" id="shop">CHECKOUT</button>
         </div>
     </div>
 </form>
+
+<script src="/static/js/checkout.js"></script>
 {% endblock %}

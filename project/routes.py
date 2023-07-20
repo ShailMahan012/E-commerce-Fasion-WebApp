@@ -124,8 +124,11 @@ def checkout():
         postal_code = request.form.get("postal_code")
         phone = request.form.get("phone")
 
+
+
         order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone)
         db.session.add(order)
+
         db.session.commit()
         return "True"
     return render_template("checkout.html", TITLE="CHECKOUT HERE")
