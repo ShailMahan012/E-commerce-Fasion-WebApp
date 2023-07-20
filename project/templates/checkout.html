@@ -2,26 +2,26 @@
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/checkout.css" />
 {% endblock %} {% block main %}
-<div id="form">
+<form id="form" action="" method="POST">
     <div class="row">
         <h2>Shop</h2>
     </div>
     <div class="row">
-        <div class="column"><input type="text" id="f_name" placeholder="First Name"></div>
-        <div class="column"><input type="text" id="l_name" placeholder="Last Name"></div>
+        <div class="column"><input type="text" name="f_name" placeholder="First Name" required></div>
+        <div class="column"><input type="text" name="l_name" placeholder="Last Name"></div>
     </div>
     <div class="row">
-        <div class="column"><input type="email" id="email" placeholder="Email Address"></div>
+        <div class="column"><input type="email" name="email" placeholder="Email Address" required></div>
     </div>
     <div class="row">
-        <div class="column"><input type="text" id="address" placeholder="Full Address"></div>
+        <div class="column"><input type="text" name="address" placeholder="Full Address" required></div>
     </div>
     <div class="row">
-        <div class="column"><input type="text" id="city" placeholder="City"></div>
-        <div class="column"><input type="text" id="post_code" placeholder="Postal Code"></div>
+        <div class="column"><input type="text" name="city" placeholder="City" required></div>
+        <div class="column"><input type="text" name="postal_code" placeholder="Postal Code" required></div>
     </div>
     <div class="row">
-        <div class="column"><input type="text" id="phone" placeholder="Phone"></div>
+        <div class="column"><input type="text" name="phone" placeholder="Phone" required></div>
     </div>
     <div class="row" style="margin: 8px 3px;">
         <div class="column">
@@ -31,8 +31,8 @@
             </a>
         </div>
         <div class="column" style="align-items: last baseline;">
-            <button class="btn btn-black" id="shop">SHOP</button>
+            <button class="btn btn-black" name="shop">SHOP</button>
         </div>
     </div>
-</div>
+</form>
 {% endblock %}

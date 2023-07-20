@@ -1,7 +1,7 @@
 from flask import render_template, request, session, redirect, send_file, json, Markup
 from functools import wraps
 from project import app, db
-from project.models import Users, Products, Images
+from project.models import Users, Products, Images, Orders
 from werkzeug.utils import secure_filename
 import os
 from time import time
@@ -111,8 +111,23 @@ def cart():
     return render_template("cart.html", TITLE="YOUR CART")
 
 
-@app.route("/checkout")
+@app.route("/checkout", methods=["GET", "POST"])
 def checkout():
+    if request.method == "POST":
+        email = request.form.get("email")
+        f_name = request.form.get("f_name")
+        l_name = request.form.get("l_name")
+        
+        address = request.form.get("address")
+
+        city = request.form.get("city")
+        postal_code = request.form.get("postal_code")
+        phone = request.form.get("phone")
+
+        order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone)
+        db.session.add(order)
+        db.session.commit()
+        return "True"
     return render_template("checkout.html", TITLE="CHECKOUT HERE")
 
 

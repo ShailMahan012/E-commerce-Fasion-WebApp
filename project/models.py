@@ -28,3 +28,16 @@ class Images(db.Model):
     product_id = db.Column(db.Integer, default=None)
     title = db.Column(db.Text, nullable=False)
     filename = db.Column(db.Text, nullable=False)
+
+class Orders(db.Model):
+    __tablename__ = 'Orders'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.Text, nullable=False)
+
+    f_name = db.Column(db.Text, nullable=False)
+    l_name = db.Column(db.Text, nullable=True)
+
+    address = db.Column(db.Text, nullable=False)
+    city = db.Column(db.Text, nullable=False)
+    postal_code = db.Column(db.Text, nullable=False)
+    phone = db.Column(db.Text, nullable=False)
