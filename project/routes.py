@@ -1,7 +1,7 @@
 from flask import render_template, request, session, redirect, send_file, json, Markup
 from functools import wraps
 from project import app, db
-from project.models import Users, Products, Images, Orders
+from project.models import Users, Products, Images, Orders, Cart
 from werkzeug.utils import secure_filename
 import os
 from time import time
