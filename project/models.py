@@ -45,7 +45,7 @@ class Orders(db.Model):
 class Cart(db.Model):
     __tablename__ = 'Cart'
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, nullable=False)
     order_id = db.Column(db.Integer, nullable=False)
+    product_id = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 

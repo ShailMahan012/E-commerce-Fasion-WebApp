@@ -124,13 +124,23 @@ def checkout():
         postal_code = request.form.get("postal_code")
         phone = request.form.get("phone")
 
+        products = json.loads(request.form.get("products"))
 
+        if products:
+            order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone)
+            db.session.add(order)
 
-        order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone)
-        db.session.add(order)
+            for prd in products:
+                ID = prd.get("id")
+                quantity = prd.get("quantity")
+                if Products.query.get(ID) and quantity:
+                    item = Cart(order_id=order.id, product_id=ID, quantity=quantity)
+                    db.session.add(item)
 
-        db.session.commit()
-        return "True"
+            db.session.commit()
+            return "True"
+
+        return "False"
     return render_template("checkout.html", TITLE="CHECKOUT HERE")
 
 
