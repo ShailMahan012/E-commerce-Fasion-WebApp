@@ -46,8 +46,8 @@ function toggleNav() {
         // Show NAV
         nav.style.top = "0px"
         // container.style.top = "0px"
-        container.style.marginTop = "0px"
-        setTimeout(()=>{nav.style.position = "relative"}, 510)
+        // container.style.marginTop = "0px"
+        // setTimeout(()=>{nav.style.position = "relative"}, 510)
     }
     else {
         btn_toggle_nav.classList.add("nav-hide-rotate")
@@ -60,7 +60,7 @@ function toggleNav() {
         nav.style.position = "absolute"
         setTimeout(()=>{nav.style.position = "absolute"}, 510)
         // container.style.top = nav2.clientHeight + "px"
-        container.style.marginTop = nav2.clientHeight + "px"
+        // container.style.marginTop = nav2.clientHeight + "px"
     }
 }
 
