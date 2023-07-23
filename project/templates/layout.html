@@ -35,18 +35,18 @@
                 </a></li>
             </ul>
         </nav>
-        <div id="search">
+        <form id="search" action="/search" method="POST">
             <!-- <div class="line"></div> -->
             <div class="row">
                 <div class="column-2">
-                    <input type="text" placeholder="SEARCH" id="search_input">
+                    <input type="text" name="search_input" placeholder="SEARCH" id="search_input">
                 </div>
                 <div class="column-1">
-                    <a href='#search' id="btn-search"><i class="far fa-search"></i></a>
+                    <button class="btn-search" type="submit"><i class="far fa-search"></i></button>
                 </div>
-                <div class="column-3"><a href="#close" onclick="hide_search()"><i class="fal fa-times"></i></a></div>
+                <div class="column-3"><button class="btn-search" onclick="hide_search()"><i class="fal fa-times"></i></button></div>
             </div>
-        </div>
+        </form>
         <nav id="nav2" class="nav">
             <ul class="nav-left">
                 <li class="nav-item-logo">

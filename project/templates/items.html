@@ -3,22 +3,29 @@
 <link rel="stylesheet" href="/static/css/cards.css" />
 <link rel="stylesheet" href="/static/css/items.css" />
 {% endblock %} {% block main %}
-<!-- <h1 class="searched">
-    Hoodies<sup>100</sup>
-</h1> -->
+<h1 class="searched">
+    {{search}}<sup>{{products.count()}}</sup>
+</h1>
 
 <div class="row" id="featured_items">
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
-  {% include 'card.html' %}
+{% for i in range(products.count()) %}
+  <div class="card" onclick="go('/product/{{products[i].id}}')">
+      <div class="flip-card">
+          <div class="flip-card-inner">
+              <div class="flip-card-front">
+      <img src="/static/product_images/{{images[i][0]}}" alt="Avatar" />
+              </div>
+              <div class="flip-card-back">
+      <img src="/static/product_images/{{images[i][1]}}" alt="Avatar" />
+              </div>
+          </div>
+      </div>
+      <div class="card-container" style="text-align: center;">
+          <p>{{products[i].title}}</p>
+          <p class="price">${{products[i].price}} CAD</p>
+      </div>
+  </div>
+{% endfor %}
 </div>
 
 <div class="row" style="background-color: white;margin-bottom: 10px;">

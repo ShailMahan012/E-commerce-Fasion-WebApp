@@ -125,7 +125,7 @@ nav a:hover {
     width: 100%;
 }
 
-#btn-search {
+.btn-search {
     outline: none;
     background-color: inherit;
     padding: 0;
@@ -149,6 +149,10 @@ nav a:hover {
 }
 
 /* SEARCH END */
+
+button:hover {
+    cursor: pointer;
+}
 
 .btn-toggle-nav {
     display: none;

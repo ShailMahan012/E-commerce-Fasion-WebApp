@@ -22,6 +22,9 @@ class Products(db.Model):
     primary = db.Column(db.Integer, nullable=False)
     secondary = db.Column(db.Integer, nullable=False)
 
+    def __str__(self):
+        return f"{self.title}, {self.price}, {self.core_collection}"
+
 class Images(db.Model):
     __tablename__ = 'Images'
     id = db.Column(db.Integer, primary_key=True)

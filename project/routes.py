@@ -83,6 +83,14 @@ def items():
     return render_template("items.html", TITLE=TITLE)
 
 
+@app.route("/search", methods=["POST"])
+def search():
+    search = request.form.get("search_input")
+    products = Products.query.filter(Products.title.like(f"%{search}%"))
+    images = get_images(products)
+    return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search)
+
+
 @app.route("/core_collection")
 def core_collection():
     core_collection = Products.query.filter_by(core_collection=True)
