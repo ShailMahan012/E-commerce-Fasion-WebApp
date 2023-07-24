@@ -188,7 +188,7 @@ button:hover {
 
 /* Responivness */
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 800px) {
     nav {
         position: absolute;
         flex-direction: column;

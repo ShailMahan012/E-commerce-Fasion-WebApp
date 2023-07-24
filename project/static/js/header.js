@@ -13,7 +13,7 @@ var btn_toggle_nav = get("btn-toggle-nav")
 function after_load() {
     // container.style.top = nav2.clientHeight + "px"
     container.style.marginTop = nav2.clientHeight + "px"
-    hide_search()
+    initial_nav_pos()
 }
 
 
@@ -37,7 +37,6 @@ function hide_search() {
         let top = nav.clientHeight - nav2.clientHeight - search.clientHeight
         search.style.transform = `translateY(${top}px)`
         // search.style.visibility = "hidden"
-        initial_nav_pos()
         nav.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
     })
 }
@@ -47,6 +46,8 @@ function initial_nav_pos() {
     let top = -nav2.clientHeight
     search.style.transform = `translateY(${top}px)`
 }
+
+
 function toggleNav() {
     // Navbar is closed if top is not 0px
     if (nav.style.top != "0px") {
@@ -56,14 +57,17 @@ function toggleNav() {
         // Show NAV
         nav.style.top = "0px"
         nav2.style.boxShadow = "none"
-        initial_nav_pos()
+        hide_search()
         // container.style.top = "0px"
         // container.style.marginTop = "0px"
         // setTimeout(()=>{nav.style.position = "relative"}, 510)
     }
     else {
         btn_toggle_nav.classList.add("nav-hide-rotate")
-        setTimeout(()=>{btn_toggle_nav.classList.remove("nav-hide-rotate")}, 1020)
+        setTimeout(()=>{
+            btn_toggle_nav.classList.remove("nav-hide-rotate")
+            initial_nav_pos()
+        }, 1020)
 
         // Also hide search just in case if it might be opened. It just look ugly when nav is closed and search is still showing
         hide_search()
@@ -80,3 +84,4 @@ function toggleNav() {
 function go(url) {
     window.location.href = url
 }
+
