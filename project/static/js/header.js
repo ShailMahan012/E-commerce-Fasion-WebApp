@@ -8,19 +8,19 @@ var nav = get("nav")
 var nav2 = get("nav2")
 var nav_show = false
 var search_input = get("search_input")
+var search_show = false
 var container = get("container")
 var btn_toggle_nav = get("btn-toggle-nav")
 
 function after_load() {
-    // container.style.top = nav2.clientHeight + "px"
     container.style.marginTop = nav2.clientHeight + "px"
     pos_search()
 }
 
 
 function show_search() {
-    let top = nav.clientHeight - nav2.clientHeight
-    search.style.transform = `translateY(${top}px)`
+    search_show = true
+    pos_search()
     // setTimeout(()=> {search.style.zIndex = 0}, 1000)
     search.style.zIndex = 100
     nav.style.boxShadow = "none"
@@ -30,10 +30,12 @@ function show_search() {
 
 
 function hide_search() {
+    search_show = false
     const zIndexPromise = new Promise((resolve) => {
         search.style.zIndex = '98';
         resolve();
     });
+    // wait for z-index to change
     zIndexPromise.then(function () {
         pos_search()
         nav.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
@@ -43,12 +45,31 @@ function hide_search() {
 
 function pos_search() {
     let top;
-    // if nav is going to close then set search box position with negative navbar height so that it will completely hidden
-    if (!nav_show)
-        top = -nav2.clientHeight
-    // if nav is going to open then set search box right bellow the opened navbar
-    else
-        top = nav.clientHeight - nav2.clientHeight - search.clientHeight
+
+    // nav2 height is 0. Which means nav2 is hidden and there is no toggling navbar
+    if (nav2.clientHeight === 0) {
+        if (search_show) {
+            top = 0
+        }
+        else {
+            top = -nav.clientHeight
+        }
+    }
+    else {
+        // if nav is going to open then set search box right bellow the opened navbar
+        if (nav_show) {
+            if (search_show) {
+                top = nav.clientHeight - nav2.clientHeight
+            }
+            else {
+                top = nav.clientHeight - nav2.clientHeight - search.clientHeight
+            }
+        }
+        // if nav is going to close then set search box position with negative navbar height so that it will completely hidden
+        else {
+            top = -nav2.clientHeight
+        }
+    }
     search.style.transform = `translateY(${top}px)`
 }
 
