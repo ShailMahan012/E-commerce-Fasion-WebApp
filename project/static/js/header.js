@@ -6,6 +6,7 @@ var search = get("search")
 var header = get("header")
 var nav = get("nav")
 var nav2 = get("nav2")
+var nav_show = false
 var search_input = get("search_input")
 var container = get("container")
 var btn_toggle_nav = get("btn-toggle-nav")
@@ -13,7 +14,7 @@ var btn_toggle_nav = get("btn-toggle-nav")
 function after_load() {
     // container.style.top = nav2.clientHeight + "px"
     container.style.marginTop = nav2.clientHeight + "px"
-    initial_nav_pos()
+    pos_search()
 }
 
 
@@ -34,23 +35,29 @@ function hide_search() {
         resolve();
     });
     zIndexPromise.then(function () {
-        let top = nav.clientHeight - nav2.clientHeight - search.clientHeight
-        search.style.transform = `translateY(${top}px)`
-        // search.style.visibility = "hidden"
+        pos_search()
         nav.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
     })
 }
 
 
-function initial_nav_pos() {
-    let top = -nav2.clientHeight
+function pos_search() {
+    let top;
+    // if nav is going to close then set search box position with negative navbar height so that it will completely hidden
+    if (!nav_show)
+        top = -nav2.clientHeight
+    // if nav is going to open then set search box right bellow the opened navbar
+    else
+        top = nav.clientHeight - nav2.clientHeight - search.clientHeight
     search.style.transform = `translateY(${top}px)`
 }
 
 
 function toggleNav() {
     // Navbar is closed if top is not 0px
+    // Show NAVBAR
     if (nav.style.top != "0px") {
+        nav_show = true
         btn_toggle_nav.classList.add("nav-show-rotate")
         setTimeout(()=>{btn_toggle_nav.classList.remove("nav-show-rotate")}, 1020)
 
@@ -62,11 +69,12 @@ function toggleNav() {
         // container.style.marginTop = "0px"
         // setTimeout(()=>{nav.style.position = "relative"}, 510)
     }
+    // HIDE NAVBAR
     else {
+        nav_show = false
         btn_toggle_nav.classList.add("nav-hide-rotate")
         setTimeout(()=>{
             btn_toggle_nav.classList.remove("nav-hide-rotate")
-            initial_nav_pos()
         }, 1020)
 
         // Also hide search just in case if it might be opened. It just look ugly when nav is closed and search is still showing
