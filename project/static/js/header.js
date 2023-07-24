@@ -13,14 +13,17 @@ var btn_toggle_nav = get("btn-toggle-nav")
 function after_load() {
     // container.style.top = nav2.clientHeight + "px"
     container.style.marginTop = nav2.clientHeight + "px"
+    hide_search()
 }
 
 
 function show_search() {
-    search.style.transform = "translateY(0)"
+    let top = nav.clientHeight - nav2.clientHeight
+    search.style.transform = `translateY(${top}px)`
     // setTimeout(()=> {search.style.zIndex = 0}, 1000)
     search.style.zIndex = 100
     nav.style.boxShadow = "none"
+    nav2.style.boxShadow = "none"
     setTimeout(()=> {search_input.focus()}, 700)
 }
 
@@ -31,12 +34,19 @@ function hide_search() {
         resolve();
     });
     zIndexPromise.then(function () {
-        search.style.transform = "translateY(-70px)"
+        let top = nav.clientHeight - nav2.clientHeight - search.clientHeight
+        search.style.transform = `translateY(${top}px)`
         // search.style.visibility = "hidden"
+        initial_nav_pos()
         nav.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
     })
 }
 
+
+function initial_nav_pos() {
+    let top = -nav2.clientHeight
+    search.style.transform = `translateY(${top}px)`
+}
 function toggleNav() {
     // Navbar is closed if top is not 0px
     if (nav.style.top != "0px") {
@@ -45,6 +55,8 @@ function toggleNav() {
 
         // Show NAV
         nav.style.top = "0px"
+        nav2.style.boxShadow = "none"
+        initial_nav_pos()
         // container.style.top = "0px"
         // container.style.marginTop = "0px"
         // setTimeout(()=>{nav.style.position = "relative"}, 510)
@@ -58,6 +70,7 @@ function toggleNav() {
         // Hide NAV
         nav.style.top = "-300px"
         nav.style.position = "absolute"
+        nav2.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
         setTimeout(()=>{nav.style.position = "absolute"}, 510)
         // container.style.top = nav2.clientHeight + "px"
         // container.style.marginTop = nav2.clientHeight + "px"
