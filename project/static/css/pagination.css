@@ -1,0 +1,25 @@
+.pagination {
+    margin: 20px 0;
+}
+
+.pagination .btn {
+    padding: 5px 15px;
+    margin: 0;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 5px;
+}
+
+.pagination .link {
+    background-color: rgb(255, 255, 255);
+    transition-duration: 300ms;
+}
+
+.pagination .link:hover {
+    background-color: rgb(216, 216, 216);
+}
+
+.pagination .active {
+    color: white;
+    border: 1px solid rgb(0, 0, 122);
+    background-color: rgb(29, 29, 255);
+}

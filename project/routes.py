@@ -82,13 +82,17 @@ def index():
 def items():
     return render_template("items.html", TITLE=TITLE)
 
-
-@app.route("/search", methods=["POST"])
-def search():
-    search = request.form.get("search_input")
+PER_PAGE = 15
+@app.route("/search/<int:num>", methods=["GET"])
+def search(num):
+    search = request.args.get('search_input')
     products = Products.query.filter(Products.title.like(f"%{search}%"))
-    images = get_images(products)
-    return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search)
+    count = products.count()
+
+    products = products.paginate(page=num, per_page=PER_PAGE)
+    images = get_images(products.items)
+
+    return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count)
 
 
 @app.route("/core_collection")

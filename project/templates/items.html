@@ -2,14 +2,15 @@
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/cards.css" />
 <link rel="stylesheet" href="/static/css/items.css" />
+<link rel="stylesheet" href="/static/css/pagination.css" />
 {% endblock %} {% block main %}
 <h1 class="searched">
-    {{search}}<sup>{{products.count()}}</sup>
+    {{search}}<sup>{{count}}</sup>
 </h1>
 
 <div class="row" id="featured_items">
-{% for i in range(products.count()) %}
-  <div class="card" onclick="go('/product/{{products[i].id}}')">
+{% for i in range(products.items | length) %}
+  <div class="card" onclick="go('/product/{{products.items[i].id}}')">
       <div class="flip-card">
           <div class="flip-card-inner">
               <div class="flip-card-front">
@@ -21,17 +22,37 @@
           </div>
       </div>
       <div class="card-container" style="text-align: center;">
-          <p>{{products[i].title}}</p>
-          <p class="price">${{products[i].price}} CAD</p>
+          <p>{{products.items[i].title}}</p>
+          <p class="price">${{products.items[i].price}} CAD</p>
       </div>
   </div>
 {% endfor %}
 </div>
 
 <div class="row" style="background-color: white;margin-bottom: 10px;">
-  <div class="column clm-center">
-    <!-- <button class="btn btn-black">VIEW MORE</button> -->
-  </div>
+    <div class="column clm-center">
+        <!-- <button class="btn btn-black">VIEW MORE</button> -->
+        <div class="pagination">
+            {% for i in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+                {% if i == products.page %}
+                    <button class="btn active">
+                {% else %}
+                    <button class="btn link" onclick="page_go('{{i}}')">
+                {% endif %}
+                {% if i == None %}
+                    ...
+                {% else %}
+                    {{i}}
+                {% endif %}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
+
+<script>
+    const searched = "{{search}}"
+</script>
+<script src="/static/js/pagination.js"></script>
 {% endblock %}
