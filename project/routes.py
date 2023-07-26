@@ -161,8 +161,9 @@ def admin():
     return render_template("admin/index.html")
 
 
+@app.route("/admin/products")
 @app.route("/admin/products/<int:page>")
-def get_products(page):
+def get_products(page=1):
     products = Products.query.paginate(page=page, per_page=PER_PAGE)
 
     images = get_images(products.items)
@@ -172,8 +173,9 @@ def get_products(page):
 
 
 @app.route("/admin/images")
-def images():
-    images = Images.query.all()
+@app.route("/admin/images/<int:page>")
+def images(page=1):
+    images = Images.query.paginate(page=page, per_page=PER_PAGE)
     return render_template("admin/images.html", images=images)
 
 

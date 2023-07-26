@@ -1,7 +1,9 @@
 {% extends "admin/layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/css/home.css">
 <link rel="stylesheet" href="/static/admin/form.css">
+<link rel="stylesheet" href="/static/css/pagination.css" />
 {% endblock %} {% block main %}
-<h2>All Products</h2>
+<h2>All Images</h2>
 <table class="product_list" border="1">
 <thead>
 <tr>
@@ -12,19 +14,40 @@
 </tr>
 </thead>
 <tbody>
-{% for i in range(images|length) %}
+{% for i in range(images.items|length) %}
 <tr>
     <td>{{i+1}}</td>
-    <td><img src="/static/product_images/{{images[i].filename}}" alt=" " class="img"></td>
-    <td>{{images[i].title}}</td>
+    <td><img src="/static/product_images/{{images.items[i].filename}}" alt=" " class="img"></td>
+    <td>{{images.items[i].title}}</td>
     <td>
-        <!-- <button onclick="go_url('/admin/update/image/{{images[i].id}}')" class="btn edit">UPDATE</button><br> -->
-        <button onclick="delete_image('{{images[i].id}}')" class="btn delete">DELETE</button>
+        <button onclick="delete_image('{{images.items[i].id}}')" class="btn delete">DELETE</button>
     </td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
+
+<div class="row" style="background-color: white;margin-bottom: 10px;">
+    <div class="column clm-center">
+        <!-- <button class="btn btn-black">VIEW MORE</button> -->
+        <div class="pagination">
+            {% for i in images.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+                {% if i == images.page %}
+                    <button class="btn active">
+                {% else %}
+                    <button class="btn link" onclick="page_go('{{i}}')">
+                {% endif %}
+                {% if i == None %}
+                    ...
+                {% else %}
+                    {{i}}
+                {% endif %}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 <script src="/static/js/go_url.js"></script>
 <script>
     function delete_image(id) {
@@ -32,6 +55,11 @@
         if (del) {
             go_url("/admin/delete/image/" + id)
         }
+    }
+
+    function page_go(num) {
+        if (num != "None")
+            window.location.href = `/admin/images/${num}`
     }
 </script>
 {% endblock %}
