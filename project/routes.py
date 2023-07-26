@@ -171,44 +171,43 @@ def get_products(page):
     return render_template("admin/products.html", TITLE="ADMIN", products=products, images=images)
 
 
-# @app.route("/admin/images")
-# def images():
-#     images = Images.query.all()
-#     return render_template("admin/images.html", images=images)
+@app.route("/admin/images")
+def images():
+    images = Images.query.all()
+    return render_template("admin/images.html", images=images)
 
 
-# @app.route("/admin/delete/image/<int:ID>")
-# def delete_image(ID):
-#     image = Images.query.get(ID)
-#     if image:
-#         file = os.path.join(IMAGE_DIR, image.filename)
-#         if os.path.isfile(file):
-#             os.remove(file)
-#         else:
-#             print(file, "IMG NOT FOUND DEL")
-#         db.session.delete(image)
-#         db.session.commit()
-#     return redirect("/admin/images")
+@app.route("/admin/delete/image/<int:ID>")
+def delete_image(ID):
+    image = Images.query.get(ID)
+    if image:
+        file = os.path.join(IMAGE_DIR, image.filename)
+        if os.path.isfile(file):
+            os.remove(file)
+        else:
+            print(file, "IMG NOT FOUND DEL")
+        db.session.delete(image)
+        db.session.commit()
+    return redirect("/admin/images")
 
 
-# @app.route("/admin/new_image", methods=["GET", "POST"])
-# def new_image():
-#     if request.method == "POST":
-#         title = request.form.get("title")
-#         for i in request.files:
-#             file = request.files.get(i)
-#             filename = file.filename
-#             if filename:
-#                 filename = str(time()) + secure_filename(filename)
-#                 path = os.path.join(IMAGE_DIR, filename)
-#                 file.save(path)
+@app.route("/admin/new_image", methods=["GET", "POST"])
+def new_image():
+    if request.method == "POST":
+        title = request.form.get("title")
+        for i in request.files:
+            file = request.files.get(i)
+            filename = file.filename
+            if filename:
+                filename = str(time()) + secure_filename(filename)
+                path = os.path.join(IMAGE_DIR, filename)
+                file.save(path)
 
-#                 image = Images(title=title, filename=filename)
-#                 db.session.add(image)
-#         db.session.commit()
+                image = Images(title=title, filename=filename)
+                db.session.add(image)
+        db.session.commit()
 
-
-#    return render_template("admin/new_image.html", time=time)
+    return render_template("admin/new_image.html", time=time)
 
 
 @app.route("/admin/new_product", methods=["GET", "POST"])
