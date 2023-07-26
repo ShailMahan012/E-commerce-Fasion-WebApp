@@ -83,13 +83,13 @@ def items():
     return render_template("items.html", TITLE=TITLE)
 
 PER_PAGE = 15
-@app.route("/search/<int:num>", methods=["GET"])
-def search(num):
+@app.route("/search/<int:page>", methods=["GET"])
+def search(page):
     search = request.args.get('search_input')
     products = Products.query.filter(Products.title.like(f"%{search}%"))
     count = products.count()
 
-    products = products.paginate(page=num, per_page=PER_PAGE)
+    products = products.paginate(page=page, per_page=PER_PAGE)
     images = get_images(products.items)
 
     return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count)
@@ -157,11 +157,18 @@ def checkout():
 
 
 @app.route("/admin")
-@app.route("/products")
 def admin():
-    products = Products.query.all()
-    images = get_images(products)
-    return render_template("admin/products.html", products=products, images=images)
+    return render_template("admin/index.html")
+
+
+@app.route("/admin/products/<int:page>")
+def get_products(page):
+    products = Products.query.paginate(page=page, per_page=PER_PAGE)
+
+    images = get_images(products.items)
+    images = [i[0] for i in images]
+
+    return render_template("admin/products.html", TITLE="ADMIN", products=products, images=images)
 
 
 # @app.route("/admin/images")

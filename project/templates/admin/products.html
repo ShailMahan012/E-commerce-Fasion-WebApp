@@ -1,5 +1,7 @@
 {% extends "admin/layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/css/home.css">
 <link rel="stylesheet" href="/static/admin/form.css">
+<link rel="stylesheet" href="/static/css/pagination.css" />
 {% endblock %} {% block main %}
 <h2>All Products</h2>
 <table class="product_list" border="1">
@@ -14,21 +16,43 @@
 </tr>
 </thead>
 <tbody>
-{% for i in range(products|length) %}
+{% for i in range(products.items|length) %}
 <tr>
     <td>{{i+1}}</td>
     <td><img src="/static/product_images/{{images[i]}}" alt=" " class="img"></td>
-    <td>{{products[i].title}}</td>
-    <td>{{products[i].category}}</td>
-    <td>{{products[i].price}}</td>
+    <td>{{products.items[i].title}}</td>
+    <td>{{products.items[i].category}}</td>
+    <td>{{products.items[i].price}}</td>
     <td>
-        <!-- <button onclick="go_url('/admin/update/product/{{products[i].id}}')" class="btn edit">UPDATE</button><br> -->
-        <button onclick="delete_product('{{products[i].id}}')" class="btn delete">DELETE</button>
+        <!-- <button onclick="go_url('/admin/update/product/{{products.items[i].id}}')" class="btn edit">UPDATE</button><br> -->
+        <button onclick="delete_product('{{products.items[i].id}}')" class="btn delete">DELETE</button>
     </td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
+
+<div class="row" style="background-color: white;margin-bottom: 10px;">
+    <div class="column clm-center">
+        <!-- <button class="btn btn-black">VIEW MORE</button> -->
+        <div class="pagination">
+            {% for i in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+                {% if i == products.page %}
+                    <button class="btn active">
+                {% else %}
+                    <button class="btn link" onclick="page_go('{{i}}')">
+                {% endif %}
+                {% if i == None %}
+                    ...
+                {% else %}
+                    {{i}}
+                {% endif %}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 <script src="/static/js/go_url.js"></script>
 <script>
     function delete_product(id) {
@@ -38,4 +62,7 @@
         }
     }
 </script>
+
+
+<script src="/static/admin/pagination.js"></script>
 {% endblock %}
