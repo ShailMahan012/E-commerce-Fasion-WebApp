@@ -1,33 +1,29 @@
-var images = document.getElementsByClassName("img")
-var img_search_input = get("img_search_input")
-var popup = document.getElementById("popup")
-var overlay = get("overlay")
-var search_div = document.getElementById("search_div")
+const images = document.getElementsByClassName("img")
+const images_ids = document.getElementsByClassName("img_id")
+const img_search_input = get("img_search_input")
+const popup = get("popup")
+const overlay = get("overlay")
+const search_div = get("search_div")
+
 var img_id = -1 // ID of image container in which we are going to place image -1 means no image container is select
 var fetched_images;
 
-function img_select() {
+function img_select(img_index) {
+    let image = fetched_images[img_index]
+    let src = `/static/product_images/${image.filename}`
+    let img_input = images_ids[img_id]
+    img_input.value = image.id
+    images[img_id].src = src
+    hide_popup()
 }
 
 
-function img_del(file_img_id) {
-    let img_file = image_file_input[file_img_id]
-    let image = images[file_img_id]
+function img_del(img_id) {
+    let img_input = images_ids[img_id]
+    let image = images[img_id]
 
-    img_file.value = null
+    img_input.value = null
     if (!image.src.endsWith("#")) image.src = "#"
-}
-
-
-function img_change(file_img_id) {
-    let img_file = image_file_input[file_img_id]
-    let image = images[file_img_id]
-    if (img_file.value) {
-        image.src = URL.createObjectURL(img_file.files[0])
-    }
-    else {
-        image.src = "#"
-    }
 }
 
 
@@ -35,7 +31,7 @@ function create_row(img_data, id) {
     let filename = img_data.filename
     let title = img_data.title
     let row = `
-        <div class="search_row" onclick(img_select(${id}))>
+        <div class="search_row" onclick="img_select(${id})">
             <img src="/static/product_images/${filename}" alt="img" class="img">
             <span>${title}</span>
         </div>`
