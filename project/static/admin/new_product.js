@@ -45,9 +45,14 @@ function show_images() {
     if (search) {
         fetch_images(search).then(result=> {
             fetched_images = result
-            for (let i=0;i<result.length;i++) {
-                let row = create_row(result[i], i)
-                search_div.innerHTML += row
+            if (result.length > 0) {
+                for (let i=0;i<result.length;i++) {
+                    let row = create_row(result[i], i)
+                    search_div.innerHTML += row
+                }
+            }
+            else {
+                search_div.innerHTML = `<span class="not-found">NOT FOUND</span>`
             }
         })
     }

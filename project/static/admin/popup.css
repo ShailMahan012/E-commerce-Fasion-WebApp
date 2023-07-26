@@ -25,6 +25,7 @@
     margin-bottom: 10px;
     background-color: white;
     padding: 10px;
+    text-align: center;
 }
 
 .popup .search_row {
@@ -37,6 +38,11 @@
     padding: 5px;
     transition-duration: 200ms;
     cursor: pointer;
+}
+
+.popup .not-found {
+    font-weight: bold;
+    color: red;
 }
 
 .popup .search_row:hover {
