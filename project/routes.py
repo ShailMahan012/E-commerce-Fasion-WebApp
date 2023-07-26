@@ -199,18 +199,14 @@ def new_product():
         db.session.add(product)
         db.session.commit()
 
-        for i in request.files:
-            file = request.files.get(i)
-            filename = file.filename
-            if filename:
-                filename = str(time()) + secure_filename(filename)
-                path = os.path.join(IMAGE_DIR, filename)
-                file.save(path)
-
-                image = Images(product_id=product.id, filename=filename)
-                db.session.add(image)
-
+        for i in range(4):
+            img_name = f"img_id{i}"
+            img_id = request.form.get(img_name)
+            if img_id:
+                image = Images.query.get(img_id)
+                image.product_id = product.id
         db.session.commit()
+
     return render_template("admin/new_product.html", time=time)
 
 
@@ -222,12 +218,6 @@ def delete_product(ID):
         images = Images.query.filter_by(product_id=ID).all()
         for img in images:
             img.product_id = None
-            # file = os.path.join(IMAGE_DIR, img.filename)
-            # if os.path.isfile(file):
-            #     os.remove(file)
-            # else:
-            #     print(file, "IMG NOT FOUND DEL")
-            # db.session.delete(img)
     db.session.commit()
     return redirect("/admin")
 
