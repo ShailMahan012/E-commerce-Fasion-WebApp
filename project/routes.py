@@ -298,10 +298,9 @@ def new_image():
 @app.route("/admin/fetch/images", methods=["POST"])
 def admin_images_fetch():
     search = request.form.get("search")
-    images = Images.query.filter_by(product_id=None).limit(15)
+    images = Images.query.filter(Images.title.like(f"%{search}%"), Images.product_id==None).all()
     images = get_images_dict(images)
-    [print(i) for i in images]
-    return search
+    return json.jsonify(images)
 
 
 @app.route("/logout")

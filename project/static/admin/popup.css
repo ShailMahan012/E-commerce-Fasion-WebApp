@@ -51,9 +51,18 @@
     height: 60px;
 }
 
-.popup .btn-cancel {
+.btn {
     color: white;
-    background-color:rgb(122, 122, 122);
+}
+.btn-search {
+    background-color: rgb(28, 96, 255);
+}
+
+.btn-search:hover {
+    background-color: rgb(0, 62, 206);
+}
+
+.popup .btn-cancel {
     background-color: rgb(234, 86, 86);
 }
 

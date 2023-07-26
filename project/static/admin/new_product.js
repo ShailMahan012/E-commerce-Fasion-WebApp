@@ -94,5 +94,3 @@ async function fetch_images(search) {
         })
     return output;
 }
-
-img_search_input.onkeydown = show_images

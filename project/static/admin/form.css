@@ -96,7 +96,7 @@ td, th {
     max-width: 100%;
 }
 
-.img_id {
+.img_id, .img_file {
     display: none;
 }
 
