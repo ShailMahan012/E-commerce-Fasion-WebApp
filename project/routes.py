@@ -62,6 +62,18 @@ def get_product_dict(products):
     return products_dict
 
 
+def get_images_dict(images):
+    images_dict = []
+    for img in images:
+        image = {
+            'id': img.id,
+            'title': img.title,
+            'filename': img.filename,
+        }
+        images_dict.append(image)
+    return images_dict
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -172,6 +184,77 @@ def get_products(page=1):
     return render_template("admin/products.html", TITLE="ADMIN", products=products, images=images)
 
 
+@app.route("/admin/new_product", methods=["GET", "POST"])
+def new_product():
+    if request.method == "POST":
+        title = request.form.get("title")
+        category = request.form.get("category")
+        details = request.form.get("details")
+        price = request.form.get("price")
+        primary = 0 if not request.form.get("primary") else request.form.get("primary")
+        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
+        core_collection = True if request.form.get("core_collection") else False
+
+        product = Products(title=title, category=category, details=details, price=price, primary=primary, secondary=secondary, core_collection=core_collection)
+        db.session.add(product)
+        db.session.commit()
+
+        for i in request.files:
+            file = request.files.get(i)
+            filename = file.filename
+            if filename:
+                filename = str(time()) + secure_filename(filename)
+                path = os.path.join(IMAGE_DIR, filename)
+                file.save(path)
+
+                image = Images(product_id=product.id, filename=filename)
+                db.session.add(image)
+
+        db.session.commit()
+    return render_template("admin/new_product.html", time=time)
+
+
+@app.route("/admin/delete/product/<int:ID>")
+def delete_product(ID):
+    product = Products.query.get(ID)
+    if product:
+        db.session.delete(product)
+        images = Images.query.filter_by(product_id=ID).all()
+        for img in images:
+            img.product_id = None
+            # file = os.path.join(IMAGE_DIR, img.filename)
+            # if os.path.isfile(file):
+            #     os.remove(file)
+            # else:
+            #     print(file, "IMG NOT FOUND DEL")
+            # db.session.delete(img)
+    db.session.commit()
+    return redirect("/admin")
+
+
+# @app.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
+# def update_product(ID):
+#     product = Products.query.get(ID)
+#     return render_template("admin/update_product.html", product=product)
+
+
+@app.route("/fetch/products", methods=["POST"])
+def fetch_products():
+    products_id = request.form.get("id")
+    try:
+        products_id = json.loads(products_id)
+        products = Products.query.filter(Products.id.in_((products_id))).all()
+        images = [x[0] for x in get_images(products)]
+        products = get_product_dict(products)
+        for i in range(len(products)):
+            products[i]['img'] = images[i]
+        return json.jsonify(products)
+    except ValueError:
+        print("fetch_products: JSON Decode ERROR")
+        return "fetch_products: JSON Decode ERROR", 501
+    return 'fetch_products: This message should not be received', 501
+
+
 @app.route("/admin/images")
 @app.route("/admin/images/<int:page>")
 def images(page=1):
@@ -212,74 +295,14 @@ def new_image():
     return render_template("admin/new_image.html", time=time)
 
 
-@app.route("/admin/new_product", methods=["GET", "POST"])
-def new_product():
-    if request.method == "POST":
-        title = request.form.get("title")
-        category = request.form.get("category")
-        details = request.form.get("details")
-        price = request.form.get("price")
-        primary = 0 if not request.form.get("primary") else request.form.get("primary")
-        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
-        core_collection = True if request.form.get("core_collection") else False
+@app.route("/admin/fetch/images", methods=["POST"])
+def admin_images_fetch():
+    search = request.form.get("search")
+    images = Images.query.filter_by(product_id=None).limit(15)
+    images = get_images_dict(images)
+    [print(i) for i in images]
+    return search
 
-        product = Products(title=title, category=category, details=details, price=price, primary=primary, secondary=secondary, core_collection=core_collection)
-        db.session.add(product)
-        db.session.commit()
-
-        for i in request.files:
-            file = request.files.get(i)
-            filename = file.filename
-            if filename:
-                filename = str(time()) + secure_filename(filename)
-                path = os.path.join(IMAGE_DIR, filename)
-                file.save(path)
-
-                image = Images(product_id=product.id, filename=filename)
-                db.session.add(image)
-
-        db.session.commit()
-    return render_template("admin/new_product.html", time=time)
-
-
-@app.route("/admin/delete/product/<int:ID>")
-def delete_product(ID):
-    product = Products.query.get(ID)
-    if product:
-        db.session.delete(product)
-        images = Images.query.filter_by(product_id=ID).all()
-        for img in images:
-            file = os.path.join(IMAGE_DIR, img.filename)
-            if os.path.isfile(file):
-                os.remove(file)
-            else:
-                print(file, "IMG NOT FOUND DEL")
-            db.session.delete(img)
-    db.session.commit()
-    return redirect("/admin")
-
-
-# @app.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
-# def update_product(ID):
-#     product = Products.query.get(ID)
-#     return render_template("admin/update_product.html", product=product)
-
-
-@app.route("/fetch/products", methods=["POST"])
-def fetch_products():
-    products_id = request.form.get("id")
-    try:
-        products_id = json.loads(products_id)
-        products = Products.query.filter(Products.id.in_((products_id))).all()
-        images = [x[0] for x in get_images(products)]
-        products = get_product_dict(products)
-        for i in range(len(products)):
-            products[i]['img'] = images[i]
-        return json.jsonify(products)
-    except ValueError:
-        print("fetch_products: JSON Decode ERROR")
-        return "fetch_products: JSON Decode ERROR", 501
-    return 'fetch_products: This message should not be received', 501
 
 @app.route("/logout")
 def logout():

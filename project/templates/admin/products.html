@@ -61,8 +61,11 @@
             go_url("/admin/delete/product/" + id)
         }
     }
+
+    function page_go(num) {
+        if (num != "None")
+            window.location.href = `/admin/products/${num}`
+    }
 </script>
 
-
-<script src="/static/admin/pagination.js"></script>
 {% endblock %}

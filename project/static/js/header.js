@@ -1,7 +1,3 @@
-function get(id) {
-    return document.getElementById(id)
-}
-
 var search = get("search")
 var header = get("header")
 var nav = get("nav")
