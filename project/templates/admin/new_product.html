@@ -40,22 +40,22 @@
     <tr>
         <td>
             <input type="number" class="img_id" name="img_id0">
-            <button type="button" class="btn btn-icon btn-add" onclick="img_select(0)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(0)"><i class="fal fa-upload"></i></button>
             <button type="button" class="btn btn-icon btn-del" onclick="img_del(0)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
             <input type="number" class="img_id" name="img_id1">
-            <button type="button" class="btn btn-icon btn-add" onclick="img_select(1)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(1)"><i class="fal fa-upload"></i></button>
             <button type="button" class="btn btn-icon btn-del" onclick="img_del(1)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
             <input type="number" class="img_id" name="img_id2">
-            <button type="button" class="btn btn-icon btn-add" onclick="img_select(2)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(2)"><i class="fal fa-upload"></i></button>
             <button type="button" class="btn btn-icon btn-del" onclick="img_del(2)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
             <input type="number" class="img_id" name="img_id3">
-            <button type="button" class="btn btn-icon btn-add" onclick="img_select(3)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(3)"><i class="fal fa-upload"></i></button>
             <button type="button" class="btn btn-icon btn-del" onclick="img_del(3)"><i class="fa-regular fa-trash"></i></button>
         </td>
     </tr>
@@ -80,14 +80,6 @@
     <h2>Select Image</h2>
     <input type="text" id="img_search_input" placeholder="SEARCH">
     <div id="search_div">
-        <div class="search_row">
-            <img src="/static/product_images/1686148515.0545945FMS.ico" alt="img" class="img">
-            <span>TITLE TITLE TITLE</span>
-        </div>
-        <div class="search_row">
-            <img src="/static/product_images/1686148515.0545945FMS.ico" alt="img" class="img">
-            <span>TITLE TITLE TITLE</span>
-        </div>
     </div>
     <button class="btn btn-search" onclick="show_images()">SEARCH</button>
     <button class="btn btn-cancel" onclick="hide_popup()">CANCEL</button>

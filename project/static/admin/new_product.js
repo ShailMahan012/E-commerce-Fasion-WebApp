@@ -3,10 +3,10 @@ var img_search_input = get("img_search_input")
 var popup = document.getElementById("popup")
 var overlay = get("overlay")
 var search_div = document.getElementById("search_div")
+var img_id = -1 // ID of image container in which we are going to place image -1 means no image container is select
+var fetched_images;
 
-
-function img_select(img_id) {
-    show_popup()
+function img_select() {
 }
 
 
@@ -31,22 +31,35 @@ function img_change(file_img_id) {
 }
 
 
-function create_row(img_id) {
-
+function create_row(img_data, id) {
+    let filename = img_data.filename
+    let title = img_data.title
+    let row = `
+        <div class="search_row" onclick(img_select(${id}))>
+            <img src="/static/product_images/${filename}" alt="img" class="img">
+            <span>${title}</span>
+        </div>`
+    return row
 }
 
 
 function show_images() {
     let search = img_search_input.value
+    search_div.innerHTML = ''
     if (search) {
         fetch_images(search).then(result=> {
-            console.log(result)
+            fetched_images = result
+            for (let i=0;i<result.length;i++) {
+                let row = create_row(result[i], i)
+                search_div.innerHTML += row
+            }
         })
     }
 }
 
 
-function show_popup() {
+function show_popup(id) {
+    img_id = id
     search_div.innerHTML = ''
     popup.style.display = 'block'
     overlay.style.display = 'block'
@@ -60,6 +73,7 @@ function show_popup() {
 
 
 function hide_popup() {
+    img_id = -1
     popup.style.transitionDelay = '0ms'
     overlay.style.transitionDelay = '700ms'
     setTimeout(()=> {
@@ -83,7 +97,7 @@ async function fetch_images(search) {
         body: form,
     })
         .then((result) => {
-            return result.text()
+            return result.json()
         })
         .then(text => {
             output = text
