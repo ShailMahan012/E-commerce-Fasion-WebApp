@@ -196,7 +196,6 @@ def set_images(product_id, form, primary, secondary):
 
         x = 2
         for img in img_ids:
-            print(img.title, img.order)
             if img.order is None:
                 img.order = x
                 x += 1

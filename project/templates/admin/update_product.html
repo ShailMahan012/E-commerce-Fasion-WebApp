@@ -8,9 +8,9 @@
     <tr><td colspan="4"><input type="text" name="title" id="" placeholder="Title" value="{{product.title}}"></td></tr>
     <tr><td colspan="4">
         <select name="category">
-            <option value="men">MEN</option>
-            <option value="women">WOMEN</option>
-            <option value="kids">KIDS</option>
+            <option value="men" {% if product.category == "men" %} selected {% endif %}>MEN</option>
+            <option value="women" {% if product.category == "women" %} selected {% endif %}>WOMEN</option>
+            <option value="kids" {% if product.category == "kids" %} selected {% endif %}>KIDS</option>
         </select>
     </td></tr>
     <tr><td colspan="4"><input type="number" name="price" id="" placeholder="Price" min="0" value="{{product.price}}"></td></tr>
