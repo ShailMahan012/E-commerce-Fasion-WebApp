@@ -6,13 +6,13 @@ const overlay = get("overlay")
 const search_div = get("search_div")
 
 var img_id = -1 // ID of image container in which we are going to place image -1 means no image container is select
-var fetched_images;
+// var fetched_images;
 
-function img_select(img_index) {
-    let image = fetched_images[img_index]
-    let src = `/static/product_images/${image.filename}`
+// show images in img tag and also set value of input to image ID(IN DATABASE)
+function img_select(id, filename) {
+    let src = `/static/product_images/${filename}`
     let img_input = images_ids[img_id]
-    img_input.value = image.id
+    img_input.value = id
     images[img_id].src = src
     hide_popup()
 }
@@ -27,11 +27,12 @@ function img_del(img_id) {
 }
 
 
-function create_row(img_data, id) {
+function create_row(img_data) {
+    let id = img_data.id
     let filename = img_data.filename
     let title = img_data.title
     let row = `
-        <div class="search_row" onclick="img_select(${id})">
+        <div class="search_row" onclick="img_select(${id}, '${filename}')">
             <img src="/static/product_images/${filename}" alt="img" class="img">
             <span>${title}</span>
         </div>`
@@ -44,7 +45,7 @@ function show_images() {
     search_div.innerHTML = ''
     if (search) {
         fetch_images(search).then(result=> {
-            fetched_images = result
+            // fetched_images = result
             if (result.length > 0) {
                 for (let i=0;i<result.length;i++) {
                     let row = create_row(result[i], i)

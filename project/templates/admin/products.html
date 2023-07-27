@@ -24,7 +24,7 @@
     <td>{{products.items[i].category}}</td>
     <td>{{products.items[i].price}}</td>
     <td>
-        <!-- <button onclick="go_url('/admin/update/product/{{products.items[i].id}}')" class="btn edit">UPDATE</button><br> -->
+        <button onclick="go_url('/admin/update/product/{{products.items[i].id}}')" class="btn edit">UPDATE</button><br>
         <button onclick="delete_product('{{products.items[i].id}}')" class="btn delete">DELETE</button>
     </td>
 </tr>
@@ -34,7 +34,6 @@
 
 <div class="row" style="background-color: white;margin-bottom: 10px;">
     <div class="column clm-center">
-        <!-- <button class="btn btn-black">VIEW MORE</button> -->
         <div class="pagination">
             {% for i in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
                 {% if i == products.page %}
@@ -64,7 +63,7 @@
 
     function page_go(num) {
         if (num != "None")
-            window.location.href = `/admin/products/${num}`
+            go_url(`/admin/products/${num}`)
     }
 </script>
 

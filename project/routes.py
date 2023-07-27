@@ -175,6 +175,35 @@ def get_products(page=1):
     return render_template("admin/products.html", TITLE="ADMIN", products=products, images=images)
 
 
+def set_images(product_id, form, primary, secondary):
+    img_ids = []
+    for i in range(4):
+        img_name = f"img_id{i}"
+        img_id = form.get(img_name)
+        if img_id:
+            image = Images.query.get(img_id)
+            if image:
+                image.product_id = product_id
+                image.order = None
+                img_ids.append(image)
+
+    if img_ids:
+        primary = 0 if primary > len(img_ids)-1 else primary
+        secondary = 0 if secondary > len(img_ids)-1 else secondary
+
+        img_ids[primary].order = 0
+        img_ids[secondary].order = 1
+
+        x = 2
+        for img in img_ids:
+            print(img.title, img.order)
+            if img.order is None:
+                img.order = x
+                x += 1
+
+        db.session.commit()
+
+
 @app.route("/admin/new_product", methods=["GET", "POST"])
 def new_product():
     if request.method == "POST":
@@ -182,39 +211,15 @@ def new_product():
         category = request.form.get("category")
         details = request.form.get("details")
         price = request.form.get("price")
-        primary = 0 if not int(request.form.get("primary")) else int(request.form.get("primary"))
-        secondary = 0 if not int(request.form.get("secondary")) else int(request.form.get("secondary"))
+        primary = 0 if not request.form.get("primary") else request.form.get("primary")
+        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
         core_collection = True if request.form.get("core_collection") else False
 
         product = Products(title=title, category=category, details=details, price=price, core_collection=core_collection)
         db.session.add(product)
         db.session.commit()
 
-        img_ids = []
-        for i in range(4):
-            img_name = f"img_id{i}"
-            img_id = request.form.get(img_name)
-            if img_id:
-                image = Images.query.get(img_id)
-                if image:
-                    image.product_id = product.id
-                    image.order = None
-                    img_ids.append(image)
-
-        if img_ids:
-            primary = 0 if primary >= len(img_ids)-1 else primary
-            secondary = 0 if secondary >= len(img_ids)-1 else secondary
-
-            img_ids[primary].order = 0
-            img_ids[secondary].order = 1
-
-            x = 2
-            for img in img_ids:
-                if img.order is not None:
-                    img.order = x
-                    x += 1
-
-            db.session.commit()
+        set_images(product.id, request.form, int(primary), int(secondary))
 
     return render_template("admin/new_product.html", time=time)
 
@@ -228,13 +233,37 @@ def delete_product(ID):
         for img in images:
             img.product_id = None
     db.session.commit()
-    return redirect("/admin")
+    return redirect("/admin/products")
 
 
-# @app.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
-# def update_product(ID):
-#     product = Products.query.get(ID)
-#     return render_template("admin/update_product.html", product=product)
+@app.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
+def update_product(ID):
+    product = Products.query.get(ID)
+    images = Images.query.filter_by(product_id=ID)
+    if request.method == "POST":
+        title = request.form.get("title")
+        category = request.form.get("category")
+        details = request.form.get("details")
+        price = request.form.get("price")
+        primary = 0 if not request.form.get("primary") else request.form.get("primary")
+        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
+        core_collection = True if request.form.get("core_collection") else False
+
+        product.title = title
+        product.category = category
+        product.details = details
+        product.price = price
+        product.core_collection = core_collection
+
+        for i in images:
+            i.product_id = None
+        db.session.commit()
+
+        set_images(ID, request.form, int(primary), int(secondary))
+
+    images = Images.query.filter_by(product_id=ID)
+    images = get_images_dict(images)
+    return render_template("admin/update_product.html", product=product, images=images)
 
 
 @app.route("/fetch/products", methods=["POST"])

@@ -1,10 +1,18 @@
 {% extends "admin/layout.html" %} {% block head %}
 <link rel="stylesheet" href="/static/admin/form.css">
+<link rel="stylesheet" href="/static/admin/popup.css">
 {% endblock %} {% block main %}
 <h2>Add New Product</h2>
 <form action="" method="POST" enctype="multipart/form-data">
 <table>
     <tr><td colspan="4"><input type="text" name="title" id="" placeholder="Title" value="{{product.title}}"></td></tr>
+    <tr><td colspan="4">
+        <select name="category">
+            <option value="men">MEN</option>
+            <option value="women">WOMEN</option>
+            <option value="kids">KIDS</option>
+        </select>
+    </td></tr>
     <tr><td colspan="4"><input type="number" name="price" id="" placeholder="Price" min="0" value="{{product.price}}"></td></tr>
     <tr><td colspan="4"><textarea name="details">{{product.details}}</textarea></td></tr>
     <tr style="border: 0 1px solid black 0 1 px solid black;">
@@ -31,24 +39,24 @@
     </tr>
     <tr>
         <td>
-            <input type="file" class="img_file" id="img0" name="image_file0" accept="image/*" onchange="img_change(0)">
-            <button type="button" class="btn btn-icon btn-upload" onclick="upload(0)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="del_image(0)"><i class="fa-regular fa-trash"></i></button>
+            <input type="number" class="img_id" name="img_id0">
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(0)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="img_del(0)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
-            <input type="file" class="img_file" id="img1" name="image_file1" accept="image/*" onchange="img_change(1)">
-            <button type="button" class="btn btn-icon btn-upload" onclick="upload(1)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="del_image(1)"><i class="fa-regular fa-trash"></i></button>
+            <input type="number" class="img_id" name="img_id1">
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(1)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="img_del(1)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
-            <input type="file" class="img_file" id="img2" name="image_file2" accept="image/*" onchange="img_change(2)">
-            <button type="button" class="btn btn-icon btn-upload" onclick="upload(2)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="del_image(2)"><i class="fa-regular fa-trash"></i></button>
+            <input type="number" class="img_id" name="img_id2">
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(2)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="img_del(2)"><i class="fa-regular fa-trash"></i></button>
         </td>
         <td>
-            <input type="file" class="img_file" id="img3" name="image_file3" accept="image/*" onchange="img_change(3)">
-            <button type="button" class="btn btn-icon btn-upload" onclick="upload(3)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="del_image(3)"><i class="fa-regular fa-trash"></i></button>
+            <input type="number" class="img_id" name="img_id3">
+            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(3)"><i class="fal fa-upload"></i></button>
+            <button type="button" class="btn btn-icon btn-del" onclick="img_del(3)"><i class="fa-regular fa-trash"></i></button>
         </td>
     </tr>
     <tr>
@@ -59,24 +67,34 @@
     </tr>
     <tr>
         <td><label>Secondary: <input type="radio" name="secondary" value="0"></label></td>
-        <td><label>Secondary: <input type="radio" name="secondary" value="1"></label></td>
+        <td><label>Secondary: <input type="radio" name="secondary" value="1" checked></label></td>
         <td><label>Secondary: <input type="radio" name="secondary" value="2"></label></td>
         <td><label>Secondary: <input type="radio" name="secondary" value="3"></label></td>
     </tr>
-    <tr><td colspan="4"><label>Core Collection <input type="checkbox" name="core_collection" 
+    <tr><td colspan="4"><label>Core Collection <input type="checkbox" name="core_collection"
         {% if  product.core_collection%} checked {% endif %}></label></td></tr>
     <tr><td colspan="4"><button type="submit" class="btn" id="save">SAVE</button></td></tr>
-    <tr><td colspan="4"><button onclick="go_url('/admin')" type="button" class="btn" id="cancel">CANCEL</button></td></tr>
 </table>
 </form>
 
-<script src="/static/admin/new_product.js"></script>
-<script src="/static/js/go_url.js"></script>
-<script>
-    var primary = document.getElementsByName("primary")
-    var secondary = document.getElementsByName("secondary")
+<div id="popup" class="popup">
+    <h2>Select Image</h2>
+    <input type="text" id="img_search_input" placeholder="SEARCH">
+    <div id="search_div">
+    </div>
+    <button class="btn btn-search" onclick="show_images()">SEARCH</button>
+    <button class="btn btn-cancel" onclick="hide_popup()">CANCEL</button>
+</div>
 
-    primary[{{product.primary}}].checked = true
-    secondary[{{product.secondary}}].checked = true
+<div id="overlay"></div>
+
+<script src="/static/admin/new_product.js"></script>
+<script>
+    const image_data = {{images | tojson}}
+    for(let i=0;i<image_data.length;i++) {
+        img_id = i
+        let image = image_data[i]
+        img_select(image.id, image.filename)
+    }
 </script>
 {% endblock %}
