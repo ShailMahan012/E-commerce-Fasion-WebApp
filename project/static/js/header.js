@@ -4,12 +4,16 @@ const nav = get("nav")
 const nav2 = get("nav2")
 const search_input = get("search_input")
 const container = get("container")
+const footer = get("footer")
 const btn_toggle_nav = get("btn-toggle-nav")
 var nav_show = false
 var search_show = false
 
 function after_load() {
-    container.style.marginTop = nav2.clientHeight + "px"
+    let margin_top = nav2.clientHeight;
+    if (margin_top == 0) margin_top = nav.clientHeight
+    container.style.top = margin_top + "px"
+    if (footer) footer.style.marginTop = margin_top + "px"
     pos_search()
 }
 
@@ -60,7 +64,7 @@ function pos_search() {
             // if nav is going to open then set search box right bellow the opened navbar
             if (nav_show) {
                 if (search_show) {
-                    top = nav.clientHeight - nav2.clientHeight
+                    top = nav.clientHeight
                 }
                 else {
                     top = nav.clientHeight - nav2.clientHeight - search.clientHeight
