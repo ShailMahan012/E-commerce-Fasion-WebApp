@@ -44,9 +44,6 @@ def get_product_dict(products):
             'price': prd.price,
             'details': prd.details,
             'core_collection': prd.core_collection,
-
-            'primary': prd.primary,
-            'secondary': prd.secondary,
         }
         products_dict.append(product)
     return products_dict
