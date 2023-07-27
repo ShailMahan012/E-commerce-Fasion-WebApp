@@ -10,7 +10,7 @@ db.create_all()
 
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
-PER_PAGE = 5
+PER_PAGE = 15
 
 # take a list and return list of unique items
 def unique(lst):
@@ -28,6 +28,8 @@ def get_images(products):
         product_id = i.id
         images = Images.query.with_entities(Images.filename).filter_by(product_id=product_id).order_by("order").all()
         images = [i[0] for i in images] # save only first item of each row since we only need filename of images
+        if not images:
+            images.append(None)
         images_list.append(images)
     return images_list
 
