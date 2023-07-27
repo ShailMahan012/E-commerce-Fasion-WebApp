@@ -1,12 +1,12 @@
-var search = get("search")
-var header = get("header")
-var nav = get("nav")
-var nav2 = get("nav2")
+const search = get("search")
+const header = get("header")
+const nav = get("nav")
+const nav2 = get("nav2")
+const search_input = get("search_input")
+const container = get("container")
+const btn_toggle_nav = get("btn-toggle-nav")
 var nav_show = false
-var search_input = get("search_input")
 var search_show = false
-var container = get("container")
-var btn_toggle_nav = get("btn-toggle-nav")
 
 function after_load() {
     container.style.marginTop = nav2.clientHeight + "px"

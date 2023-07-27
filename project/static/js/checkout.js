@@ -1,10 +1,10 @@
-var f_name = document.getElementById('f_name')
-var l_name = document.getElementById('l_name')
-var email = document.getElementById('email')
-var address = document.getElementById('address')
-var city = document.getElementById('city')
-var postal_code = document.getElementById('postal_code')
-var phone = document.getElementById('phone')
+const f_name = get('f_name')
+const l_name = get('l_name')
+const email = get('email')
+const address = get('address')
+const city = get('city')
+const postal_code = get('postal_code')
+const phone = get('phone')
 const URL = "/checkout"
 
 

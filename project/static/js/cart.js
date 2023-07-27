@@ -1,5 +1,5 @@
-var tbody_prooducts = document.getElementById('products')
-var total_price = document.getElementById('total_price')
+const tbody_prooducts = document.getElementById('products')
+const total_price = document.getElementById('total_price')
 
 
 // Check if products key exist in localStorage or not
