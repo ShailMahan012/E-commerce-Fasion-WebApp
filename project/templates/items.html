@@ -53,6 +53,12 @@
 
 <script>
     const searched = "{{search}}"
+    const page_name = "{{page_name}}"
+
+    function page_go(num) {
+        let url = `/${page_name}/${num}?search_input=${searched}`
+        if (num != "None")
+            window.location.href = url
+}
 </script>
-<script src="/static/js/pagination.js"></script>
 {% endblock %}

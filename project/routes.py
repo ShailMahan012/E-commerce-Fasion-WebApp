@@ -10,7 +10,7 @@ db.create_all()
 
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
-
+PER_PAGE = 5
 
 # take a list and return list of unique items
 def unique(lst):
@@ -94,7 +94,7 @@ def index():
 def items():
     return render_template("items.html", TITLE=TITLE)
 
-PER_PAGE = 15
+
 @app.route("/search/<int:page>", methods=["GET"])
 def search(page):
     search = request.args.get('search_input')
@@ -104,14 +104,18 @@ def search(page):
     products = products.paginate(page=page, per_page=PER_PAGE)
     images = get_images(products.items)
 
-    return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count)
+    return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count, page_name="search")
 
 
 @app.route("/core_collection")
-def core_collection():
-    core_collection = Products.query.filter_by(core_collection=True)
-    images = get_images(core_collection)
-    return render_template("items.html", TITLE=TITLE, core_collection=core_collection, images=images)
+@app.route("/core_collection/<int:page>", methods=["GET"])
+def core_collection(page=1):
+    products = Products.query.filter_by(core_collection=True)
+    count = products.count()
+
+    products = products.paginate(page=page, per_page=PER_PAGE)
+    images = get_images(products.items)
+    return render_template("items.html", TITLE=TITLE, products=products, images=images, count=count, page_name="core_collection")
 
 
 @app.route("/product/<int:id>")
