@@ -26,21 +26,9 @@ def get_images(products):
     images_list = [] # 2d array to store images of all products
     for i in products:
         product_id = i.id
-        primary = i.primary # index of primary image
-        secondary = i.secondary # index of secondary image
-        images = Images.query.with_entities(Images.filename).filter_by(product_id=product_id).all()
-        images_count = len(images) # length of images
+        images = Images.query.with_entities(Images.filename).filter_by(product_id=product_id).order_by("order").all()
         images = [i[0] for i in images] # save only first item of each row since we only need filename of images
-        if images_count - 1 >= primary:
-            primary = images[primary]
-        else:
-            primary = "None"
-        if images_count - 1 >= secondary:
-            secondary = images[secondary]
-        else:
-            secondary = "None"
-        images = unique([primary, secondary] + images)
-        images_list.append(tuple(images))
+        images_list.append(images)
     return images_list
 
 
@@ -195,20 +183,37 @@ def new_product():
         category = request.form.get("category")
         details = request.form.get("details")
         price = request.form.get("price")
-        primary = 0 if not request.form.get("primary") else request.form.get("primary")
-        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
+        primary = 0 if not int(request.form.get("primary")) else int(request.form.get("primary"))
+        secondary = 0 if not int(request.form.get("secondary")) else int(request.form.get("secondary"))
         core_collection = True if request.form.get("core_collection") else False
 
-        product = Products(title=title, category=category, details=details, price=price, primary=primary, secondary=secondary, core_collection=core_collection)
+        product = Products(title=title, category=category, details=details, price=price, core_collection=core_collection)
         db.session.add(product)
         db.session.commit()
 
+        img_ids = []
         for i in range(4):
             img_name = f"img_id{i}"
             img_id = request.form.get(img_name)
             if img_id:
                 image = Images.query.get(img_id)
-                image.product_id = product.id
+                if image:
+                    image.product_id = product.id
+                    image.order = None
+                    img_ids.append(image)
+
+        primary = 0 if primary >= len(img_ids)-1 else primary
+        secondary = 0 if secondary >= len(img_ids)-1 else secondary
+
+        img_ids[primary].order = 0
+        img_ids[secondary].order = 1
+
+        x = 2
+        for img in img_ids:
+            if img.order is not None:
+                img.order = x
+                x += 1
+
         db.session.commit()
 
     return render_template("admin/new_product.html", time=time)

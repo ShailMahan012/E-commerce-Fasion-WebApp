@@ -19,9 +19,6 @@ class Products(db.Model):
     details = db.Column(db.Text, nullable=False)
     core_collection = db.Column(db.Boolean, nullable=False)
 
-    primary = db.Column(db.Integer, nullable=False)
-    secondary = db.Column(db.Integer, nullable=False)
-
     def __str__(self):
         return f"{self.title}, {self.price}, {self.core_collection}"
 
@@ -31,6 +28,9 @@ class Images(db.Model):
     product_id = db.Column(db.Integer, default=None)
     title = db.Column(db.Text, nullable=False)
     filename = db.Column(db.Text, nullable=False)
+    order = db.Column(db.Integer, default=None)
+    def __str__(self):
+        return f"{self.id}, {self.product_id}, {self.title}, {self.order}"
 
 class Orders(db.Model):
     __tablename__ = 'Orders'
