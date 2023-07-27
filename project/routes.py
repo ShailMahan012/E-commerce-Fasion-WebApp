@@ -204,19 +204,20 @@ def new_product():
                     image.order = None
                     img_ids.append(image)
 
-        primary = 0 if primary >= len(img_ids)-1 else primary
-        secondary = 0 if secondary >= len(img_ids)-1 else secondary
+        if img_ids:
+            primary = 0 if primary >= len(img_ids)-1 else primary
+            secondary = 0 if secondary >= len(img_ids)-1 else secondary
 
-        img_ids[primary].order = 0
-        img_ids[secondary].order = 1
+            img_ids[primary].order = 0
+            img_ids[secondary].order = 1
 
-        x = 2
-        for img in img_ids:
-            if img.order is not None:
-                img.order = x
-                x += 1
+            x = 2
+            for img in img_ids:
+                if img.order is not None:
+                    img.order = x
+                    x += 1
 
-        db.session.commit()
+            db.session.commit()
 
     return render_template("admin/new_product.html", time=time)
 
