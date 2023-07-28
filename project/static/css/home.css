@@ -45,14 +45,17 @@ a {
     height: 100%;
 }
 
-.column h1 {
+.title {
+    user-select: none;
     font-family: "BauerBodoni-Roman";
+}
+
+.column h1 {
     font-size: 4em;
 }
 .column h2 {
     font-size: 1.5em;
     text-align: center;
-    font-family: "BauerBodoni-Roman";
 }
 
 .column .left-bottom {

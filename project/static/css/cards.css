@@ -7,11 +7,12 @@
     width: 200px;
     margin: 40px 40px;
     border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
     cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.6);
 }
 
 .card img {
@@ -86,9 +87,9 @@
 
 @media screen and (max-width: 560px) {
   .card {
-    width: 140px !important;
+    box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.6);
+    margin: 20px 10px;
   }
   .card-container {
-    margin-top: 135px;
   }
 }
