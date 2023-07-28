@@ -29,6 +29,7 @@ main {
     width: 0;
 }
 .info-cell {
+    font-family: "FoundersGrotesk";
     text-align: left;
 }
 .quantity-cell{

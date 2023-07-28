@@ -6,9 +6,27 @@
 html, body {
     height: 100%;
 }
+
 @font-face {
     font-family: FoundersGrotesk;
-    src: url("/static/FoundersGrotesk-Regular.otf") format("opentype");
+    src: url("/static/fonts/FoundersGrotesk-Regular.otf") format("opentype");
+}
+@font-face {
+    font-family: BauerBodoni-Roman;
+    src: url("/static/fonts/Bauer Bodoni Roman.otf") format("opentype");
+}
+
+@font-face {
+    font-family: BodoniClassic-Italic;
+    src: url("/static/fonts/Bodoni Classic Italic.ttf");
+}
+@font-face {
+    font-family: BodoniClassic-Bold-Italic;
+    src: url("/static/fonts/Bodoni Classic Ad Bold Italic.ttf");
+}
+@font-face {
+    font-family: Helserif-Book;
+    src: url("/static/fonts/Helserif-Book.ttf");
 }
 
 #container {

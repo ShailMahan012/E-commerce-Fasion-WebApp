@@ -5,7 +5,7 @@
     transition: 0.3s;
     /* width: 25%; */
     width: 200px;
-    margin: 10px;
+    margin: 40px 40px;
     border-radius: 5px;
 }
 
@@ -21,14 +21,20 @@
 }
 
 .card-container {
-    color: rgb(63, 63, 63);
+    color: black;
     padding: 2px 16px;
     text-align: center;
     margin-top: 210px;
 }
-.card-container .price {
+.card-container .card-title {
     margin-top: 5px;
-    color: rgb(80, 80, 80);
+    letter-spacing: 1px;
+    overflow-x: hidden;
+    font-family: "BodoniClassic-Bold-Italic";
+}
+.card-container .card-price {
+    margin-top: 10px;
+    font-family: "Helserif-Book";
 }
 
 #featured_items {
