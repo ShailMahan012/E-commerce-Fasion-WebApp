@@ -59,6 +59,7 @@ a {
 
 .btn {
     border: none;
+    color: black;
     margin: 0;
     padding: 15px;
     width: fit-content;

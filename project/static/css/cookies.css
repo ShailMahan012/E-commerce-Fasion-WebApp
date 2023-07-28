@@ -1,0 +1,24 @@
+#cookies {
+    position: fixed;
+    padding: 20px;
+    width: 100%;
+    background-color: white;
+    border: 1px solid grey;
+    z-index: 102;
+    bottom: -400px;
+    transition-duration: 400ms;
+    transition-delay: 300ms;
+}
+
+#cookies .btn {
+    width: 200px;
+}
+
+#cookies .row {
+    align-items: center;
+    justify-content: space-between;
+}
+
+#cookies .column {
+    flex-grow: 0;
+}

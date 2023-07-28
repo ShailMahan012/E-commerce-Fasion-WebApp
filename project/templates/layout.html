@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/cookies.css">
+    <link rel="stylesheet" href="/static/css/overlay.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
 
     <script src="/static/js/jquery.min.js"></script>
@@ -81,6 +83,18 @@
             COPYRIGHT © <span id="copyright-year"></span>, Grabalty
         </div>
     </section>
+    <section id="cookies">
+        <div class="row">
+            <div class="column" style="width: 70%;">
+                Maison Francis Kurkdjian use cookies, without any third-party cookies, for statistical analysis, to personalise your experience, offer you content that targets your particular interests and analyse the performance of our advertising campaigns. You can either accept these cookies by clicking "Accept", or click "Deny" to set your preferences. You can change your preferences at any time at the bottom of our site.
+            </div>
+            <div class="column">
+                <button class="btn" onclick="hide_cookies()">Accept</button>
+                <button class="btn"  onclick="hide_cookies()" style="margin-top: 3px;">Deny</button>
+            </div>
+        </div>
+    </section>
+    <section id="overlay"></section>
     <script>
         function setCopyrightYear() {
             const d = new Date();
@@ -90,5 +104,6 @@
         setCopyrightYear()
     </script>
     <script src="/static/js/header.js"></script>
+    <script src="/static/js/cookies.js"></script>
 </body>
 </html>
