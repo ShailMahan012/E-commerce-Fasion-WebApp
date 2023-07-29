@@ -333,6 +333,12 @@ def admin_images_fetch():
     return json.jsonify(images)
 
 
+@app.route("/admin/orders")
+@app.route("/admin/orders/<int:page>")
+def orders(page=1):
+    return render_template("admin/orders.html")
+
+
 @app.route("/logout")
 def logout():
     return redirect("/admin")
