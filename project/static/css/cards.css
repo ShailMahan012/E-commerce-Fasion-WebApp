@@ -85,7 +85,7 @@
 /* FLIP CARD END */
 
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 600px) {
   .card {
     box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.6);
     margin: 20px 10px;

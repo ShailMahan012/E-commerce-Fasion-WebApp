@@ -82,9 +82,12 @@ def items():
     return render_template("items.html", TITLE=TITLE)
 
 
-@app.route("/search/<int:page>", methods=["GET"])
-def search(page):
+@app.route("/search")
+@app.route("/search/<int:page>")
+def search(page=1):
     search = request.args.get('search_input')
+    if not search:
+        search = ""
     products = Products.query.filter(Products.title.like(f"%{search}%"))
     count = products.count()
 
