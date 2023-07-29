@@ -88,3 +88,36 @@ main {
     padding-right: 50px;
     padding-left: 50px;
 }
+.quantity-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .product-img {
+        width: 80px;
+    }
+    .quantity {
+        width: 40px;
+        height: 25px;
+        padding: 5px;
+        font-size: 1em;
+    }
+    .quantity-cell {
+        display: none;
+    }
+    .quantity-mobile {
+        display: block;
+        margin: 10px 0;
+    }
+    .quantity-btn {
+        width: 30px;
+        height: 25px;
+        font-size: 1em;
+    }
+    .info-cell, .total-cell, .clear-btn {
+        font-size: 0.8em;
+    }
+    #main {
+        padding: 5px;
+    }
+}

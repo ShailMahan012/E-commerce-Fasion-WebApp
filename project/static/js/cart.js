@@ -1,5 +1,5 @@
-const tbody_prooducts = document.getElementById('products')
-const total_price = document.getElementById('total_price')
+const tbody_prooducts = get('products')
+const total_price = get('total_price')
 
 
 // Check if products key exist in localStorage or not
@@ -48,12 +48,14 @@ function find_product(products, id) {
 
 function update_quantity(id, i) {
     let products = get_products()
-    let prd_quantity = document.getElementById("quantity_" + id)
+    let prd_quantity = get("quantity_" + id)
+    let prd_quantity_m = get("quantity-m_" + id) // Mobile version of quantity input
 
     prd_id = find_product(products, id)
     let quantity = products[prd_id].quantity += i
     if (quantity<1) return null
     prd_quantity.value = quantity
+    prd_quantity_m.value = quantity
     save_products(products)
     update_prices()
 }
@@ -65,7 +67,7 @@ function update_prices() {
     let total = 0
     for (let i=0;i<products.length;i++) {
         let prd = products[i]
-        let prd_price_node = document.getElementById("price_" + prd.id) // Get element where price of current product is stored
+        let prd_price_node = get("price_" + prd.id) // Get element where price of current product is stored
         let prd_price = prd.quantity * prd.price
         prd_price_node.innerText = prd_price // update net price in table column for specific product
         total += prd_price
@@ -76,7 +78,7 @@ function update_prices() {
 
 // remove row of product as well as from localStorage
 function delete_product(id) {
-    var prd_node = document.getElementById("product_" + id)
+    var prd_node = get("product_" + id)
     if (prd_node) {
         remove_from_cart(id)
         prd_node.remove()
@@ -96,8 +98,13 @@ function make_product(prd, net_price) {
             <td class="info-cell">
                 <a href="/product/${prd.id}">
                 ${prd.title}<br>
-                ${prd.price}<br>
+                \$${prd.price}<br>
                 </a>
+                <div class="quantity-mobile">
+                <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
+                <input type="text" name="quantity" class="quantity" id="quantity-m_${prd.id}" value="${prd.quantity}" disabled>
+                <button class="quantity-btn" onclick="update_quantity(${prd.id}, 1)">+</button>
+                </div>
                 <button class="clear-btn" onclick="delete_product(${prd.id})">remove</button>
             </td>
             <td class="quantity-cell">
@@ -106,7 +113,7 @@ function make_product(prd, net_price) {
                 <button class="quantity-btn" onclick="update_quantity(${prd.id}, 1)">+</button>
             </td>
             <td class="total-cell" id="price_${prd.id}">
-                ${net_price}
+                \$${net_price}
             </td>
         </tr>
     `
