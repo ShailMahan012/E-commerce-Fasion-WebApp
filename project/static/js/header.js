@@ -12,8 +12,10 @@ var search_show = false
 function after_load() {
     let margin_top = nav2.clientHeight;
     if (margin_top == 0) margin_top = nav.clientHeight
+    else nav.style.top = -(nav.clientHeight - nav2.clientHeight) + "px" // put nav on perfect hiding position behind nav2 only if nav2 is displayed
     container.style.top = margin_top + "px"
     if (footer) footer.style.marginTop = margin_top + "px"
+    // nav.style.top = nav
     pos_search()
 }
 
@@ -107,7 +109,7 @@ function toggleNav() {
         // Also hide search just in case if it might be opened. It just look ugly when nav is closed and search is still showing
         hide_search()
         // Hide NAV
-        nav.style.top = "-300px"
+        nav.style.top = -(nav.clientHeight - nav2.clientHeight) + "px"
         nav.style.position = "absolute"
         nav2.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
         setTimeout(()=>{nav.style.position = "absolute"}, 510)
