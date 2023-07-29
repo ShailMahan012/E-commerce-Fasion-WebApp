@@ -4,7 +4,9 @@ const cookies = get("cookies")
 
 function check_cookies() {
     let cookies = localStorage.getItem("cookies")
-    if (!cookies) show_cookies()
+    if (!cookies) {
+        show_cookies()
+    }
 }
 
 
