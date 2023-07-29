@@ -61,6 +61,22 @@ def get_images_dict(images):
     return images_dict
 
 
+def get_orders_dict(orders):
+    orders_dict = {}
+    for o in orders:
+        order = {
+            'f_name': o.f_name,
+            'l_name': o.l_name,
+            'address': o.address,
+            'city': o.city,
+            'postal_code': o.postal_code,
+            'phone': o.phone,
+            'status': o.status
+        }
+        orders_dict[o.id] = order
+    return orders_dict
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -336,7 +352,9 @@ def admin_images_fetch():
 @app.route("/admin/orders")
 @app.route("/admin/orders/<int:page>")
 def orders(page=1):
-    orders = Orders.query.paginate(page=page, per_page=PER_PAGE)
+    orders = Orders.query.paginate(page=page, per_page=6)
+    orders_dict = get_orders_dict(order.items)
+    cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
     return render_template("admin/orders.html", orders=orders)
 
 
