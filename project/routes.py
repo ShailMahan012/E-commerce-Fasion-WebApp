@@ -49,6 +49,18 @@ def get_product_dict(products):
     return products_dict
 
 
+# just get products as dictionary but not as array
+def get_product_dict_id(products):
+    products_dict = {}
+    for prd in products:
+        product = {
+            'title': prd.title,
+            'price': prd.price,
+        }
+        products_dict[prd.id] = product
+    return products_dict
+
+
 def get_images_dict(images):
     images_dict = []
     for img in images:
@@ -353,8 +365,17 @@ def admin_images_fetch():
 @app.route("/admin/orders/<int:page>")
 def orders(page=1):
     orders = Orders.query.paginate(page=page, per_page=6)
-    orders_dict = get_orders_dict(order.items)
+    orders_dict = get_orders_dict(orders.items)
     cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
+
+    products_id = []
+    for prd in cart:
+        products_id.append(prd.product_id)
+    
+    products = Products.query.filter(Products.id.in_((products_id))).all()
+    images = get_images(products)
+    products = get_product_dict_id(products)
+    products = json.dumps(products)
     return render_template("admin/orders.html", orders=orders)
 
 
