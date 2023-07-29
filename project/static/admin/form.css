@@ -16,6 +16,9 @@ table, textarea, input:not([type=radio], [type=checkbox]), select{
     padding: 10px;
     outline: none;
 }
+table {
+    border: 0;
+}
 
 thead {
     color: white;
