@@ -336,7 +336,8 @@ def admin_images_fetch():
 @app.route("/admin/orders")
 @app.route("/admin/orders/<int:page>")
 def orders(page=1):
-    return render_template("admin/orders.html")
+    orders = Orders.query.paginate(page=page, per_page=PER_PAGE)
+    return render_template("admin/orders.html", orders=orders)
 
 
 @app.route("/logout")

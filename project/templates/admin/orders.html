@@ -1,3 +1,65 @@
 {% extends "admin/layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/admin/form.css">
+<link rel="stylesheet" href="/static/admin/popup.css">
+<link rel="stylesheet" href="/static/css/home.css">
+<link rel="stylesheet" href="/static/css/pagination.css">
+<link rel="stylesheet" href="/static/css/overlay.css">
 {% endblock %} {% block main %}
+
+<table class="product_list" border="0">
+<thead>
+<tr>
+    <th>#</th>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Note</th>
+    <th>PRICE</th>
+    <th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+{% for i in range(orders.items|length) %}
+<tr>
+    <td>{{i+1}}</td>
+    <td>ORD_{{orders.items[i].id}}</td>
+    <td>{{orders.items[i].f_name}} {{orders.items[i].l_name}}</td>
+
+    <td>{{orders.items[i].status}}</td>
+    <td class="status">PENDING</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<div class="row" style="background-color: white;margin-bottom: 10px;">
+    <div class="column clm-center">
+        <div class="pagination">
+            {% for i in orders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+                {% if i == orders.page %}
+                    <button class="btn active">
+                {% else %}
+                    <button class="btn link" onclick="page_go('{{i}}')">
+                {% endif %}
+                {% if i == None %}
+                    ...
+                {% else %}
+                    {{i}}
+                {% endif %}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="popup"></div>
+<div id="overlay"></div>
+<script src="/static/admin/orders.js"></script>
+<script>
+    const page_name = "admin/order"
+    function page_go(num) {
+        let url = `/${page_name}/${num}`
+        if (num != "None")
+            window.location.href = url
+    }
+</script>
 {% endblock %}
