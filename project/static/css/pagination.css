@@ -12,6 +12,7 @@
 
 .pagination .link {
     background-color: rgb(255, 255, 255);
+    color: black;
     transition-duration: 300ms;
 }
 

@@ -1,10 +1,10 @@
 {% extends "admin/layout.html" %} {% block head %}
-<link rel="stylesheet" href="/static/admin/form.css">
-<link rel="stylesheet" href="/static/admin/popup.css">
 <link rel="stylesheet" href="/static/admin/orders.css">
 <link rel="stylesheet" href="/static/css/home.css">
-<link rel="stylesheet" href="/static/css/pagination.css">
+<link rel="stylesheet" href="/static/admin/form.css">
+<link rel="stylesheet" href="/static/admin/popup.css">
 <link rel="stylesheet" href="/static/css/overlay.css">
+<link rel="stylesheet" href="/static/css/pagination.css">
 {% endblock %} {% block main %}
 
 <table class="product_list" border="0">
@@ -67,7 +67,7 @@
         <tr><th>note</th><td id="note"></td></tr>
         <tr><th>total price:</th><td id="total_price"></td></tr>
     </table>
-    <button class="btn btn-add" >CLOSE</button>
+    <button class="btn btn-cancel" onclick="hide_popup()">CLOSE</button>
 </div>
 <div id="overlay"></div>
 <script>

@@ -15,7 +15,7 @@ const postal_code = get("postal_code")
 const note = get("note")
 
 
-// Display all orders in different rows of tbale
+// Display all orders in different rows of table
 function display_orders() {
     orders.innerHTML = ''
     let i = 1
@@ -35,7 +35,6 @@ function show_order(ord_id) {
     let ord_total_price = 0
     order_id.innerText = ord_id // show order id in popup
 
-    console.log(order)
     for(let i=0;i<items.length;i++) {
         let prd_id = items[i].product
         prd = products_json[prd_id] // get one product
@@ -52,7 +51,6 @@ function show_order(ord_id) {
     set_order_data(order, ord_total_price)
     show_popup()
 }
-show_order(3)
 
 
 // create one row of product in popup
