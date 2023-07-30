@@ -34,6 +34,22 @@ def get_images(products):
     return images_list
 
 
+def get_images_data(products):
+    images_dict = {}
+    for prd in products:
+        product_id = prd.id
+        images = Images.query.filter_by(product_id=product_id).order_by("order").all()
+        images_list = []
+        for img in images:
+            image = {
+                'id': img.id,
+                'filename': img.filename
+            }
+            images_list.append(image)
+        images_dict[product_id] = images_list
+    return images_dict
+
+
 def get_product_dict(products):
     products_dict = []
     for prd in products:
@@ -373,8 +389,10 @@ def orders(page=1):
         products_id.append(prd.product_id)
     
     products = Products.query.filter(Products.id.in_((products_id))).all()
-    images = get_images(products)
+    images = get_images_data(products)
     products = get_product_dict_id(products)
+    for i in products:
+        products[i]["images"] = images[i]
     products = json.dumps(products)
     return render_template("admin/orders.html", orders=orders)
 
