@@ -10,25 +10,13 @@
 <thead>
 <tr>
     <th>#</th>
-    <th>ID</th>
     <th>Name</th>
     <th>Note</th>
     <th>PRICE</th>
     <th>STATUS</th>
 </tr>
 </thead>
-<tbody>
-{% for i in range(orders.items|length) %}
-<tr>
-    <td>{{i+1}}</td>
-    <td>ORD_{{orders.items[i].id}}</td>
-    <td>{{orders.items[i].f_name}} {{orders.items[i].l_name}}</td>
-
-    <td>{{orders.items[i].status}}</td>
-    <td class="status">PENDING</td>
-</tr>
-{% endfor %}
-</tbody>
+<tbody id="orders"></tbody>
 </table>
 
 <div class="row" style="background-color: white;margin-bottom: 10px;">
@@ -53,8 +41,10 @@
 
 <div id="popup" class="popup"></div>
 <div id="overlay"></div>
-<script src="/static/admin/orders.js"></script>
 <script>
+    const orders_json = {{orders_json | tojson}}
+    const products_json = {{products_json | tojson}}
+
     const page_name = "admin/orders"
     function page_go(num) {
         let url = `/${page_name}/${num}`
@@ -62,4 +52,5 @@
             window.location.href = url
     }
 </script>
+<script src="/static/admin/orders.js"></script>
 {% endblock %}

@@ -105,6 +105,19 @@ def get_orders_dict(orders):
     return orders_dict
 
 
+def get_cart_dict(cart):
+    cart_dict = {}
+    for i in cart:
+        if not cart_dict.get(i.order_id):
+            cart_dict[i.order_id] = []
+        item = {
+            'product': i.product_id,
+            'quantity': i.quantity
+        }
+        cart_dict[i.order_id].append(item)
+    return cart_dict
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -384,6 +397,11 @@ def orders(page=1):
     orders_dict = get_orders_dict(orders.items)
     cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
 
+    cart_dict = get_cart_dict(cart)
+    for i in orders_dict:
+        items = [] if not cart_dict.get(i) else cart_dict.get(i)
+        orders_dict[i]['items'] = items
+
     products_id = []
     for prd in cart:
         products_id.append(prd.product_id)
@@ -393,8 +411,7 @@ def orders(page=1):
     products = get_product_dict_id(products)
     for i in products:
         products[i]["images"] = images[i]
-    products = json.dumps(products)
-    return render_template("admin/orders.html", orders=orders)
+    return render_template("admin/orders.html", orders=orders, products_json=products, orders_json=orders_dict)
 
 
 @app.route("/logout")
