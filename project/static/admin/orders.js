@@ -2,10 +2,9 @@ const orders = get("orders") // tbody of orders
 const products = get("products") // tbody of pop
 const order_id = get("ord_id") // order id in popup
 const not_found = get("not_found") // not found message in popup
-const total_price = get("total_price") // total price of full order in popup
 const popup = get("popup")
 const overlay = get("overlay")
-
+const btn_order_status = get("btn_order_status") // button to mark order as completed
 
 const name = get("name")
 const phone = get("phone")
@@ -13,7 +12,10 @@ const address = get("address")
 const city = get("city")
 const postal_code = get("postal_code")
 const note = get("note")
+const status = get("status")
+const total_price = get("total_price") // total price of full order in popup
 
+var current_order_id = -1; // GLOBAL variable to be used to mark order
 
 // Display all orders in different rows of table
 function display_orders() {
@@ -29,6 +31,7 @@ display_orders()
 
 // Show only one order details with all products (image, quantity, price, total price with quantity)
 function show_order(ord_id) {
+    current_order_id = ord_id
     products.innerHTML = ''
     let order = orders_json[ord_id] // get specific order with its id
     let items = order.items // get all products/items of that order
@@ -55,7 +58,9 @@ function show_order(ord_id) {
 
 // create one row of product in popup
 function create_product_row(i, prd, quantity, total_price) {
-    let image_url = prd.images[0].filename
+    let image_url = "not-found.png"
+    if (prd.images.length != 0)
+        image_url = prd.images[0].filename
     row = `
         <tr>
             <td>${i}</td>
@@ -79,19 +84,30 @@ function set_order_data(order, ord_total_price) {
     postal_code.innerText = order.postal_code
     note.innerText = order.note
     total_price.innerText = ord_total_price
+    
+    let status_txt = "PENDING"
+    let btn_status = "Mark As Completed"
+    if (order.status) {
+        status_txt = "COMPLETED"
+        btn_status = "Mark As Uncompleted"
+    }
+    status.innerText = status_txt
+    btn_order_status.innerText = btn_status
 }
 
 
 // create one order row
 function create_order_row(i, order, ord_id) {
     let price = calc_price(order)
+    let status_td = "<td class='pending'>PENDING</td>"
+    if (order.status) status_td = "<td class='done'>COMPLETED</td>"
     let row = `
         <tr onclick="show_order(${ord_id})">
             <td>${i}</td>
             <td>${order.f_name} ${order.l_name}</td>
             <td>${order.note}</td>
             <td>${price}</td>
-            <td>${order.status}</td>
+            ${status_td}
         </tr>
     `
     return row
@@ -109,6 +125,13 @@ function calc_price(order) {
         price += quantity * product.price
     }
     return price
+}
+
+
+function mark_order() {
+    if (current_order_id != -1) {
+        go(`/admin/order/mark/${current_order_id}/${page_num}`)
+    }
 }
 
 

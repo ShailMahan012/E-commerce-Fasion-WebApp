@@ -4,7 +4,7 @@
     background-color: rgb(211, 211, 211);
     width: 95%;
     padding: 20px;
-    margin: auto;
+    margin: 0 auto;
     left: 0;
     right: 0;
     top: -100%;
@@ -13,6 +13,8 @@
     border-radius: 15px;
     box-shadow: 0px 8px 16px 1px rgba(0, 0, 0, 0.8);
     z-index: 102;
+    height: 90%;
+    overflow-y: scroll;
 }
 
 #img_search_input {
@@ -49,7 +51,7 @@
     background-color: rgb(219, 219, 219);
 }
 
-.popup span {
+.popup .img-title {
     margin-left: 20px;
 }
 

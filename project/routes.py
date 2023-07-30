@@ -416,6 +416,15 @@ def orders(page=1):
     return render_template("admin/orders.html", orders=orders, products_json=products, orders_json=orders_dict)
 
 
+@app.route("/admin/order/mark/<int:ID>/<int:page>")
+def mark_order(ID, page):
+    order = Orders.query.get(ID)
+    if order:
+        order.status = not order.status
+        db.session.commit()
+    return redirect(f"/admin/orders/{page}")
+
+
 @app.route("/logout")
 def logout():
     return redirect("/admin")

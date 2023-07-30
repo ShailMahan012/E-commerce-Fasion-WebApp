@@ -34,7 +34,7 @@ function create_row(img_data) {
     let row = `
         <div class="search_row" onclick="img_select(${id}, '${filename}')">
             <img src="/static/product_images/${filename}" alt="img" class="img">
-            <span>${title}</span>
+            <span class="img-title">${title}</span>
         </div>`
     return row
 }
