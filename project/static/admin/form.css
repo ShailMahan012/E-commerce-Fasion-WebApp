@@ -3,7 +3,7 @@ main {
 }
 
 
-h2 {
+h2, h3 {
     text-align: center;
     margin-bottom: 10px;
 }
@@ -23,6 +23,7 @@ table {
 thead {
     color: white;
     background-color: rgb(53, 53, 53);
+    text-transform: uppercase;
 }
 
 td, th {
@@ -30,15 +31,17 @@ td, th {
     text-align: center;
     /* border: 1px solid red; */
 }
-tbody > tr {
+.tbody-hover > tr {
     cursor: pointer;
     transition-duration: 200ms;
 }
-tbody > tr:hover {
+.tbody-hover > tr:hover {
     background-color: rgba(156, 156, 156, 0.66);
 }
 
-
+.category {
+    text-transform: uppercase;
+}
 #save {
     width: 100%;
     background-color: rgb(0, 200, 200);

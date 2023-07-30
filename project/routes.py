@@ -72,6 +72,7 @@ def get_product_dict_id(products):
         product = {
             'title': prd.title,
             'price': prd.price,
+            'category': prd.category,
         }
         products_dict[prd.id] = product
     return products_dict

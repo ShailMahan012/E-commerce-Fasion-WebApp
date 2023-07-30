@@ -16,7 +16,7 @@
     <th>STATUS</th>
 </tr>
 </thead>
-<tbody id="orders"></tbody>
+<tbody id="orders" class="tbody-hover"></tbody>
 </table>
 
 <div class="row" style="background-color: white;margin-bottom: 10px;">
@@ -39,7 +39,24 @@
     </div>
 </div>
 
-<div id="popup" class="popup"></div>
+<div id="popup" class="popup">
+    <h2>ORDER ID# <span id="ord_id" style="margin: 0;"></span></h2>
+    <h3 id="not_found" style="display: none; background-color: rgb(255, 50, 50);color: white;">Not Any Product Found</h3>
+    <table style="background-color: white;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>image</th>
+                <th>title</th>
+                <th>category</th>
+                <th>price</th>
+                <th>quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody id="products"></tbody>
+    </table>
+</div>
 <div id="overlay"></div>
 <script>
     const orders_json = {{orders_json | tojson}}
