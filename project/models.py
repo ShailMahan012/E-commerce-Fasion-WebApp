@@ -45,6 +45,7 @@ class Orders(db.Model):
     postal_code = db.Column(db.Text, nullable=False)
     phone = db.Column(db.Text, nullable=False)
 
+    note = db.Column(db.Text, default=None)
     status = db.Column(db.Boolean, nullable=True, default=False)
 
 class Cart(db.Model):
