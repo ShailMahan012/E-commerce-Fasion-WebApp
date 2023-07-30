@@ -1,6 +1,7 @@
 {% extends "admin/layout.html" %} {% block head %}
 <link rel="stylesheet" href="/static/admin/form.css">
 <link rel="stylesheet" href="/static/admin/popup.css">
+<link rel="stylesheet" href="/static/admin/orders.css">
 <link rel="stylesheet" href="/static/css/home.css">
 <link rel="stylesheet" href="/static/css/pagination.css">
 <link rel="stylesheet" href="/static/css/overlay.css">
@@ -40,9 +41,9 @@
 </div>
 
 <div id="popup" class="popup">
-    <h2>ORDER ID# <span id="ord_id" style="margin: 0;"></span></h2>
-    <h3 id="not_found" style="display: none; background-color: rgb(255, 50, 50);color: white;">Not Any Product Found</h3>
-    <table style="background-color: white;">
+    <h2>ORDER ID# <span id="ord_id"></span></h2>
+    <h3 id="not_found" class="not_found">Not Any Product Found</h3>
+    <table>
         <thead>
             <tr>
                 <th>#</th>
@@ -56,6 +57,17 @@
         </thead>
         <tbody id="products"></tbody>
     </table>
+    <br><br>
+    <table>
+        <tr><th>Full Name</th><td id="name"></td></tr>
+        <tr><th>Phone Number</th><td id="phone"></td></tr>
+        <tr><th>Address</th><td id="address"></td></tr>
+        <tr><th>City</th><td id="city"></td></tr>
+        <tr><th>Postal Code</th><td id="postal_code"></td></tr>
+        <tr><th>note</th><td id="note"></td></tr>
+        <tr><th>total price:</th><td id="total_price"></td></tr>
+    </table>
+    <button class="btn btn-add" >CLOSE</button>
 </div>
 <div id="overlay"></div>
 <script>

@@ -1,9 +1,18 @@
 const orders = get("orders") // tbody of orders
 const products = get("products") // tbody of pop
 const order_id = get("ord_id") // order id in popup
-const not_found = get("not_found")
+const not_found = get("not_found") // not found message in popup
+const total_price = get("total_price") // total price of full order in popup
 const popup = get("popup")
 const overlay = get("overlay")
+
+
+const name = get("name")
+const phone = get("phone")
+const address = get("address")
+const city = get("city")
+const postal_code = get("postal_code")
+const note = get("note")
 
 
 // Display all orders in different rows of tbale
@@ -23,27 +32,32 @@ function show_order(ord_id) {
     products.innerHTML = ''
     let order = orders_json[ord_id] // get specific order with its id
     let items = order.items // get all products/items of that order
-    order_id.innerHTML = ord_id // show order id in popup
+    let ord_total_price = 0
+    order_id.innerText = ord_id // show order id in popup
 
+    console.log(order)
     for(let i=0;i<items.length;i++) {
         let prd_id = items[i].product
         prd = products_json[prd_id] // get one product
         let quantity = items[i].quantity
-        let total_price = quantity * prd.price
-        let row = create_product_row(i+1, prd, quantity, total_price) // create row of that one product
+        let prd_total_price = quantity * prd.price
+        ord_total_price += prd_total_price
+        let row = create_product_row(i+1, prd, quantity, prd_total_price) // create row of that one product
         products.innerHTML += row
     }
 
+    
     if (items.length === 0) not_found.style.display = "block"
     else not_found.style.display = "none"
+    set_order_data(order, ord_total_price)
     show_popup()
 }
+show_order(3)
 
 
 // create one row of product in popup
 function create_product_row(i, prd, quantity, total_price) {
     let image_url = prd.images[0].filename
-    console.log(prd)
     row = `
         <tr>
             <td>${i}</td>
@@ -56,6 +70,17 @@ function create_product_row(i, prd, quantity, total_price) {
         </tr>
     `
     return row
+}
+
+
+function set_order_data(order, ord_total_price) {
+    name.innerText = order.f_name + ' ' + order.l_name
+    phone.innerText = order.phone
+    address.innerText = order.address
+    city.innerText = order.city
+    postal_code.innerText = order.postal_code
+    note.innerText = order.note
+    total_price.innerText = ord_total_price
 }
 
 
@@ -95,7 +120,7 @@ function show_popup() {
     popup.style.transitionDelay = '200ms'
     overlay.style.transitionDelay = '0ms'
     setTimeout(()=>{
-        popup.style.top = "100px"
+        popup.style.top = "50px"
         overlay.style.opacity = 1
     }, 100)
 }
