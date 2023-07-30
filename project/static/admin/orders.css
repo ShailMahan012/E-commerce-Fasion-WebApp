@@ -14,3 +14,16 @@ td, th {
 .category {
     text-transform: uppercase;
 }
+
+.status {
+    color: white;
+    text-align: center;
+}
+
+.pending {
+    background-color: rgb(255, 46, 46);
+}
+
+.done {
+    background-color: hsl(240, 100%, 58%);
+}

@@ -99,8 +99,8 @@ function set_order_data(order, ord_total_price) {
 // create one order row
 function create_order_row(i, order, ord_id) {
     let price = calc_price(order)
-    let status_td = "<td class='pending'>PENDING</td>"
-    if (order.status) status_td = "<td class='done'>COMPLETED</td>"
+    let status_td = "<td class='status pending'>PENDING</td>"
+    if (order.status) status_td = "<td class='status done'>COMPLETED</td>"
     let row = `
         <tr onclick="show_order(${ord_id})">
             <td>${i}</td>
