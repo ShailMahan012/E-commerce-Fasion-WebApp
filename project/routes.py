@@ -10,7 +10,7 @@ db.create_all()
 
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
-PER_PAGE = 15
+PER_PAGE = 5
 
 # take a list and return list of unique items
 def unique(lst):
@@ -154,6 +154,21 @@ def search(page=1):
     images = get_images(products.items)
 
     return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count, page_name="search")
+
+
+@app.route("/category/<string:cat>/search")
+@app.route("/category/<string:cat>/search/<int:page>")
+def category(cat, page=1):
+    search = request.args.get('search_input')
+    if not search:
+        search = ""
+    products = Products.query.filter(Products.title.like(f"%{search}%"), Products.category==cat)
+    count = products.count()
+
+    products = products.paginate(page=page, per_page=PER_PAGE)
+    images = get_images(products.items)
+
+    return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count, page_name=f"category/{cat}/search")
 
 
 @app.route("/core_collection")

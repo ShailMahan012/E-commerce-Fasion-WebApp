@@ -35,9 +35,9 @@
                     </a>
                     <!-- <a href='#nav-toogle' class="btn-toggle-nav" onclick="toggleNav()"><i class="far fa-bars"></i></a> -->
                 </li>
-                <li><a href="#women">women</a></li>
-                <li><a href="#men">men</a></li>
-                <li><a href="#kids">kids</a></li>
+                <li><a href="/category/women/search">women</a></li>
+                <li><a href="/category/men/search">men</a></li>
+                <li><a href="/category/kids/search">kids</a></li>
             </ul>
             <ul class="nav-right">
                 <li><a href="#search-products" onclick="show_search()">search</a></li>
@@ -46,7 +46,12 @@
                 </a></li>
             </ul>
         </nav>
-        <form id="search" action="/search/1" method="GET">
+
+        {% if page_name is defined %}
+        <form id="search" action="/{{page_name}}" method="GET">
+        {% else %}
+            <form id="search" action="/search" method="GET">
+        {% endif %}
             <!-- <div class="line"></div> -->
             <div class="row">
                 <div class="column-2">
