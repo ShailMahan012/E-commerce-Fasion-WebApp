@@ -13,12 +13,11 @@ a {
 .row {
     /* background-color: green; */
     color: black;
+    margin: 0;
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     justify-content: center;
-    /* align-items: center; */
 }
 
 .column {
@@ -113,6 +112,10 @@ a {
     color: black;
     background-color: white;
     cursor: pointer;
+}
+
+#grabalty-video {
+    width: 100%;
 }
 
 /* Responsive */
