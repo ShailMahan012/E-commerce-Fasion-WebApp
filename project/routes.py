@@ -10,7 +10,7 @@ db.create_all()
 
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
-PER_PAGE = 5
+PER_PAGE = 15
 
 # take a list and return list of unique items
 def unique(lst):
@@ -410,7 +410,7 @@ def admin_images_fetch():
 @app.route("/admin/orders")
 @app.route("/admin/orders/<int:page>")
 def orders(page=1):
-    orders = Orders.query.paginate(page=page, per_page=6)
+    orders = Orders.query.paginate(page=page, per_page=PER_PAGE)
     orders_dict = get_orders_dict(orders.items)
     cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
 
@@ -428,7 +428,7 @@ def orders(page=1):
     products = get_product_dict_id(products)
     for i in products:
         products[i]["images"] = images[i]
-    return render_template("admin/orders.html", orders=orders, products_json=products, orders_json=orders_dict)
+    return render_template("admin/orders.html", orders=orders, products_json=products, orders_json=orders_dict, TITLE="ORDERS")
 
 
 @app.route("/admin/order/mark/<int:ID>/<int:page>")
