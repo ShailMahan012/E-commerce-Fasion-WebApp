@@ -76,10 +76,13 @@ nav ul {
 }
 
 nav .dropdown {
-    padding: 20px 10px;
+    padding: 10px 10px;
     position: absolute;
-    flex-direction: column;
+    margin-top: 40px;
+    left: 0;
+    flex-direction: row;
     background-color: whitesmoke;
+    box-shadow: 0 5px 15px rgba(92, 92, 92, 0.7);
 }
 
 .nav-item-logo {
@@ -95,16 +98,19 @@ nav .dropdown {
 
 nav li {
     margin-left: 10px;
+    cursor: pointer;
 }
 nav a {
     text-decoration: none;
     color: black;
+}
+.nav-item {
     padding: 20px 10px;
     transition: border-bottom-color 250ms ease;
     border-bottom: 3px solid rgba(0, 0, 0, 0);
     font-weight: bold;
 }
-nav a:hover {
+.nav-item:hover {
     border-bottom-color: black;
 }
 .nav-logo {
