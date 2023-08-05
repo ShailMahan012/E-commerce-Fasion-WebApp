@@ -67,12 +67,19 @@ nav {
     box-shadow: 0 5px 15px rgba(92, 92, 92, 0.7);
 }
 
-nav > ul {
+nav ul {
     display: flex;
     flex-direction: row;
     list-style-type: none;
     align-items: center;
     text-transform: uppercase;
+}
+
+nav .dropdown {
+    padding: 20px 10px;
+    position: absolute;
+    flex-direction: column;
+    background-color: whitesmoke;
 }
 
 .nav-item-logo {
