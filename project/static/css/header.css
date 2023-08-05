@@ -76,6 +76,7 @@ nav ul {
 }
 
 nav .dropdown {
+    width: 100%;
     padding: 10px 10px;
     position: absolute;
     margin-top: 40px;
@@ -83,6 +84,7 @@ nav .dropdown {
     flex-direction: row;
     background-color: whitesmoke;
     box-shadow: 0 5px 15px rgba(92, 92, 92, 0.7);
+    display: none;
 }
 
 .nav-item-logo {
@@ -99,6 +101,7 @@ nav .dropdown {
 nav li {
     margin-left: 10px;
     cursor: pointer;
+    user-select: none;
 }
 nav a {
     text-decoration: none;
@@ -247,6 +250,9 @@ button:hover {
         text-align: center;
         width: 100%;
         margin: 20px 0px;
+    }
+    .nav-item {
+        padding: 0;
     }
     .btn-toggle-nav {
         display: block;

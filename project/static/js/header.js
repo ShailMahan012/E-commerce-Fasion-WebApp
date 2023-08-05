@@ -118,6 +118,18 @@ function toggleNav() {
     }
 }
 
+
+function dropdown(e) {
+    console.log(e.clientWidth)
+    if (e.style.display == "" || e.style.display == "none") {
+        e.style.display = "flex"
+    }
+    else {
+        e.style.display = "none"
+    }
+}
+
+
 function go(url) {
     window.location.href = url
 }

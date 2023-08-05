@@ -35,8 +35,8 @@
                     </a>
                     <!-- <a href='#nav-toogle' class="btn-toggle-nav" onclick="toggleNav()"><i class="far fa-bars"></i></a> -->
                 </li>
-                <li class="nav-item">
-                    <a href="#/category/women/search">women</a>
+                <li class="nav-item" onclick="dropdown(this.childNodes[1])">
+                    women
                     <ul class="dropdown">
                         <li class="nav-item"><a href="#">Shail</a></li>
                         <li class="nav-item"><a href="#">Shail</a></li>
@@ -44,8 +44,17 @@
                         <li class="nav-item"><a href="#">Shail</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="/category/men/search">men</a></li>
-                <li class="nav-item"><a href="/category/kids/search">kids</a></li>
+                <li class="nav-item" onclick="dropdown(this.childNodes[1])">
+                    men
+                    <ul class="dropdown">
+
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="dropdown(this.childNodes[1])">
+                    kids
+                    <ul class="dropdown">
+                    </ul>
+                </li>
             </ul>
             <ul class="nav-right">
                 <li class="nav-item"><a href="#search-products" onclick="show_search()">search</a></li>
