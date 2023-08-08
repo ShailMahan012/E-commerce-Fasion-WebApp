@@ -37,7 +37,7 @@ def capture_payment(order_id):
     response = requests.post(url, headers=headers)
     data = response.json()
     
-    return jsonify(data), response.status_co
+    return jsonify(data), response.status_code
 
 
 def gen_order_json(products):
