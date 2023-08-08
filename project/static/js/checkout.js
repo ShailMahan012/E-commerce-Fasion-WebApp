@@ -57,10 +57,10 @@ async function send_data(form, url) {
     return output;
 }
 
-var form = gen_order_form()
-if (form != -1) {
-    send_data(form, URL).then(result=> {
-        console.log(result)
-    })
-}
+// var form = gen_order_form()
+// if (form != -1) {
+//     send_data(form, URL).then(result=> {
+//         console.log(result)
+//     })
+// }
 

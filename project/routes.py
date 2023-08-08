@@ -2,6 +2,7 @@ from flask import render_template, request, session, redirect, send_file, json, 
 from functools import wraps
 from project import app, db
 from project.models import Users, Products, Images, Orders, Cart
+from project.paypal import create_order
 from werkzeug.utils import secure_filename
 import os
 from time import time
@@ -11,6 +12,10 @@ db.create_all()
 TITLE = "Fashion"
 IMAGE_DIR = 'project/static/product_images'
 PER_PAGE = 15
+paypal = app.config["paypal"]
+CLIENT_ID = paypal["CLIENT_ID"]
+CURRENCY = paypal["CURRENCY"]
+
 
 # take a list and return list of unique items
 def unique(lst):
@@ -233,7 +238,14 @@ def checkout():
             return "True"
 
         return "False"
-    return render_template("checkout.html", TITLE="CHECKOUT HERE")
+    return render_template("checkout.html", TITLE="CHECKOUT HERE", client_id=CLIENT_ID, currency=CURRENCY)
+
+
+@app.route("/create-paypal-order", methods=["POST"])
+def create_paypal_order():
+    products = request.get_json()
+    order_response = create_order(products)
+    return order_response
 
 
 @app.route("/admin")

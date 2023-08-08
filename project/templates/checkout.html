@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/checkout.css" />
 {% endblock %} {% block main %}
+
+<script src="https://www.paypal.com/sdk/js?client-id={{client_id}}&currency={{currency}}"></script>
+
 <div class="row">
     <h2>Shop</h2>
 </div>
@@ -34,7 +37,9 @@
             <button class="btn btn-black" id="shop">CHECKOUT</button>
         </div>
     </div>
-</div>
 
+
+<div id="paypal-button-container"></div>
+<script src="/static/js/paypal.js"></script>
 <script src="/static/js/checkout.js"></script>
 {% endblock %}
