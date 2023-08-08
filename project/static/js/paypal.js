@@ -28,6 +28,7 @@ paypal.Buttons({
         var form = gen_order_form()
         if (form != -1) {
           send_data(form, CHECKOUT_URL).then(result => {
+            localStorage.setItem("products", '[]') // Empty cart after checkout
             console.log(result)
             const element = document.getElementById('paypal-button-container');
             element.innerHTML = '<h3>Thank you for your payment!</h3>';
