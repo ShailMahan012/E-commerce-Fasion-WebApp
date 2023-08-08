@@ -2,7 +2,7 @@ from flask import render_template, request, session, redirect, send_file, json, 
 from functools import wraps
 from project import app, db
 from project.models import Users, Products, Images, Orders, Cart
-from project.paypal import create_order
+from project.paypal import create_order, capture_payment
 from werkzeug.utils import secure_filename
 import os
 from time import time
@@ -246,6 +246,13 @@ def create_paypal_order():
     products = request.get_json()
     order_response = create_order(products)
     return order_response
+
+
+@app.route("/capture-paypal-order", methods=["POST"])
+def capture_paypal_order():
+    order_id = request.get_json().get("orderID")
+    response = capture_payment(order_id)
+    return response
 
 
 @app.route("/admin")

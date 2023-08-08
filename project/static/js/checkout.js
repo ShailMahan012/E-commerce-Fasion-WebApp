@@ -5,7 +5,7 @@ const address = get('address')
 const city = get('city')
 const postal_code = get('postal_code')
 const phone = get('phone')
-const URL = "/checkout"
+const CHECKOUT_URL = "/checkout"
 
 
 const inputs = {

@@ -26,6 +26,20 @@ def create_order(products):
     return jsonify(response.json()), response.status_code
 
 
+def capture_payment(order_id):
+    url = f"{BASE_URL}/v2/checkout/orders/{order_id}/capture"
+    access_token = generate_access_token()
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {access_token}",
+    }
+    
+    response = requests.post(url, headers=headers)
+    data = response.json()
+    
+    return jsonify(data), response.status_co
+
+
 def gen_order_json(products):
     if products:
         total_price = 0
@@ -37,7 +51,6 @@ def gen_order_json(products):
                 price = product.price * quantity
                 total_price += price
 
-    total_price = 200
     paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}]}
 
     return paypal_json
