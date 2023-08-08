@@ -19,6 +19,23 @@ const inputs = {
     phone: phone
 }
 
+function checkout() {
+    if (validate_form()) {
+        show_paypal()
+    }
+}
+
+function validate_form() {
+    for (const key in inputs) {
+        let input = inputs[key];
+        if (!input.checkValidity()) {
+            input.reportValidity();
+            console.log("VALIDITY ISSUE: ", input)
+            return false;
+        }
+    }
+    return true
+}
 
 function get_products() {
     let products = JSON.parse(localStorage.getItem("products"))
@@ -75,3 +92,5 @@ function hide_paypal() {
     }, 200)
     
 }
+
+overlay.onclick = hide_paypal
