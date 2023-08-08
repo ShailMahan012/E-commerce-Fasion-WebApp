@@ -42,4 +42,4 @@ paypal.Buttons({
         // Or go to another URL:  window.location.href = 'thank_you.html';
       });
   }
-}).render('#paypal-button-container');
+}).render('#paypal-button');

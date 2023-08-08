@@ -7,15 +7,16 @@ const postal_code = get('postal_code')
 const phone = get('phone')
 const CHECKOUT_URL = "/checkout"
 
+const paypal_container = get("paypal-button-container")
 
 const inputs = {
     f_name: f_name,
     l_name: l_name,
-    email,
-    address,
-    city,
-    postal_code,
-    phone
+    email: email,
+    address: address,
+    city: city,
+    postal_code: postal_code,
+    phone: phone
 }
 
 
@@ -57,10 +58,20 @@ async function send_data(form, url) {
     return output;
 }
 
-// var form = gen_order_form()
-// if (form != -1) {
-//     send_data(form, URL).then(result=> {
-//         console.log(result)
-//     })
-// }
+function show_paypal() {
+    overlay.style.display = "block"
+    setTimeout(()=> {
+        overlay.style.opacity = "1"
+        paypal_container.style.top = "10px"
+    }, 200)
+    
+}
 
+function hide_paypal() {
+    overlay.style.opacity = "0"
+    paypal_container.style.top = "-500px"
+    setTimeout(()=> {
+        overlay.style.display = "none"
+    }, 200)
+    
+}

@@ -33,6 +33,27 @@ a {
     width: 50%;
 }
 
+#paypal-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 30px;
+    background-color: 0;
+    position: absolute;
+    left: 0;
+    z-index: 101;
+    transition-duration: 500ms;
+    top: -500px;
+}
+
+#paypal-button {
+    padding: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 7%;
+}
+
+
 @media screen and (max-width: 660px) {
     #form .input-row {
         flex-direction: column;
