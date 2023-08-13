@@ -47,10 +47,11 @@ a {
 }
 
 #paypal-button {
+    width: 50%;
     padding: 20px;
     background-color: white;
     border: none;
-    border-radius: 7%;
+    border-radius: 2%;
 }
 
 
@@ -61,5 +62,8 @@ a {
 
     main {
         padding: 30px;
+    }
+    #paypal-button {
+        width: initial;
     }
 }
