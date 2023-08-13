@@ -1,4 +1,3 @@
-const overlay = get("overlay")
 const cookies = get("cookies")
 
 

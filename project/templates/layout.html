@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/static/css/footer.css">
     <link rel="stylesheet" href="/static/css/cookies.css">
     <link rel="stylesheet" href="/static/css/overlay.css">
+    <link rel="stylesheet" href="/static/css/subscription.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
 
     <script src="/static/js/jquery.min.js"></script>
@@ -154,9 +155,19 @@
             </div>
         </div>
     </section>
+    <section id="sub-container">
+        <div id="sub">
+                <img src="/static/GRABALTY-final.png" alt="grabalty" id="sub-logo">
+                <h2>Subscribe Now</h2>
+                <div class="sub-row">And get immediate access to our latest offers!</div>
+                <div class="sub-row"><input type="email" name="sub-email" id="sub-email" placeholder="Email Address"></div>
+                <div class="sub-row"><button class="btn btn-black" id="btn-sub" onclick="hide_sub()">SUBSCRIBE</button></div>
+                <div class="sub-row"><button id="sub-close" onclick="hide_sub()">No Thanks</button></div>
+        </div>
+    </section>
 
-    <script src="/static/js/cookies.js"></script>
     <script>
+        const overlay = get("overlay")
         function setCopyrightYear() {
             const d = new Date();
             let year = d.getFullYear();
@@ -164,6 +175,8 @@
         }
         setCopyrightYear()
     </script>
+    <script src="/static/js/subscription.js"></script>
+    <script src="/static/js/cookies.js"></script>
     <script src="/static/js/header.js"></script>
 </body>
 

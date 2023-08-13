@@ -1,0 +1,55 @@
+#sub-container {
+    position: absolute;
+    display: flex;
+    top: -100%;
+    width: 100%;
+    background: transparent;
+    justify-content: center;
+    z-index: 102;
+    transition-duration: 600ms;
+}
+
+#sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px 50px;
+}
+
+#sub-logo {
+    width: 150px;
+}
+
+#sub-email {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+
+#btn-sub {
+    margin: 2px 0;
+    width: 100%
+}
+
+.sub-row:nth-of-type(2) {
+    margin-top: 20px;
+}
+
+.sub-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#sub-close {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
