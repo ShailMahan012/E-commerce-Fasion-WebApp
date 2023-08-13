@@ -6,6 +6,7 @@ const search_input = get("search_input")
 const container = get("container")
 const footer = get("footer")
 const btn_toggle_nav = get("btn-toggle-nav")
+const dropdowns = document.getElementsByClassName("dropdown")
 var nav_show = false
 var search_show = false
 
@@ -121,6 +122,7 @@ function toggleNav() {
 
 function dropdown(e) {
     if (e.style.display == "" || e.style.display == "none") {
+        for (let i=0;i<dropdowns.length;i++) dropdowns[i].style.display = 'none' // Hide all dropdowns before displaying given one
         e.style.display = "flex"
     }
     else {
