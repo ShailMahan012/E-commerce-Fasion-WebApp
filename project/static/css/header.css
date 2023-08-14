@@ -29,12 +29,6 @@ html, body {
     src: url("/static/fonts/Helserif-Book.ttf");
 }
 
-#container {
-    /* margin: 0px; */
-    top: 100px;
-    position: relative;
-    width: 100%;
-}
 
 #header {
     /* padding: 10px 0px; */

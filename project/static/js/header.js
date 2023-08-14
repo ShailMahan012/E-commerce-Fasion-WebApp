@@ -14,9 +14,6 @@ function after_load() {
     let margin_top = nav2.clientHeight;
     if (margin_top == 0) margin_top = nav.clientHeight
     else nav.style.top = -(nav.clientHeight - nav2.clientHeight) + "px" // put nav on perfect hiding position behind nav2 only if nav2 is displayed
-    container.style.top = margin_top + "px"
-    if (footer) footer.style.marginTop = margin_top + "px"
-    // nav.style.top = nav
     pos_search()
 }
 
