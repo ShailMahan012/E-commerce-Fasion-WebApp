@@ -1,12 +1,12 @@
 #sub-container {
-    position: absolute;
+    /* position: absolute; */
     display: flex;
-    top: -100%;
+    /* top: -100%; */
     width: 100%;
-    background: transparent;
+    /* background: transparent; */
     justify-content: center;
-    z-index: 102;
-    transition-duration: 600ms;
+    /* z-index: 102; */
+    /* transition-duration: 600ms; */
 }
 
 #sub {

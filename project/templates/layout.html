@@ -122,6 +122,16 @@
         {% block main %}
         {% endblock %}
     </main>
+    <section id="sub-container">
+        <div id="sub">
+                <img src="/static/GRABALTY-final.png" alt="grabalty" id="sub-logo">
+                <h2>Subscribe Now</h2>
+                <div class="sub-row">And get immediate access to our latest offers!</div>
+                <div class="sub-row"><input type="email" name="sub-email" id="sub-email" placeholder="Email Address"></div>
+                <div class="sub-row"><button class="btn btn-black" id="btn-sub" onclick="hide_sub()">SUBSCRIBE</button></div>
+                <!-- <div class="sub-row"><button id="sub-close" onclick="hide_sub()">No Thanks</button></div> -->
+        </div>
+    </section>
     <section id="footer">
         <div class="paragraph">
             <h2>About Us:</h2>
@@ -155,16 +165,7 @@
             </div>
         </div>
     </section>
-    <section id="sub-container">
-        <div id="sub">
-                <img src="/static/GRABALTY-final.png" alt="grabalty" id="sub-logo">
-                <h2>Subscribe Now</h2>
-                <div class="sub-row">And get immediate access to our latest offers!</div>
-                <div class="sub-row"><input type="email" name="sub-email" id="sub-email" placeholder="Email Address"></div>
-                <div class="sub-row"><button class="btn btn-black" id="btn-sub" onclick="hide_sub()">SUBSCRIBE</button></div>
-                <div class="sub-row"><button id="sub-close" onclick="hide_sub()">No Thanks</button></div>
-        </div>
-    </section>
+
 
     <script>
         const overlay = get("overlay")
