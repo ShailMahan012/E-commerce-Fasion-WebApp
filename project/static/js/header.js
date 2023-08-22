@@ -13,7 +13,11 @@ var search_show = false
 function after_load() {
     let margin_top = nav2.clientHeight;
     if (margin_top == 0) margin_top = nav.clientHeight
-    else nav.style.top = -(nav.clientHeight - nav2.clientHeight) + "px" // put nav on perfect hiding position behind nav2 only if nav2 is displayed
+    else {
+        nav.style.top = -(nav.clientHeight - nav2.clientHeight) + "px" // put nav on perfect hiding position behind nav2 only if nav2 is displayed
+        margin_top = nav2.clientHeight
+    }
+    container.style.marginTop = margin_top + "px"
     pos_search()
 }
 
