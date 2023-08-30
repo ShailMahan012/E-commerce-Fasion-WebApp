@@ -13,7 +13,7 @@ PER_PAGE = app.config['PER_PAGE']
 
 @admin.route("/admin")
 def index():
-    return render_template("admin/index.html")
+    return render_template("index.html")
 
 
 @admin.route("/admin/products")
@@ -24,7 +24,7 @@ def get_products(page=1):
     images = get_images(products.items)
     images = [i[0] for i in images]
 
-    return render_template("admin/products.html", TITLE="ADMIN", products=products, images=images)
+    return render_template("products.html", TITLE="ADMIN", products=products, images=images)
 
 
 def set_images(product_id, form, primary, secondary):
@@ -72,7 +72,7 @@ def new_product():
 
         set_images(product.id, request.form, int(primary), int(secondary))
 
-    return render_template("admin/new_product.html", time=time)
+    return render_template("new_product.html", time=time)
 
 
 @admin.route("/admin/delete/product/<int:ID>")
@@ -114,14 +114,14 @@ def update_product(ID):
 
     images = Images.query.filter_by(product_id=ID)
     images = get_images_dict(images)
-    return render_template("admin/update_product.html", product=product, images=images)
+    return render_template("update_product.html", product=product, images=images)
 
 
 @admin.route("/admin/images")
 @admin.route("/admin/images/<int:page>")
 def images(page=1):
     images = Images.query.paginate(page=page, per_page=PER_PAGE)
-    return render_template("admin/images.html", images=images)
+    return render_template("images.html", images=images)
 
 
 @admin.route("/admin/delete/image/<int:ID>")
@@ -154,7 +154,7 @@ def new_image():
                 db.session.add(image)
         db.session.commit()
 
-    return render_template("admin/new_image.html", time=time)
+    return render_template("new_image.html", time=time)
 
 
 @admin.route("/admin/fetch/images", methods=["POST"])
@@ -186,7 +186,7 @@ def orders(page=1):
     products = get_product_dict_id(products)
     for i in products:
         products[i]["images"] = images[i]
-    return render_template("admin/orders.html", orders=orders, products_json=products, orders_json=orders_dict, TITLE="ORDERS")
+    return render_template("orders.html", orders=orders, products_json=products, orders_json=orders_dict, TITLE="ORDERS")
 
 
 @admin.route("/admin/order/mark/<int:ID>/<int:page>")
