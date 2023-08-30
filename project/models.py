@@ -55,3 +55,8 @@ class Cart(db.Model):
     product_id = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
+class Admin(db.Model):
+    __tablename__ = "Admin"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.Text, unique=True, nullable=False)
+    password = db.Column(db.Text, nullable=False)

@@ -2,7 +2,7 @@ from flask import render_template, request, session, redirect, send_file, json, 
 from werkzeug.utils import secure_filename
 from functools import wraps
 from project import app, db
-from project.models import Users, Products, Images, Orders, Cart
+from project.models import Users, Products, Images, Orders, Cart, Admin
 from project.paypal import create_order, capture_payment
 from project.get_dict import *
 import os
