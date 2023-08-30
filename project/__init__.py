@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 import logging
 
@@ -7,6 +7,8 @@ log.setLevel(logging.ERROR)
 
 
 app = Flask(__name__)
+admin = Blueprint("admin", __name__, template_folder="templates")
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret_key'
@@ -22,7 +24,10 @@ app.config['paypal'] = {
     "APP_SECRET": "EAe0WivXOobHvPhrsVS9ObDaEaaR9pWgPXnRg5UO57m3caAqNWZd_kQf1QvgSDefqW7zurVWYtYZ8Dc-",
     "CURRENCY": "USD"
 }
+app.config['IMAGE_DIR'] =  'project/static/product_images'
+app.config['TITLE'] = "Fashion"
+app.config['PER_PAGE'] = 15
 
-from project import routes
-
+from project import routes, admin_routes
+app.register_blueprint(admin)
 

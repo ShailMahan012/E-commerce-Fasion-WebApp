@@ -1,18 +1,16 @@
+from project import app, db
+from project.models import Products, Images, Orders, Cart
+from project.paypal import create_order, capture_payment
+from project.get_dict import *
 from flask import render_template, request, session, redirect, send_file, json, Markup
 from werkzeug.utils import secure_filename
 from functools import wraps
-from project import app, db
-from project.models import Users, Products, Images, Orders, Cart, Admin
-from project.paypal import create_order, capture_payment
-from project.get_dict import *
-import os
-from time import time
 
 db.create_all()
 
-TITLE = "Fashion"
-IMAGE_DIR = 'project/static/product_images'
-PER_PAGE = 15
+TITLE = app.config['TITLE']
+IMAGE_DIR = app.config['IMAGE_DIR']
+PER_PAGE = app.config['PER_PAGE']
 paypal = app.config["paypal"]
 CLIENT_ID = paypal["CLIENT_ID"]
 CURRENCY = paypal["CURRENCY"]
@@ -148,112 +146,6 @@ def capture_paypal_order():
     return response
 
 
-@app.route("/admin")
-def admin():
-    return render_template("admin/index.html")
-
-
-@app.route("/admin/products")
-@app.route("/admin/products/<int:page>")
-def get_products(page=1):
-    products = Products.query.paginate(page=page, per_page=PER_PAGE)
-
-    images = get_images(products.items)
-    images = [i[0] for i in images]
-
-    return render_template("admin/products.html", TITLE="ADMIN", products=products, images=images)
-
-
-def set_images(product_id, form, primary, secondary):
-    img_ids = []
-    for i in range(4):
-        img_name = f"img_id{i}"
-        img_id = form.get(img_name)
-        if img_id:
-            image = Images.query.get(img_id)
-            if image:
-                image.product_id = product_id
-                image.order = None
-                img_ids.append(image)
-
-    if img_ids:
-        primary = 0 if primary > len(img_ids)-1 else primary
-        secondary = 0 if secondary > len(img_ids)-1 else secondary
-
-        img_ids[primary].order = 0
-        img_ids[secondary].order = 1
-
-        x = 2
-        for img in img_ids:
-            if img.order is None:
-                img.order = x
-                x += 1
-
-        db.session.commit()
-
-
-@app.route("/admin/new_product", methods=["GET", "POST"])
-def new_product():
-    if request.method == "POST":
-        title = request.form.get("title")
-        category = request.form.get("category")
-        details = request.form.get("details")
-        price = request.form.get("price")
-        primary = 0 if not request.form.get("primary") else request.form.get("primary")
-        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
-        core_collection = True if request.form.get("core_collection") else False
-
-        product = Products(title=title, category=category, details=details, price=price, core_collection=core_collection)
-        db.session.add(product)
-        db.session.commit()
-
-        set_images(product.id, request.form, int(primary), int(secondary))
-
-    return render_template("admin/new_product.html", time=time)
-
-
-@app.route("/admin/delete/product/<int:ID>")
-def delete_product(ID):
-    product = Products.query.get(ID)
-    if product:
-        db.session.delete(product)
-        images = Images.query.filter_by(product_id=ID).all()
-        for img in images:
-            img.product_id = None
-    db.session.commit()
-    return redirect("/admin/products")
-
-
-@app.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
-def update_product(ID):
-    product = Products.query.get(ID)
-    images = Images.query.filter_by(product_id=ID)
-    if request.method == "POST":
-        title = request.form.get("title")
-        category = request.form.get("category")
-        details = request.form.get("details")
-        price = request.form.get("price")
-        primary = 0 if not request.form.get("primary") else request.form.get("primary")
-        secondary = 0 if not request.form.get("secondary") else request.form.get("secondary")
-        core_collection = True if request.form.get("core_collection") else False
-
-        product.title = title
-        product.category = category
-        product.details = details
-        product.price = price
-        product.core_collection = core_collection
-
-        for i in images:
-            i.product_id = None
-        db.session.commit()
-
-        set_images(ID, request.form, int(primary), int(secondary))
-
-    images = Images.query.filter_by(product_id=ID)
-    images = get_images_dict(images)
-    return render_template("admin/update_product.html", product=product, images=images)
-
-
 @app.route("/fetch/products", methods=["POST"])
 def fetch_products():
     products_id = request.form.get("id")
@@ -269,90 +161,4 @@ def fetch_products():
         print("fetch_products: JSON Decode ERROR")
         return "fetch_products: JSON Decode ERROR", 501
     return 'fetch_products: This message should not be received', 501
-
-
-@app.route("/admin/images")
-@app.route("/admin/images/<int:page>")
-def images(page=1):
-    images = Images.query.paginate(page=page, per_page=PER_PAGE)
-    return render_template("admin/images.html", images=images)
-
-
-@app.route("/admin/delete/image/<int:ID>")
-def delete_image(ID):
-    image = Images.query.get(ID)
-    if image:
-        file = os.path.join(IMAGE_DIR, image.filename)
-        if os.path.isfile(file):
-            os.remove(file)
-        else:
-            print(file, "IMG NOT FOUND DEL")
-        db.session.delete(image)
-        db.session.commit()
-    return redirect("/admin/images")
-
-
-@app.route("/admin/new_image", methods=["GET", "POST"])
-def new_image():
-    if request.method == "POST":
-        title = request.form.get("title")
-        for i in request.files:
-            file = request.files.get(i)
-            filename = file.filename
-            if filename:
-                filename = str(time()) + secure_filename(filename)
-                path = os.path.join(IMAGE_DIR, filename)
-                file.save(path)
-
-                image = Images(title=title, filename=filename)
-                db.session.add(image)
-        db.session.commit()
-
-    return render_template("admin/new_image.html", time=time)
-
-
-@app.route("/admin/fetch/images", methods=["POST"])
-def admin_images_fetch():
-    search = request.form.get("search")
-    images = Images.query.filter(Images.title.like(f"%{search}%"), Images.product_id==None).all()
-    images = get_images_dict(images)
-    return json.jsonify(images)
-
-
-@app.route("/admin/orders")
-@app.route("/admin/orders/<int:page>")
-def orders(page=1):
-    orders = Orders.query.paginate(page=page, per_page=PER_PAGE)
-    orders_dict = get_orders_dict(orders.items)
-    cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
-
-    cart_dict = get_cart_dict(cart)
-    for i in orders_dict:
-        items = [] if not cart_dict.get(i) else cart_dict.get(i)
-        orders_dict[i]['items'] = items
-
-    products_id = []
-    for prd in cart:
-        products_id.append(prd.product_id)
-    
-    products = Products.query.filter(Products.id.in_((products_id))).all()
-    images = get_images_data(products)
-    products = get_product_dict_id(products)
-    for i in products:
-        products[i]["images"] = images[i]
-    return render_template("admin/orders.html", orders=orders, products_json=products, orders_json=orders_dict, TITLE="ORDERS")
-
-
-@app.route("/admin/order/mark/<int:ID>/<int:page>")
-def mark_order(ID, page):
-    order = Orders.query.get(ID)
-    if order:
-        order.status = not order.status
-        db.session.commit()
-    return redirect(f"/admin/orders/{page}")
-
-
-@app.route("/logout")
-def logout():
-    return redirect("/admin")
 
