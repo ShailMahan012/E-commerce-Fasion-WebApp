@@ -198,6 +198,13 @@ def mark_order(ID, page):
     return redirect(f"/admin/orders/{page}")
 
 
+@admin.route("/admin/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        pass
+    return render_template("login.html")
+
+
 @app.route("/logout")
 def logout():
     return redirect("/admin")
