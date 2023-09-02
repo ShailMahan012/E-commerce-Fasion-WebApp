@@ -1,6 +1,6 @@
 # Routes for admin
 from project import app, admin, db
-from project.models import Products, Images, Orders, Cart
+from project.models import Products, Images, Orders, Cart, Admin
 from project.get_dict import *
 from flask import render_template, request, session, redirect, json, flash
 import os
@@ -201,7 +201,13 @@ def mark_order(ID, page):
 @admin.route("/admin/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        pass
+        uname = request.form["uname"]
+        password = request.form["password"]
+        user = Admin.query.filter_by(username=uname, password=password).first()
+        if user:
+            flash("LOGIN")
+            return redirect("/admin")
+        flash("Incorrect information", "danger")
     return render_template("login.html")
 
 
