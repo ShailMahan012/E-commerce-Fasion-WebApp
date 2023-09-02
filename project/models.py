@@ -1,4 +1,5 @@
 from project import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Users(db.Model):
@@ -59,4 +60,16 @@ class Admin(db.Model):
     __tablename__ = "Admin"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text, unique=True, nullable=False)
-    password = db.Column(db.Text, nullable=False)
+    password_hash = db.Column(db.Text, nullable=False)
+
+    def set_user(self, username, password):
+        self.username = username
+        self.password_hash = generate_password_hash(password)
+
+    def verify(self, password):
+        if check_password_hash(self.password_hash, password):
+            return True
+        return False
+
+    def __str__(self):
+        return f"USERNAME: {self.username} HASH: {self.password_hash}"

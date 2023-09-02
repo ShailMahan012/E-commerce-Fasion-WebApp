@@ -203,9 +203,8 @@ def login():
     if request.method == "POST":
         uname = request.form["uname"]
         password = request.form["password"]
-        user = Admin.query.filter_by(username=uname, password=password).first()
-        if user:
-            flash("LOGIN")
+        user = Admin.query.filter_by(username=uname).first()
+        if user and user.verify(password):
             return redirect("/admin")
         flash("Incorrect information", "danger")
     return render_template("login.html")
