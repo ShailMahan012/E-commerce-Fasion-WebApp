@@ -2,7 +2,7 @@
 from project import app, admin, db
 from project.models import Products, Images, Orders, Cart
 from project.get_dict import *
-from flask import render_template, request, session, redirect, json
+from flask import render_template, request, session, redirect, json, flash
 import os
 from time import time
 

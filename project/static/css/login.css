@@ -13,9 +13,8 @@ html, body {
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100%;
+    margin-top: 10%;
 }
 
 form {
@@ -58,14 +57,18 @@ button:hover {
 a {
     text-decoration: underline;
     color: black;
+    margin-top: 10px;
 }
 
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 530px) {
     form {
         width: 85%;
     }
     img {
         width: 120px;
+    }
+    .form-field {
+        padding: 10px 15px;
     }
 }
