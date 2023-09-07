@@ -121,8 +121,9 @@ def checkout():
             for prd in products:
                 ID = prd.get("id")
                 quantity = prd.get("quantity")
-                if Products.query.get(ID) and quantity:
-                    item = Cart(order_id=order.id, product_id=ID, quantity=quantity)
+                product = Products.query.get(ID) 
+                if product and quantity:
+                    item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price)
                     db.session.add(item)
 
             db.session.commit()
