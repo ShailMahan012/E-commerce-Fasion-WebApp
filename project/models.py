@@ -55,6 +55,8 @@ class Cart(db.Model):
     order_id = db.Column(db.Integer, nullable=False)
     product_id = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    title = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
 
 class Admin(db.Model):
     __tablename__ = "Admin"
