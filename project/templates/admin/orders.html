@@ -49,7 +49,7 @@
                 <th>#</th>
                 <th>image</th>
                 <th>title</th>
-                <th>category</th>
+                <!-- <th>category</th> -->
                 <th>price</th>
                 <th>quantity</th>
                 <th>Total Price</th>
@@ -75,7 +75,7 @@
 <div id="overlay"></div>
 <script>
     const orders_json = {{orders_json | tojson}}
-    const products_json = {{products_json | tojson}}
+    const images_json = {{images_json | tojson}}
     const page_num = {{orders.page}}
 
     const page_name = "admin/orders"

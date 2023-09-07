@@ -39,12 +39,12 @@ function show_order(ord_id) {
     order_id.innerText = ord_id // show order id in popup
 
     for(let i=0;i<items.length;i++) {
-        let prd_id = items[i].product
-        prd = products_json[prd_id] // get one product
-        let quantity = items[i].quantity
-        let prd_total_price = quantity * prd.price
+        let item = items[i]
+        let images = images_json[item.product] // get images of that item
+        let quantity = item.quantity
+        let prd_total_price = quantity * item.price
         ord_total_price += prd_total_price
-        let row = create_product_row(i+1, prd, quantity, prd_total_price) // create row of that one product
+        let row = create_product_row(i+1, images, item, quantity, prd_total_price) // create row of that one product
         products.innerHTML += row
     }
 
@@ -57,21 +57,21 @@ function show_order(ord_id) {
 
 
 // create one row of product in popup
-function create_product_row(i, prd, quantity, total_price) {
+function create_product_row(i, images, item, quantity, total_price) {
     let image_url = "not-found.png"
-    if (prd.images.length != 0)
-        image_url = prd.images[0].filename
+    if (images.length != 0)
+        image_url = images[0].filename
     row = `
         <tr>
             <td>${i}</td>
             <td><img alt='IMAGE' class='img' src='/static/product_images/${image_url}'></td>
-            <td>${prd.title}</td>
-            <td class="category">${prd.category}</td>
-            <td>${prd.price}</td>
+            <td>${item.title}</td>
+            <td>${item.price}</td>
             <td>${quantity}</td>
             <td>${total_price}</td>
         </tr>
     `
+            // <td class="category">${item.category}</td>
     return row
 }
 
@@ -116,15 +116,15 @@ function create_order_row(i, order, ord_id) {
 
 // calculate total price of specific order
 function calc_price(order) {
-    let price = 0
+    let total_price = 0
     let items = order.items // all products of that order
     for (let i=0;i<items.length;i++) { // iterate over products
         let item = items[i]
         let quantity = item.quantity
-        let product = products_json[item.product]
-        price += quantity * product.price
+        let price = item.price
+        total_price += quantity * price
     }
-    return price
+    return total_price
 }
 
 

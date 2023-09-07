@@ -196,19 +196,15 @@ def orders(page=1):
 
     cart_dict = get_cart_dict(cart)
     for i in orders_dict:
-        items = [] if not cart_dict.get(i) else cart_dict.get(i)
+        items = [] if not cart_dict.get(i) else cart_dict.get(i) # use empty list if cart does not have any item of currect order
         orders_dict[i]['items'] = items
 
     products_id = []
     for prd in cart:
         products_id.append(prd.product_id)
     
-    products = Products.query.filter(Products.id.in_((products_id))).all()
-    images = get_images_data(products)
-    products = get_product_dict_id(products)
-    for i in products:
-        products[i]["images"] = images[i]
-    return render_template("orders.html", orders=orders, products_json=products, orders_json=orders_dict, TITLE="ORDERS")
+    images = get_cart_images(cart)
+    return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="ORDERS")
 
 
 @admin.route("/admin/order/mark/<int:ID>/<int:page>")

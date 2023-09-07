@@ -103,8 +103,25 @@ def get_cart_dict(cart):
             cart_dict[i.order_id] = []
         item = {
             'product': i.product_id,
-            'quantity': i.quantity
+            'quantity': i.quantity,
+            'title': i.title,
+            'price': i.price
         }
         cart_dict[i.order_id].append(item)
     return cart_dict
 
+
+def get_cart_images(items):
+    images_dict = {}
+    for i in items:
+        product_id = i.product_id
+        images = Images.query.filter_by(product_id=product_id).order_by("order").all()
+        images_list = []
+        for img in images:
+            image = {
+                'id': img.id,
+                'filename': img.filename
+            }
+            images_list.append(image)
+        images_dict[product_id] = images_list
+    return images_dict
