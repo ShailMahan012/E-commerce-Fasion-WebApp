@@ -207,6 +207,14 @@ def orders(page=1):
     return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="ORDERS")
 
 
+@admin.route("/admin/filter/orders", methods=["GET", "POST"])
+@login_required
+def filter_orders():
+    if request.method == "POST":
+        pass
+    return render_template("filter_orders.html")
+
+
 @admin.route("/admin/order/mark/<int:ID>/<int:page>")
 @login_required
 def mark_order(ID, page):
