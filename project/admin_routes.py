@@ -212,7 +212,7 @@ def orders(page=1):
 def filter_orders():
     if request.method == "POST":
         pass
-    return render_template("filter_orders.html")
+    return render_template("filter_orders.html", TITLE="Filter Orders")
 
 
 @admin.route("/admin/order/mark/<int:ID>/<int:page>")
