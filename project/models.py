@@ -1,6 +1,6 @@
 from project import db
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime import date
 
 class Users(db.Model):
     __tablename__ = 'Users'
@@ -48,6 +48,7 @@ class Orders(db.Model):
 
     note = db.Column(db.Text, default=None)
     status = db.Column(db.Boolean, nullable=True, default=False)
+    date = db.Column(db.Date, nullable=False, default=date.today())
 
 class Cart(db.Model):
     __tablename__ = 'Cart'
