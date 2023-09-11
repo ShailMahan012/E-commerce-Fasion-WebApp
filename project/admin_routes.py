@@ -211,7 +211,11 @@ def orders(page=1):
 @login_required
 def filter_orders():
     if request.method == "POST":
-        pass
+        uname = request.form.get("uname")
+        email = request.form.get("email")
+        start_date = request.form.get("start_date")
+        end_date = request.form.get("end_date")
+        print(uname, email, start_date, end_date)
     return render_template("filter_orders.html", TITLE="Filter Orders")
 
 
