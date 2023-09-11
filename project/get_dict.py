@@ -90,6 +90,7 @@ def get_orders_dict(orders):
             'postal_code': o.postal_code,
             'phone': o.phone,
             'note': o.note,
+            'date': o.date.strftime("%d %b, %Y"),
             'status': o.status
         }
         orders_dict[o.id] = order

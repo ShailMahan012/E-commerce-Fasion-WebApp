@@ -13,6 +13,7 @@ const city = get("city")
 const postal_code = get("postal_code")
 const note = get("note")
 const status = get("status")
+const date = get("date")
 const total_price = get("total_price") // total price of full order in popup
 
 var current_order_id = -1; // GLOBAL variable to be used to mark order
@@ -84,6 +85,7 @@ function set_order_data(order, ord_total_price) {
     postal_code.innerText = order.postal_code
     note.innerText = order.note
     total_price.innerText = ord_total_price
+    date.innerText = order.date
     
     let status_txt = "PENDING"
     let btn_status = "Mark As Completed"
@@ -107,6 +109,7 @@ function create_order_row(i, order, ord_id) {
             <td>${order.f_name} ${order.l_name}</td>
             <td>${order.note}</td>
             <td>${price}</td>
+            <td>${order.date}</td>
             ${status_td}
         </tr>
     `
