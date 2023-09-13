@@ -187,10 +187,11 @@ def admin_images_fetch():
 
 
 @admin.route("/admin/orders")
-@admin.route("/admin/orders/<int:page>")
 @login_required
-def orders(page=1):
-    orders = Orders.query.paginate(page=page, per_page=PER_PAGE)
+def orders():
+    page = request.args.get("page")
+    if not page: page = 1
+    orders = Orders.query.paginate(page=int(page), per_page=PER_PAGE)
     orders_dict = get_orders_dict(orders.items)
     cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
 
@@ -210,37 +211,39 @@ def filter_orders():
 
 
 @admin.route("/admin/filtered/orders")
-@admin.route("/admin/filtered/orders/<int:page>")
 def filtered_orders(page=1):
-        name = request.args.get("name")
-        email = request.args.get("email")
-        start_date = request.args.get("start_date")
-        end_date = request.args.get("end_date")
-        status = request.args.get("status")
+    page = request.args.get("page")
+    if not page: page = 1
+    name = request.args.get("name")
+    email = request.args.get("email")
+    start_date = request.args.get("start_date")
+    end_date = request.args.get("end_date")
+    status = request.args.get("status")
 
-        orders = Orders.query
-        if name:
-            orders = orders.filter(Orders.full_name.ilike(f"%{name}%"))
-        if email:
-            orders = orders.filter(Orders.email.ilike(f"%{email}%"))
-        if start_date:
-            orders = orders.filter(Orders.date>=start_date)
-        if end_date:
-            orders = orders.filter(Orders.date>=end_date)
-        if status:
-            orders = orders.filter(Orders.status==status)
+    orders = Orders.query
+    if name:
+        orders = orders.filter(Orders.full_name.ilike(f"%{name}%"))
+    if email:
+        orders = orders.filter(Orders.email.ilike(f"%{email}%"))
+    if start_date:
+        orders = orders.filter(Orders.date>=start_date)
+    if end_date:
+        orders = orders.filter(Orders.date>=end_date)
+    if status:
+        orders = orders.filter(Orders.status==status)
 
-        orders = orders.paginate(page=1, per_page=PER_PAGE)
-        orders_dict = get_orders_dict(orders.items)
-        cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
+    orders = orders.paginate(page=int(page), per_page=PER_PAGE)
+    orders_dict = get_orders_dict(orders.items)
+    cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
 
-        cart_dict = get_cart_dict(cart)
-        for i in orders_dict:
-            items = [] if not cart_dict.get(i) else cart_dict.get(i) # use empty list if cart does not have any item of currect order
-            orders_dict[i]['items'] = items
+    cart_dict = get_cart_dict(cart)
+    for i in orders_dict:
+        items = cart_dict.get(i)
+        if not items: items = []
+        orders_dict[i]['items'] = items
 
-        images = get_cart_images(cart)
-        return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="Filtered Orders")
+    images = get_cart_images(cart)
+    return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="Filtered Orders")
 
 
 @admin.route("/admin/order/mark/<int:ID>/<int:page>")
