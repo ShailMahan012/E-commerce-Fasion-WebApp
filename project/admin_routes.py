@@ -199,23 +199,42 @@ def orders(page=1):
         items = [] if not cart_dict.get(i) else cart_dict.get(i) # use empty list if cart does not have any item of currect order
         orders_dict[i]['items'] = items
 
-    products_id = []
-    for prd in cart:
-        products_id.append(prd.product_id)
-    
     images = get_cart_images(cart)
     return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="ORDERS")
+
+
+def sql_like(*args):
+    args = list(args)
+    for i in range(len(args)):
+        args[i] = f"%{args[i]}%"
+    return args
 
 
 @admin.route("/admin/filter/orders", methods=["GET", "POST"])
 @login_required
 def filter_orders():
     if request.method == "POST":
-        uname = request.form.get("name")
+        name = request.form.get("name")
         email = request.form.get("email")
         start_date = request.form.get("start_date")
         end_date = request.form.get("end_date")
-        print(uname, email, start_date, end_date)
+        status = request.form.get("status")
+        name, email = sql_like(name, email)
+
+        print(email, start_date, end_date)
+        orders = Orders.query.filter(Orders.email.like(email))
+        print(orders.all())
+        orders = orders.paginate(page=1, per_page=PER_PAGE)
+        orders_dict = get_orders_dict(orders.items)
+        cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
+
+        cart_dict = get_cart_dict(cart)
+        for i in orders_dict:
+            items = [] if not cart_dict.get(i) else cart_dict.get(i) # use empty list if cart does not have any item of currect order
+            orders_dict[i]['items'] = items
+
+        images = get_cart_images(cart)
+        return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="Filter Orders")
     return render_template("filter_orders.html", TITLE="Filter Orders")
 
 
