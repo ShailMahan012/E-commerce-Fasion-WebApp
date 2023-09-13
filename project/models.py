@@ -1,6 +1,7 @@
 from project import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
+from sqlalchemy.ext import hybrid
 
 class Users(db.Model):
     __tablename__ = 'Users'
@@ -49,6 +50,10 @@ class Orders(db.Model):
     note = db.Column(db.Text, default=None)
     status = db.Column(db.Boolean, nullable=True, default=False)
     date = db.Column(db.Date, nullable=False, default=date.today())
+
+    @hybrid.hybrid_property
+    def full_name(self):
+        return (self.f_name + " " + self.l_name)
 
 class Cart(db.Model):
     __tablename__ = 'Cart'

@@ -203,13 +203,6 @@ def orders(page=1):
     return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="ORDERS")
 
 
-def sql_like(*args):
-    args = list(args)
-    for i in range(len(args)):
-        args[i] = f"%{args[i]}%"
-    return args
-
-
 @admin.route("/admin/filter/orders", methods=["GET", "POST"])
 @login_required
 def filter_orders():
@@ -219,11 +212,19 @@ def filter_orders():
         start_date = request.form.get("start_date")
         end_date = request.form.get("end_date")
         status = request.form.get("status")
-        name, email = sql_like(name, email)
 
-        print(email, start_date, end_date)
-        orders = Orders.query.filter(Orders.email.like(email))
-        print(orders.all())
+        orders = Orders.query
+        if name:
+            orders = orders.filter(Orders.full_name.ilike(f"%{name}%"))
+        if email:
+            orders = orders.filter(Orders.email.ilike(f"%{email}%"))
+        if start_date:
+            orders = orders.filter(Orders.date>=start_date)
+        if end_date:
+            orders = orders.filter(Orders.date>=end_date)
+        if status:
+            orders = orders.filter(Orders.status==status)
+
         orders = orders.paginate(page=1, per_page=PER_PAGE)
         orders_dict = get_orders_dict(orders.items)
         cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
