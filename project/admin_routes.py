@@ -211,6 +211,7 @@ def filter_orders():
 
 
 @admin.route("/admin/filtered/orders")
+@login_required
 def filtered_orders(page=1):
     page = request.args.get("page")
     if not page: page = 1
