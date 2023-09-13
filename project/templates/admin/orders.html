@@ -82,9 +82,11 @@
     const page_num = {{orders.page}}
 
     function page_go(num) {
-        let query = `?page=${num}`
-        if (num != "None")
-            window.location.search = query
+        let url = new URL(window.location)
+        if (num != "None") {
+            url.searchParams.set("page", num)
+            window.location = url
+        }
     }
 </script>
 <script src="/static/admin/orders.js"></script>
