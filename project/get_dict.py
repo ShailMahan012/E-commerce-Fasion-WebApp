@@ -85,6 +85,7 @@ def get_orders_dict(orders):
         order = {
             'f_name': o.f_name,
             'l_name': o.l_name,
+            'email': o.email,
             'address': o.address,
             'city': o.city,
             'postal_code': o.postal_code,

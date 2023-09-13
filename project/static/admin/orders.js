@@ -7,6 +7,7 @@ const overlay = get("overlay")
 const btn_order_status = get("btn_order_status") // button to mark order as completed
 
 const name = get("name")
+const email = get("email")
 const phone = get("phone")
 const address = get("address")
 const city = get("city")
@@ -79,6 +80,7 @@ function create_product_row(i, images, item, quantity, total_price) {
 
 function set_order_data(order, ord_total_price) {
     name.innerText = order.f_name + ' ' + order.l_name
+    email.innerText = order.email
     phone.innerText = order.phone
     address.innerText = order.address
     city.innerText = order.city
