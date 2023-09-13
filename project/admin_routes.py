@@ -203,15 +203,20 @@ def orders(page=1):
     return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="ORDERS")
 
 
-@admin.route("/admin/filter/orders", methods=["GET", "POST"])
+@admin.route("/admin/filter/orders")
 @login_required
 def filter_orders():
-    if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        start_date = request.form.get("start_date")
-        end_date = request.form.get("end_date")
-        status = request.form.get("status")
+    return render_template("filter_orders.html", TITLE="Filter Orders")
+
+
+@admin.route("/admin/filtered/orders")
+@admin.route("/admin/filtered/orders/<int:page>")
+def filtered_orders(page=1):
+        name = request.args.get("name")
+        email = request.args.get("email")
+        start_date = request.args.get("start_date")
+        end_date = request.args.get("end_date")
+        status = request.args.get("status")
 
         orders = Orders.query
         if name:
@@ -235,8 +240,7 @@ def filter_orders():
             orders_dict[i]['items'] = items
 
         images = get_cart_images(cart)
-        return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="Filter Orders")
-    return render_template("filter_orders.html", TITLE="Filter Orders")
+        return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="Filtered Orders")
 
 
 @admin.route("/admin/order/mark/<int:ID>/<int:page>")
