@@ -101,14 +101,14 @@ nav a {
     text-decoration: none;
     color: black;
 }
-.nav-item > a {
+.nav-link {
     display: inline-block;
     padding: 20px 10px;
     transition: border-bottom-color 250ms ease;
     border-bottom: 3px solid rgba(0, 0, 0, 0);
     font-weight: bold;
 }
-.nav-item:hover > a {
+.nav-link:hover {
     border-bottom-color: black;
 }
 .nav-logo {
@@ -241,13 +241,19 @@ button:hover {
     nav ul {
         flex-direction: column;
     }
-    nav ul li {
+    nav li {
         text-align: center;
         width: 100%;
-        margin: 20px 0px;
+        margin: 0;
     }
     .nav-item {
         padding: 0;
+    }
+    .nav-link {
+        width: 100%;
+    }
+    .nav-dropdown > .nav-link {
+        padding: 7px 0;
     }
     .btn-toggle-nav {
         display: block;
@@ -272,7 +278,7 @@ button:hover {
         border-bottom: 2px solid black;
     }
     nav .dropdown li {
-        padding: 10px 10px;
+        /* padding: 10px 10px; */
         margin: 0;
     }
 }
