@@ -27,7 +27,7 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    core_collection = Products.query.filter_by(core_collection=True).limit(13)
+    core_collection = Products.query.filter_by(core_collection=True).limit(8)
     images = get_images(core_collection)
     return render_template("home.html", TITLE=TITLE, core_collection=core_collection, images=images)
 
