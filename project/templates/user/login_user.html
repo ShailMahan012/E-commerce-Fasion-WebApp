@@ -23,7 +23,7 @@
             <a href="/" class="link">Go to Homepage</a>
         </form>
         {% else %}
-        <form action="" method="POST">
+        <form action="" method="POST" onsubmit="return submit_form()">
             <img src="/static/GRABALTY-final.png" alt="GRABALTY">
             <div class="row input-row">
                 <div class="column"><input type="text" name="f_name" placeholder="First Name" value="" class="form-field" required></div>
@@ -31,6 +31,14 @@
             </div>
             <div class="row input-row">
                 <div class="column"><input type="email" name="email" placeholder="Email Address" value="" class="form-field" required></div>
+            </div>
+            <div class="row input-row">
+                <div class="column">
+                    <input type="password" name="password" placeholder="Password" value="" class="form-field" required>
+                </div>
+                <div class="column">
+                    <input type="password" name="password2" placeholder="Confirm Password" value="" class="form-field" required>
+                </div>
             </div>
             <div class="row input-row">
                 <div class="column"><input type="text" name="address" placeholder="Full Address" value="" class="form-field" required></div>
@@ -46,6 +54,15 @@
             <a href="/user/login" class="link">Already have account?</a>
             <a href="/" class="link">Go to Homepage</a>
         </form>
+        <script>
+            const passwords = document.querySelectorAll("input[type=password]")
+            function submit_form() {
+                if (passwords[0].value == passwords[1].value) return true
+                msg("Enter same passwords", "danger")
+                passwords[0].focus()
+                return false
+            }
+        </script>
         {% endif %}
     </main>
     <script src="/static/js/main.js"></script>
