@@ -3,14 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
 from sqlalchemy.ext import hybrid
 
-class Users(db.Model):
-    __tablename__ = 'Users'
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.Text, unique=True, nullable=False)
-    password = db.Column(db.Text, nullable=False)
-
-    f_name = db.Column(db.Text, nullable=False)
-    l_name = db.Column(db.Text, nullable=True)
 
 class Products(db.Model):
     __tablename__ = 'Products'
@@ -86,3 +78,28 @@ class Sub_Emails(db.Model):
     __tablename__ = "Sub_Emails"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.Text, unique=True, nullable=False)
+
+class Users(db.Model):
+    __tablename__ = "Users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.Text, nullable=False)
+
+    f_name = db.Column(db.Text, nullable=False)
+    l_name = db.Column(db.Text, nullable=True)
+
+    address = db.Column(db.Text, nullable=False)
+    city = db.Column(db.Text, nullable=False)
+    postal_code = db.Column(db.Text, nullable=False)
+    phone = db.Column(db.Text, nullable=False)
+    password_hash = db.Column(db.Text, nullable=False)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify(self, password):
+        if check_password_hash(self.password_hash, password):
+            return True
+        return False
+
+    def __str__(self):
+        return f"EMAIL: {self.email} HASH: {self.password_hash}"
