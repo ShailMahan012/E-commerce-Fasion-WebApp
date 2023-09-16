@@ -8,7 +8,7 @@ from functools import wraps
 
 @user.route("/")
 def user_page():
-    return redirect('/user/login')
+    return render_template("user.html")
 
 
 @user.route("/login", methods=["GET", "POST"])
@@ -16,6 +16,11 @@ def login():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
+        user = Users.query.filter_by(email=email).first()
+        if user and user.verify(password):
+            session["user_id"] = user.id
+            return redirect("/user")
+        flash("Incorrect Information!", "danger")
     return render_template("login_user.html", PAGE="LOGIN")
 
 
