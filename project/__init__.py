@@ -19,10 +19,10 @@ app.app_context().push()
 
 
 app.config['paypal'] = {
-    "BASE_URL": "https://api-m.sandbox.paypal.com",
-    "CLIENT_ID": "AaYITUxB_0he79pMHBsHSgs2c6IGRjkbbRJJ5H47mh4GcYbkeiJ60uzXRtgt4-YmmLmiC33yhJ4rrXQm",
-    "APP_SECRET": "EAe0WivXOobHvPhrsVS9ObDaEaaR9pWgPXnRg5UO57m3caAqNWZd_kQf1QvgSDefqW7zurVWYtYZ8Dc-",
-    "CURRENCY": "USD"
+    "BASE_URL": "https://api-m.paypal.com",
+    "CLIENT_ID": "AV6qiggsr5K-Bf-ZtuFdyaCk_cQC3mvEh0LUwAqZXcGvY_WhGp1OxLplyK6Hk61V4womA9yaXFiysuIz",
+    "APP_SECRET": "EGt1FVt_xxFJXI7G0OmF3SGCXVgyhjnOImt5SzhYw421BeCJnb5tZ41ZKecZZU8SMRHK3cMPUmtVgDoV",
+    "CURRENCY": "CAD"
 }
 app.config['IMAGE_DIR'] =  'project/static/product_images'
 app.config['TITLE'] = "Fashion"
