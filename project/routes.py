@@ -1,5 +1,5 @@
 from project import app, db
-from project.models import Products, Images, Orders, Cart
+from project.models import Products, Images, Orders, Cart, Sub_Emails
 from project.paypal import create_order, capture_payment
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
@@ -168,5 +168,10 @@ def fetch_products():
 @app.route("/subscribe")
 def subscibe():
     email = request.args.get("email")
-    sub_letter(email)
-    return "True"
+    if not Sub_Emails.query.filter_by(email=email).first():
+        sub_letter(email) # send email
+        email = Sub_Emails(email=email)
+        db.session.add(email)
+        db.session.commit()
+        return "True"
+    return "False"

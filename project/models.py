@@ -81,3 +81,8 @@ class Admin(db.Model):
 
     def __str__(self):
         return f"USERNAME: {self.username} HASH: {self.password_hash}"
+
+class Sub_Emails(db.Model):
+    __tablename__ = "Sub_Emails"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.Text, unique=True, nullable=False)
