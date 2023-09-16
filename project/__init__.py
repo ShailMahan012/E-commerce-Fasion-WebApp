@@ -8,6 +8,7 @@ log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 admin = Blueprint("admin", __name__, template_folder="templates/admin")
+user = Blueprint("user", __name__, template_folder="templates/user")
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -25,9 +26,10 @@ app.config['paypal'] = {
     "CURRENCY": "CAD"
 }
 app.config['IMAGE_DIR'] =  'project/static/product_images'
-app.config['TITLE'] = "Fashion"
+app.config['TITLE'] = "GRABALTY"
 app.config['PER_PAGE'] = 15
 
-from project import routes, admin_routes
+from project import routes, admin_routes, user_routes
 app.register_blueprint(admin)
+app.register_blueprint(user)
 
