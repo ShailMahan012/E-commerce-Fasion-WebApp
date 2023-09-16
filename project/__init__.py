@@ -7,8 +7,8 @@ log.setLevel(logging.ERROR)
 
 
 app = Flask(__name__)
-admin = Blueprint("admin", __name__, template_folder="templates/admin")
-user = Blueprint("user", __name__, template_folder="templates/user")
+admin = Blueprint("admin", __name__, template_folder="templates/admin", url_prefix="/admin")
+user = Blueprint("user", __name__, template_folder="templates/user", url_prefix="/user")
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

@@ -23,14 +23,14 @@ def login_required(f):
     return decorated_function
 
 
-@admin.route("/admin")
+@admin.route("/")
 @login_required
 def index():
     return render_template("index.html")
 
 
-@admin.route("/admin/products")
-@admin.route("/admin/products/<int:page>")
+@admin.route("/products")
+@admin.route("/products/<int:page>")
 @login_required
 def get_products(page=1):
     products = Products.query.paginate(page=page, per_page=PER_PAGE)
@@ -69,7 +69,7 @@ def set_images(product_id, form, primary, secondary):
         db.session.commit()
 
 
-@admin.route("/admin/new_product", methods=["GET", "POST"])
+@admin.route("/new_product", methods=["GET", "POST"])
 @login_required
 def new_product():
     if request.method == "POST":
@@ -90,7 +90,7 @@ def new_product():
     return render_template("new_product.html", time=time)
 
 
-@admin.route("/admin/delete/product/<int:ID>")
+@admin.route("/delete/product/<int:ID>")
 @login_required
 def delete_product(ID):
     product = Products.query.get(ID)
@@ -103,7 +103,7 @@ def delete_product(ID):
     return redirect("/admin/products")
 
 
-@admin.route("/admin/update/product/<int:ID>", methods=["GET", "POST"])
+@admin.route("/update/product/<int:ID>", methods=["GET", "POST"])
 @login_required
 def update_product(ID):
     product = Products.query.get(ID)
@@ -134,15 +134,15 @@ def update_product(ID):
     return render_template("update_product.html", product=product, images=images)
 
 
-@admin.route("/admin/images")
-@admin.route("/admin/images/<int:page>")
+@admin.route("/images")
+@admin.route("/images/<int:page>")
 @login_required
 def images(page=1):
     images = Images.query.paginate(page=page, per_page=PER_PAGE)
     return render_template("images.html", images=images)
 
 
-@admin.route("/admin/delete/image/<int:ID>")
+@admin.route("/delete/image/<int:ID>")
 @login_required
 def delete_image(ID):
     image = Images.query.get(ID)
@@ -157,7 +157,7 @@ def delete_image(ID):
     return redirect("/admin/images")
 
 
-@admin.route("/admin/new_image", methods=["GET", "POST"])
+@admin.route("/new_image", methods=["GET", "POST"])
 @login_required
 def new_image():
     if request.method == "POST":
@@ -177,7 +177,7 @@ def new_image():
     return render_template("new_image.html", time=time)
 
 
-@admin.route("/admin/fetch/images", methods=["POST"])
+@admin.route("/fetch/images", methods=["POST"])
 @login_required
 def admin_images_fetch():
     search = request.form.get("search")
@@ -186,7 +186,7 @@ def admin_images_fetch():
     return json.jsonify(images)
 
 
-@admin.route("/admin/orders")
+@admin.route("/orders")
 @login_required
 def orders():
     page = request.args.get("page")
@@ -204,13 +204,13 @@ def orders():
     return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="ORDERS")
 
 
-@admin.route("/admin/filter/orders")
+@admin.route("/filter/orders")
 @login_required
 def filter_orders():
     return render_template("filter_orders.html", TITLE="Filter Orders")
 
 
-@admin.route("/admin/filtered/orders")
+@admin.route("/filtered/orders")
 @login_required
 def filtered_orders(page=1):
     page = request.args.get("page")
@@ -247,7 +247,7 @@ def filtered_orders(page=1):
     return render_template("orders.html", orders=orders, images_json=images, orders_json=orders_dict, TITLE="Filtered Orders")
 
 
-@admin.route("/admin/order/mark/<int:ID>/<int:page>")
+@admin.route("/order/mark/<int:ID>/<int:page>")
 @login_required
 def mark_order(ID, page):
     order = Orders.query.get(ID)
@@ -257,7 +257,7 @@ def mark_order(ID, page):
     return redirect(f"/admin/orders/{page}")
 
 
-@admin.route("/admin/login", methods=["GET", "POST"])
+@admin.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         redirect_path = request.args.get("redirect")
@@ -276,7 +276,7 @@ def login():
     return render_template("login.html")
 
 
-@admin.route("/admin/logout")
+@admin.route("/logout")
 @login_required
 def logout():
     session.pop('admin_id')
