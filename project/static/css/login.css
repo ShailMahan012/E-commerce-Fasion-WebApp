@@ -14,6 +14,7 @@ main {
     flex-direction: column;
     align-items: center;
     margin-top: 5%;
+    margin-bottom: 10px;
 }
 
 form {
@@ -53,14 +54,22 @@ button:hover {
     background-color: rgb(14, 14, 14);
 }
 
-a {
+a, .link {
     text-decoration: underline;
     color: black;
     margin-top: 10px;
 }
-
+.row {
+    width: 100%;
+}
+.column {
+    margin: 5px 2px;
+}
 
 @media screen and (max-width: 530px) {
+    form .input-row {
+        flex-direction: column;
+    }
     form {
         width: 85%;
     }

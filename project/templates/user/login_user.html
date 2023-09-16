@@ -3,26 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN Shail</title>
+    <title>LOGIN</title>
     <link rel="shortcut icon" href="/static/favicon.webp" type="image/x-icon">
     <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/home.css">
     <link rel="stylesheet" href="/static/css/msg.css">
 </head>
 <body>
     <main>
         <div id="msg_div" class="alert" role="alert"></div>
-        <form action="/user/login" method="POST" id="login_form">
+
+        {% if PAGE == "LOGIN" %}
+        <form action="" method="POST">
             <img src="/static/GRABALTY-final.png" alt="GRABALTY">
             <input type="email" name="email" placeholder="Email Address" class="form-field">
             <input type="password" name="password" placeholder="Password" class="form-field">
             <button type="submit" class="form-field">LOGIN</button>
-            <a href="#signup_form">Do not have account?</a>
-            <a href="/">Go to Homepage</a>
+            <a href="/user/signup" class="link">Do not have account?</a>
+            <a href="/" class="link">Go to Homepage</a>
         </form>
-        <form action="/user/signup" method="POST" id="signup_form">
+        {% else %}
+        <form action="" method="POST">
             <img src="/static/GRABALTY-final.png" alt="GRABALTY">
-            <a href="#signin_form">Already have account?</a>
+            <div class="row input-row">
+                <div class="column"><input type="text" name="f_name" placeholder="First Name" value="" class="form-field" required></div>
+                <div class="column"><input type="text" name="l_name" placeholder="Last Name" value="" class="form-field"></div>
+            </div>
+            <div class="row input-row">
+                <div class="column"><input type="email" name="email" placeholder="Email Address" value="" class="form-field" required></div>
+            </div>
+            <div class="row input-row">
+                <div class="column"><input type="text" name="address" placeholder="Full Address" value="" class="form-field" required></div>
+            </div>
+            <div class="row input-row">
+                <div class="column"><input type="text" name="city" placeholder="City" value="" class="form-field" required></div>
+                <div class="column"><input type="text" name="postal_code" placeholder="Postal Code" value="" class="form-field" required></div>
+            </div>
+            <div class="row input-row">
+            <div class="column"><input type="text" name="phone" placeholder="Phone" value="" class="form-field" required></div>
+            </div>
+            <button type="submit" class="form-field">SIGNUP</button>
+            <a href="/user/login" class="link">Already have account?</a>
+            <a href="/" class="link">Go to Homepage</a>
         </form>
+        {% endif %}
     </main>
     <script src="/static/js/main.js"></script>
     {% with messages = get_flashed_messages(with_categories=true) %}

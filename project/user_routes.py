@@ -14,6 +14,11 @@ def user_page():
     return redirect('/user/login')
 
 
-@user.route("/login")
+@user.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login_user.html")
+    return render_template("login_user.html", PAGE="LOGIN")
+
+
+@user.route("/signup", methods=["GET", "POST"])
+def signup():
+    return render_template("login_user.html", PAGE="SIGNUP")
