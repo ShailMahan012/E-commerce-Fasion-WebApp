@@ -3,18 +3,18 @@
     width: 100%;
     justify-content: center;
     border-top: 1px solid #cfcfcf;
+    background-color: white;
 }
 
-#sub {
+.sub {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: white;
     padding: 20px 50px;
 }
 
-#sub-logo {
+.sub-logo {
     width: 75px;
 }
 
@@ -48,4 +48,22 @@
     color: black;
     text-align: center;
     border-bottom: 1px solid black;
+}
+
+#sub-thanks {
+    display: none;
+    position: fixed;
+    background-color: white;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition-duration: 400ms;
+    z-index: 101;
+}
+
+.sub > a {
+    margin-top: 10px;
+    text-decoration: underline;
+    color: black;
 }

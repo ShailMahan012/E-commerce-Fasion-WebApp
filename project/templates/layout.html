@@ -124,8 +124,8 @@
         {% endblock %}
     </main>
     <section id="sub-container">
-        <div id="sub">
-                <img src="/static/crown.jpeg" alt="grabalty" id="sub-logo">
+        <div class="sub">
+                <img src="/static/crown.jpeg" alt="grabalty" class="sub-logo">
                 <h2>Subscribe Now</h2>
                 <div class="sub-row">Sign up to receive news on the latest Items, deals/discounts and Offers on Grabalty</div>
                 <div class="sub-row"><input type="email" id="sub-email" placeholder="Email Address"></div>
@@ -166,7 +166,13 @@
             </div>
         </div>
     </section>
-
+    <section id="sub-thanks">
+        <div class="sub">
+            <img src="/static/GRABALTY-final.png" alt="grabalty" class="nav-logo">
+            <h2 class="title">Thanks For Subscribing to our newletters</h2>
+            <a href="#close-sub-thanks" onclick="sub_thanks_close()">Go Back To Home Page</a>
+        </div>
+    </section>
 
     <script>
         const overlay = get("overlay")
