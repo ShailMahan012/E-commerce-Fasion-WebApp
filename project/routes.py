@@ -2,7 +2,7 @@ from project import app, db
 from project.models import Products, Images, Orders, Cart
 from project.paypal import create_order, capture_payment
 from project.get_dict import *
-from project.send_mail import send_mail
+from project.send_mail import send_mail, sub_letter
 from flask import render_template, request, session, redirect, send_file, json, Markup
 from werkzeug.utils import secure_filename
 from functools import wraps
@@ -168,5 +168,5 @@ def fetch_products():
 @app.route("/subscribe")
 def subscibe():
     email = request.args.get("email")
-    send_mail(email, "Grabalty Subscription", "Done Subscription")
+    sub_letter(email)
     return "True"
