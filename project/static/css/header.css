@@ -234,6 +234,9 @@ button:hover {
         transition-duration: 500ms;
         transition-property: top;
     }
+    #nav {
+        position: absolute;
+    }
     #nav2 {
         display: flex;
         width: 100%;

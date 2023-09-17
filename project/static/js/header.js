@@ -96,6 +96,7 @@ function toggleNav() {
         nav.style.top = "0px"
         nav2.style.boxShadow = "none"
         hide_search()
+        header.style.position = "absolute"
         // container.style.top = "0px"
         // container.style.marginTop = "0px"
         // setTimeout(()=>{nav.style.position = "relative"}, 510)
@@ -112,9 +113,8 @@ function toggleNav() {
         hide_search()
         // Hide NAV
         nav.style.top = -(nav.clientHeight - nav2.clientHeight) + "px"
-        nav.style.position = "absolute"
         nav2.style.boxShadow = "0 5px 15px rgba(92, 92, 92, 0.7)"
-        setTimeout(()=>{nav.style.position = "absolute"}, 510)
+        header.style.position = "fixed"
         // container.style.top = nav2.clientHeight + "px"
         // container.style.marginTop = nav2.clientHeight + "px"
     }
