@@ -4,9 +4,20 @@ from project.models import Users
 from flask import render_template, request, session, redirect, json, flash
 # from werkzeug.utils import secure_filename
 from functools import wraps
-# from base64 import b64encode, b64decode
+from base64 import b64encode, b64decode
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("user_id") is None:
+            return redirect(f"/user/login?redirect={b64encode(request.path.encode()).decode()}")
+        return f(*args, **kwargs)
+    return decorated_function
+
 
 @user.route("/")
+@login_required
 def user_page():
     return render_template("user.html")
 
@@ -14,6 +25,11 @@ def user_page():
 @user.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        redirect_path = request.args.get("redirect")
+        if not redirect_path:
+            redirect_path = "/admin"
+        else:
+            redirect_path = b64decode(redirect_path).decode()
         email = request.form.get("email")
         password = request.form.get("password")
         user = Users.query.filter_by(email=email).first()
@@ -47,3 +63,9 @@ def signup():
 
         flash("Account with this email already exist!", "warning")
     return render_template("login_user.html", PAGE="SIGNUP")
+
+
+@user.route("/logout")
+def logout():
+    session.pop("user_id")
+    return redirect("/")
