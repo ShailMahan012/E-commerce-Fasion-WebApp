@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/static/css/msg.css">
 </head>
 <body>
-    <main>
+    <main class="main">
         <div id="msg_div" class="alert" role="alert"></div>
 
         {% if PAGE == "LOGIN" %}
@@ -24,7 +24,7 @@
         </form>
         {% else %}
         <form action="" method="POST" onsubmit="return submit_form()">
-            <img src="/static/GRABALTY-final.png" alt="GRABALTY">
+            <img src="/static/GRABALTY-final.png" alt="GRABALTY" class="gr-logo">
             <div class="row input-row">
                 <div class="column"><input type="text" name="f_name" placeholder="First Name" value="" class="form-field" required></div>
                 <div class="column"><input type="text" name="l_name" placeholder="Last Name" value="" class="form-field"></div>

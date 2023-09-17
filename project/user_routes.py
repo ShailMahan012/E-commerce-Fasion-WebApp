@@ -19,7 +19,42 @@ def login_required(f):
 @user.route("/")
 @login_required
 def user_page():
-    return render_template("user.html")
+    user_id = session.get("user_id")
+    user = db.session.get(Users, user_id)
+    if user:
+        return render_template("user.html", TITLE="User", user=user)
+    flash("User not found!", "danger")
+    return redirect("/user/logout")
+
+
+@user.route("/update_info", methods=["POST"])
+@login_required
+def update_info():
+    user_id = session.get("user_id")
+    user = db.session.get(Users, user_id)
+    if user:
+        email = request.form.get("email")
+        f_name = request.form.get("f_name")
+        l_name = request.form.get("l_name")
+        
+        address = request.form.get("address")
+
+        city = request.form.get("city")
+        postal_code = request.form.get("postal_code")
+        phone = request.form.get("phone")
+
+        user.email = email
+        user.f_name = f_name
+        user.l_name = l_name
+        user.address = address
+        user.city = city
+        user.postal_code = postal_code
+        user.phone = phone
+        db.session.commit()
+        flash("User Information has been updated!", "primary")
+        return redirect("/user")
+    flash("User not found!", "danger")
+    return redirect("/user/logout")
 
 
 @user.route("/login", methods=["GET", "POST"])

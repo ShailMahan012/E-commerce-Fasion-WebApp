@@ -1,5 +1,46 @@
-{% extends "layout.html" %} {% block head %}
+{% extends "layout_user.html" %} {% block head %}
 <link rel="stylesheet" href="/static/css/home.css" />
+<link rel="stylesheet" href="/static/css/login.css">
+<link rel="stylesheet" href="/static/css/msg.css">
 {% endblock %} {% block main %}
-yo! user
+<main class="main" style="margin-top: 10%;">
+    <div id="msg_div" class="alert" role="alert"></div>
+
+    <form action="/user/update_info" method="POST">
+        <div class="row">
+            <div class="column">
+                <h2 class="title">Update Information</h2>
+            </div>
+        </div>
+        <div class="row input-row">
+            <div class="column"><input type="text" name="f_name" placeholder="First Name" value="{{user.f_name}}" class="form-field" required></div>
+            <div class="column"><input type="text" name="l_name" placeholder="Last Name" value="{{user.l_name}}" class="form-field"> </div>
+        </div>
+        <div class="row input-row">
+            <div class="column"><input type="email" name="email" placeholder="Email Address" value="{{user.email}}" class="form-field" required></div>
+        </div>
+        <div class="row input-row">
+            <div class="column"><input type="text" name="address" placeholder="Full Address" value="{{user.address}}" class="form-field" required></div>
+        </div>
+        <div class="row input-row">
+            <div class="column"><input type="text" name="city" placeholder="City" value="{{user.city}}" class="form-field" required>
+            </div>
+            <div class="column"><input type="text" name="postal_code" placeholder="Postal Code" value="{{user.postal_code}}" class="form-field" required></div>
+        </div>
+        <div class="row input-row">
+            <div class="column"><input type="text" name="phone" placeholder="Phone" value="{{user.phone}}" class="form-field" required></div>
+        </div>
+        <button type="submit" class="form-field">UPDATE</button>
+    </form>
+</main>
+<script src="/static/js/main.js"></script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <script>
+        msg("{{message}}", "{{category}}")
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 {% endblock %}
