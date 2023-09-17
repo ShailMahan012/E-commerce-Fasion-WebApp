@@ -1,11 +1,12 @@
 from project import app, db
-from project.models import Products, Images, Orders, Cart, Sub_Emails
+from project.models import Products, Images, Orders, Cart, Sub_Emails, Users
 from project.paypal import create_order, capture_payment
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
-from flask import render_template, request, session, redirect, send_file, json, Markup
+from flask import render_template, request, session, redirect, send_file, json, Markup, flash
 from werkzeug.utils import secure_filename
 from functools import wraps
+from base64 import b64encode
 
 db.create_all()
 
@@ -20,8 +21,9 @@ CURRENCY = paypal["CURRENCY"]
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("id") is None:
-            return redirect("/login")
+        if session.get("user_id") is None:
+            flash("Please login to continue!", "primary")
+            return redirect(f"/user/login?redirect={b64encode(request.path.encode()).decode()}")
         return f(*args, **kwargs)
     return decorated_function
 
@@ -101,6 +103,7 @@ def cart():
 
 
 @app.route("/checkout", methods=["GET", "POST"])
+@login_required
 def checkout():
     if request.method == "POST":
         email = request.form.get("email")
@@ -122,7 +125,7 @@ def checkout():
             for prd in products:
                 ID = prd.get("id")
                 quantity = prd.get("quantity")
-                product = Products.query.get(ID) 
+                product = Products.query.get(ID)
                 if product and quantity:
                     item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price)
                     db.session.add(item)
@@ -131,7 +134,10 @@ def checkout():
             return "True"
 
         return "False"
-    return render_template("checkout.html", TITLE="CHECKOUT HERE", client_id=CLIENT_ID, currency=CURRENCY)
+
+    user_id = session.get("user_id")
+    user = db.session.get(Users, user_id)
+    return render_template("checkout.html", TITLE="CHECKOUT HERE", client_id=CLIENT_ID, currency=CURRENCY, user=user)
 
 
 @app.route("/create-paypal-order", methods=["POST"])

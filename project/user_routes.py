@@ -62,7 +62,7 @@ def login():
     if request.method == "POST":
         redirect_path = request.args.get("redirect")
         if not redirect_path:
-            redirect_path = "/admin"
+            redirect_path = "/user"
         else:
             redirect_path = b64decode(redirect_path).decode()
         email = request.form.get("email")
@@ -70,7 +70,7 @@ def login():
         user = Users.query.filter_by(email=email).first()
         if user and user.verify(password):
             session["user_id"] = user.id
-            return redirect("/user")
+            return redirect(redirect_path)
         flash("Incorrect Information!", "danger")
     return render_template("login_user.html", PAGE="LOGIN")
 
@@ -103,4 +103,4 @@ def signup():
 @user.route("/logout")
 def logout():
     session.pop("user_id")
-    return redirect("/")
+    return redirect("/user/login")

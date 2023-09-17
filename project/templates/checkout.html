@@ -10,21 +10,21 @@
 </div>
 <div id="form">
     <div class="row input-row">
-        <div class="column"><input type="text" name="f_name" id="f_name" placeholder="First Name" value="" required></div>
-        <div class="column"><input type="text" name="l_name" id="l_name" placeholder="Last Name" value=""></div>
+        <div class="column"><input type="text" name="f_name" id="f_name" placeholder="First Name" value="{{user.f_name}}" required></div>
+        <div class="column"><input type="text" name="l_name" id="l_name" placeholder="Last Name" value="{{user.l_name}}"></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input type="email" name="email" id="email" placeholder="Email Address" value="" required></div>
+        <div class="column"><input type="email" name="email" id="email" placeholder="Email Address" value="{{user.email}}" required></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input type="text" name="address" id="address" placeholder="Full Address" value="" required></div>
+        <div class="column"><input type="text" name="address" id="address" placeholder="Full Address" value="{{user.address}}" required></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input type="text" name="city" id="city" placeholder="City" value="" required></div>
-        <div class="column"><input type="text" name="postal_code" id="postal_code" placeholder="Postal Code" value="" required></div>
+        <div class="column"><input type="text" name="city" id="city" placeholder="City" value="{{user.city}}" required></div>
+        <div class="column"><input type="text" name="postal_code" id="postal_code" placeholder="Postal Code" value="{{user.postal_code}}" required></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input type="text" name="phone" id="phone" placeholder="Phone" value="" required></div>
+        <div class="column"><input type="text" name="phone" id="phone" placeholder="Phone" value="{{user.phone}}" required></div>
     </div>
     <div class="row" style="margin: 8px 3px;">
         <div class="column">
