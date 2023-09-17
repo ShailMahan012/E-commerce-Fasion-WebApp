@@ -5,6 +5,7 @@ const address = get('address')
 const city = get('city')
 const postal_code = get('postal_code')
 const phone = get('phone')
+const note = get('note')
 const CHECKOUT_URL = "/checkout"
 
 const paypal_container = get("paypal-button-container")
@@ -16,7 +17,8 @@ const inputs = {
     address: address,
     city: city,
     postal_code: postal_code,
-    phone: phone
+    phone: phone,
+    note: note
 }
 
 function checkout() {

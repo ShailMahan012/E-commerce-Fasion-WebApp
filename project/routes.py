@@ -115,11 +115,14 @@ def checkout():
         city = request.form.get("city")
         postal_code = request.form.get("postal_code")
         phone = request.form.get("phone")
+        note = request.form.get("note")
+        if not note:
+            note = None
 
         products = json.loads(request.form.get("products"))
 
         if products:
-            order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone)
+            order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
             db.session.add(order)
 
             for prd in products:

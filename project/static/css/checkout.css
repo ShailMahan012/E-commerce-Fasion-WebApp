@@ -3,7 +3,7 @@ main {
 }
 
 
-#form input {
+.form-input {
     padding: 15px;
     border: 1px solid rgb(214, 214, 214);
     border-radius: 5px;
@@ -12,7 +12,7 @@ main {
     transition-duration: 400ms;
 }
 
-#form input:focus {
+.form-input:focus {
     border-color:rgb(111, 111, 111);
 }
 
@@ -65,5 +65,8 @@ a {
     }
     #paypal-button {
         width: initial;
+    }
+    .btn-black {
+        width: 100%;
     }
 }
