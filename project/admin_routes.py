@@ -257,6 +257,12 @@ def mark_order(ID, page):
     return redirect(f"/admin/orders/{page}")
 
 
+@admin.route("/main_collection_home")
+@login_required
+def main_collection_home():
+    return render_template("main_collection_home.html")
+
+
 @admin.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":

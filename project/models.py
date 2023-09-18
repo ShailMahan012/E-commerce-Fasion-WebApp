@@ -16,6 +16,11 @@ class Products(db.Model):
     def __str__(self):
         return f"{self.title}, {self.price}, {self.core_collection}"
 
+class Main_Collection_Home(db.Model):
+    __tablename__ = "Main_Collection_Home"
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, nullable=False)
+
 class Images(db.Model):
     __tablename__ = 'Images'
     id = db.Column(db.Integer, primary_key=True)
