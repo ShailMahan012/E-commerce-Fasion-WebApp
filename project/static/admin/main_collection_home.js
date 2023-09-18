@@ -35,7 +35,7 @@ function prd_select(id) {
 
 
 function prd_del(prd_id) {
-    product_ids.pop(prd_id)
+    product_ids.splice(product_ids.indexOf(prd_id), 1)
     let prd = get("prd_" + prd_id)
     prd.remove()
 }
