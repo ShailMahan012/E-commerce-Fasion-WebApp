@@ -1,35 +1,41 @@
 const prd_search_input = get("prd_search_input")
+const main_collection = get("main_collection")
 const popup = get("popup")
 const overlay = get("overlay")
 const search_div = get("search_div")
 
 var product_ids = []
-
-// show images in img tag and also set value of input to image ID(IN DATABASE)
-// function prd_select(id, filename) {
-//     let src = `/static/product_images/${filename}`
-//     let img_input = images_ids[img_id]
-//     img_input.value = id
-//     images[img_id].src = src
-//     hide_popup()
-// }
+var search_results = {}
 
 
-// function prd_del(img_id) {
-//     let img_input = images_ids[img_id]
-//     let image = images[img_id]
+function prd_select(id) {
+    let product = search_results[id]
+    product_ids.push(id)
+    let row = `
+    <tr id="prd_${id}">
+        <td>
+            <img src="/static/product_images/${product.image}" alt="img" class="img">
+        </td>
+        <td>${product.title}</td>
+        <td><button class="btn btn-del" onclick="prd_del(${id})">REMOVE</button></td>
+    </tr>`
+    main_collection.innerHTML += row
+    hide_popup()
+}
 
-//     img_input.value = null
-//     if (!image.src.endsWith("#")) image.src = "#"
-// }
+
+function prd_del(prd_id) {
+    product_ids.pop(prd_id)
+    let prd = get("prd_" + prd_id)
+    prd.remove()
+}
 
 
-function create_row(prd_data) {
-    let id = prd_data.id
+function create_row(id, prd_data) {
     let title = prd_data.title
     let image = prd_data.image
     let row = `
-        <div class="search_row" onclick="prd_select(${id}}')">
+        <div class="search_row" onclick="prd_select(${id})">
             <img src="/static/product_images/${image}" alt="img" class="img">
             <span class="img-title">${title}</span>
         </div>`
@@ -42,10 +48,12 @@ function show_prd() {
     search_div.innerHTML = ''
     if (search) {
         fetch_prd(search).then(result=> {
+            search_results = result
+            console.log(search_results)
             let prd_ids = Object.keys(result)
             if (prd_ids.length > 0) {
                 for (let id in result) {
-                    let row = create_row(result[id])
+                    let row = create_row(id, result[id])
                     search_div.innerHTML += row
                 }
             }

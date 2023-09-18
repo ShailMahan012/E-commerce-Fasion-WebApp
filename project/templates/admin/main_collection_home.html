@@ -2,14 +2,17 @@
 <link rel="stylesheet" href="/static/admin/form.css">
 <link rel="stylesheet" href="/static/css/overlay.css">
 <link rel="stylesheet" href="/static/admin/popup.css">
+<style>
+    table td {
+        text-align: left;
+    }
+</style>
 {% endblock %} {% block main %}
 <h2>Update Home Main Collection</h2>
-<form action="" method="POST">
-<table>
-    <tr><td><button type="button" class="btn btn-add" onclick="show_popup()">Search Products</button></td></tr>
-    <tr><td><button type="button" class="btn" id="save">SAVE</button></td></tr>
+<table id="main_collection">
+    <tr><td colspan="3"><button type="button" class="btn btn-add" onclick="show_popup()">Search Products</button></td></tr>
 </table>
-</form>
+    <button type="button" class="btn" id="save">SAVE</button>
 
 <div id="popup" class="popup">
     <h2>Select Product</h2>
