@@ -13,7 +13,16 @@
 <h2>Update Home Main Collection</h2>
 <table id="main_collection">
     <tr><td colspan="3"><button type="button" class="btn btn-add" onclick="show_popup()">Search Products</button></td></tr>
-    {% for p in main_collection %}
+    {% for i in range(main_collection|length) %}
+    <tr id="prd_{{main_collection[i]['id']}}">
+        <td>
+            <img src="/static/product_images/{{images[i][0]}}" alt="img" class="img">
+        </td>
+        <td>
+            {{main_collection[i]["title"]}}
+        </td>
+        <td><button class="btn btn-del" onclick="prd_del({{main_collection[i]['id']}})">REMOVE</button></td>
+    </tr>
     {% endfor %}
 </table>
     <button type="button" class="btn" id="save" onclick="save_collection()">SAVE</button>

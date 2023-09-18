@@ -274,7 +274,9 @@ def main_collection_home():
     for i in product_ids:
         product = db.session.get(Products, i)
         main_collection.append(product)
-    return render_template("main_collection_home.html", main_collection=main_collection, product_ids=product_ids)
+    images = get_images(main_collection)
+    main_collection = get_product_dict(main_collection)
+    return render_template("main_collection_home.html", main_collection=main_collection, product_ids=product_ids, images=images)
 
 
 @admin.route("/fetch/products", methods=["POST"])
