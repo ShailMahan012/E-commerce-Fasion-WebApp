@@ -263,6 +263,18 @@ def main_collection_home():
     return render_template("main_collection_home.html")
 
 
+@admin.route("/fetch/products", methods=["POST"])
+@login_required
+def fetch_products():
+    search = request.form.get("search")
+    products = Products.query.filter(Products.title.like(f"%{search}%")).all() # Products.core_collection=True
+    products_dict = get_product_dict_id(products)
+    for prd in products:
+        image = get_images([prd])[0]
+        products_dict[prd.id]["image"] = image[0]
+    return json.jsonify(products_dict)
+
+
 @admin.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":

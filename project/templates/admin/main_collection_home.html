@@ -1,87 +1,22 @@
 {% extends "admin/layout.html" %} {% block head %}
 <link rel="stylesheet" href="/static/admin/form.css">
-<link rel="stylesheet" href="/static/admin/popup.css">
 <link rel="stylesheet" href="/static/css/overlay.css">
+<link rel="stylesheet" href="/static/admin/popup.css">
 {% endblock %} {% block main %}
 <h2>Update Home Main Collection</h2>
 <form action="" method="POST">
 <table>
-    <tr><td colspan="4">
-        <select name="category">
-            <option value="men">MEN</option>
-            <option value="women">WOMEN</option>
-            <option value="kids">KIDS</option>
-        </select>
-    </td></tr>
-    <tr><td colspan="4"><input type="number" name="price" id="" placeholder="Price" min="0" value="1"></td></tr>
-    <tr><td colspan="4"><textarea name="details">Details</textarea></td></tr>
-    <tr style="border: 0 1px solid black 0 1 px solid black;">
-        <td>
-            <div class="img_div">
-                <img src="#" alt=" " class="img"/>
-            </div>
-        </td>
-        <td>
-            <div class="img_div">
-                <img src="#" alt=" " class="img"/>
-            </div>
-        </td>
-        <td>
-            <div class="img_div">
-                <img src="#" alt=" " class="img"/>
-            </div>
-        </td>
-        <td>
-            <div class="img_div">
-                <img src="#" alt=" " class="img" />
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="number" class="img_id" name="img_id0">
-            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(0)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="img_del(0)"><i class="fa-regular fa-trash"></i></button>
-        </td>
-        <td>
-            <input type="number" class="img_id" name="img_id1">
-            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(1)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="img_del(1)"><i class="fa-regular fa-trash"></i></button>
-        </td>
-        <td>
-            <input type="number" class="img_id" name="img_id2">
-            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(2)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="img_del(2)"><i class="fa-regular fa-trash"></i></button>
-        </td>
-        <td>
-            <input type="number" class="img_id" name="img_id3">
-            <button type="button" class="btn btn-icon btn-add" onclick="show_popup(3)"><i class="fal fa-upload"></i></button>
-            <button type="button" class="btn btn-icon btn-del" onclick="img_del(3)"><i class="fa-regular fa-trash"></i></button>
-        </td>
-    </tr>
-    <tr>
-        <td><label>Primary: <input type="radio" name="primary" value="0"></label></td>
-        <td><label>Primary: <input type="radio" name="primary" value="1"></label></td>
-        <td><label>Primary: <input type="radio" name="primary" value="2"></label></td>
-        <td><label>Primary: <input type="radio" name="primary" value="3"></label></td>
-    </tr>
-    <tr>
-        <td><label>Secondary: <input type="radio" name="secondary" value="0"></label></td>
-        <td><label>Secondary: <input type="radio" name="secondary" value="1"></label></td>
-        <td><label>Secondary: <input type="radio" name="secondary" value="2"></label></td>
-        <td><label>Secondary: <input type="radio" name="secondary" value="3"></label></td>
-    </tr>
-    <tr><td colspan="4"><label>Core Collection <input type="checkbox" name="core_collection"></label></td></tr>
-    <tr><td colspan="4"><button type="submit" class="btn" id="save">SAVE</button></td></tr>
+    <tr><td><button type="button" class="btn btn-add" onclick="show_popup()">Search Products</button></td></tr>
+    <tr><td><button type="button" class="btn" id="save">SAVE</button></td></tr>
 </table>
 </form>
 
 <div id="popup" class="popup">
     <h2>Select Product</h2>
-    <input type="text" id="img_search_input" placeholder="SEARCH">
+    <input type="text" id="prd_search_input" class="search_input" placeholder="SEARCH">
     <div id="search_div">
     </div>
-    <button class="btn btn-search" onclick="show_images()">SEARCH</button>
+    <button class="btn btn-search" onclick="show_prd()">SEARCH</button>
     <button class="btn btn-cancel" onclick="hide_popup()">CANCEL</button>
 </div>
 

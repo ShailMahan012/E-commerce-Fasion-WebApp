@@ -17,9 +17,9 @@
     overflow-y: scroll;
 }
 
-#img_search_input {
+.search_input {
     margin-bottom: 10px;
-    border: none;
+    border: none !important;
     padding: 10px;
 }
 
