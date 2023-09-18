@@ -38,7 +38,7 @@ def get_products(page=1):
     images = get_images(products.items)
     images = [i[0] for i in images]
 
-    return render_template("products.html", TITLE="ADMIN", products=products, images=images)
+    return render_template("products.html", TITLE="All Products", products=products, images=images)
 
 
 def set_images(product_id, form, primary, secondary):
@@ -87,7 +87,7 @@ def new_product():
 
         set_images(product.id, request.form, int(primary), int(secondary))
 
-    return render_template("new_product.html", time=time)
+    return render_template("new_product.html", TITLE="New Product", time=time)
 
 
 @admin.route("/delete/product/<int:ID>")
@@ -131,7 +131,7 @@ def update_product(ID):
 
     images = Images.query.filter_by(product_id=ID)
     images = get_images_dict(images)
-    return render_template("update_product.html", product=product, images=images)
+    return render_template("update_product.html", TITLE="Update Product", product=product, images=images)
 
 
 @admin.route("/images")
@@ -139,7 +139,7 @@ def update_product(ID):
 @login_required
 def images(page=1):
     images = Images.query.paginate(page=page, per_page=PER_PAGE)
-    return render_template("images.html", images=images)
+    return render_template("images.html", TITLE="All Images", images=images)
 
 
 @admin.route("/delete/image/<int:ID>")
@@ -174,7 +174,7 @@ def new_image():
                 db.session.add(image)
         db.session.commit()
 
-    return render_template("new_image.html", time=time)
+    return render_template("new_image.html", TITLE="New Image", time=time)
 
 
 @admin.route("/fetch/images", methods=["POST"])
@@ -276,7 +276,7 @@ def main_collection_home():
         main_collection.append(product)
     images = get_images(main_collection)
     main_collection = get_product_dict(main_collection)
-    return render_template("main_collection_home.html", main_collection=main_collection, product_ids=product_ids, images=images)
+    return render_template("main_collection_home.html", TITLE="Main Collection", main_collection=main_collection, product_ids=product_ids, images=images)
 
 
 @admin.route("/fetch/products", methods=["POST"])
