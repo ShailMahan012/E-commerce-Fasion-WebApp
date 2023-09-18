@@ -4,8 +4,18 @@ const popup = get("popup")
 const overlay = get("overlay")
 const search_div = get("search_div")
 
-var product_ids = []
 var search_results = {}
+
+
+function save_collection() {
+    fetch("/admin/main_collection_home", {
+        "method": "POST",
+        "headers": {"Content-Type": "application/json"},
+        "body": JSON.stringify(product_ids),
+    }).then(result=> {
+        msg("Data has been saved!", "primary")
+    })
+}
 
 
 function prd_select(id) {
@@ -49,7 +59,6 @@ function show_prd() {
     if (search) {
         fetch_prd(search).then(result=> {
             search_results = result
-            console.log(search_results)
             let prd_ids = Object.keys(result)
             if (prd_ids.length > 0) {
                 for (let id in result) {

@@ -1,6 +1,6 @@
 # Routes for admin
 from project import app, admin, db
-from project.models import Products, Images, Orders, Cart, Admin
+from project.models import Products, Images, Orders, Cart, Admin, Main_Collection_Home
 from project.get_dict import *
 from flask import render_template, request, session, redirect, json, flash
 from werkzeug.utils import secure_filename
@@ -257,10 +257,24 @@ def mark_order(ID, page):
     return redirect(f"/admin/orders/{page}")
 
 
-@admin.route("/main_collection_home")
+@admin.route("/main_collection_home", methods=["GET", "POST"])
 @login_required
 def main_collection_home():
-    return render_template("main_collection_home.html")
+    if request.method == "POST":
+        product_ids = request.get_json()
+        for i in Main_Collection_Home.query.all():
+            db.session.delete(i)
+        for i in product_ids:
+            product = Main_Collection_Home(product_id=i)
+            db.session.add(product)
+        db.session.commit()
+        return "True"
+    main_collection = []
+    product_ids = list(map(lambda prd: prd.product_id, Main_Collection_Home.query.all()))
+    for i in product_ids:
+        product = db.session.get(Products, i)
+        main_collection.append(product)
+    return render_template("main_collection_home.html", main_collection=main_collection, product_ids=product_ids)
 
 
 @admin.route("/fetch/products", methods=["POST"])
