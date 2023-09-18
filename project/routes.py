@@ -1,5 +1,5 @@
 from project import app, db
-from project.models import Products, Images, Orders, Cart, Sub_Emails, Users
+from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home
 from project.paypal import create_order, capture_payment
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
@@ -30,9 +30,14 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    core_collection = Products.query.filter_by(core_collection=True).limit(8)
-    images = get_images(core_collection)
-    return render_template("home.html", TITLE=TITLE, core_collection=core_collection, images=images)
+    main_collection = []
+    product_ids = list(map(lambda prd: prd.product_id, Main_Collection_Home.query.all())) # get only product_ids from table
+    for i in product_ids:
+        product = db.session.get(Products, i)
+        main_collection.append(product)
+    images = get_images(main_collection)
+    main_collection = get_product_dict(main_collection)
+    return render_template("home.html", TITLE=TITLE, main_collection=main_collection, images=images)
 
 
 @app.route("/items")

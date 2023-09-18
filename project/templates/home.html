@@ -37,8 +37,8 @@
 </div>
 
 <div class="row" id="featured_items">
-{#% for i in range(core_collection.count()) %}
-  <div class="card" onclick="go('/product/{{core_collection[i].id}}')">
+{% for i in range(main_collection|length) %}
+  <div class="card" onclick="go('/product/{{main_collection[i]['id']}}')">
       <div class="flip-card">
           <div class="flip-card-inner">
               <div class="flip-card-front">
@@ -50,14 +50,14 @@
           </div>
       </div>
       <div class="card-container" style="text-align: center;">
-          <p class="card-title">{{core_collection[i].title}}</p>
-          <p class="card-price">${{core_collection[i].price}} CAD</p>
+          <p class="card-title">{{main_collection[i]['title']}}</p>
+          <p class="card-price">${{main_collection[i]['price']}} CAD</p>
       </div>
   </div>
-{% endfor %#}
-{% for i in range(8) %}
-  {% include 'card.html' %}
 {% endfor %}
+{#% for i in range(8) %}
+  {% include 'card.html' %}
+{% endfor %#}
 </div>
 <div class="row" style="background-color: white;margin-bottom: 10px;">
   <div class="column clm-center">
