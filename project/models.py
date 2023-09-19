@@ -108,3 +108,14 @@ class Users(db.Model):
 
     def __str__(self):
         return f"EMAIL: {self.email} HASH: {self.password_hash}"
+
+class Coupons(db.Model):
+    __tablename__ = "Coupons"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text, nullable=False)
+    name = db.Column(db.Text, nullable=False) # On which thing? PurchaseAmount or FirstOrder
+    type = db.Column(db.Text, nullable=False) # % or number of items
+    amount = db.Column(db.Integer, nullable=False) # Could be % or number of items
+    usage_limit = db.Column(db.Integer, default=None) # Limit per user
+    min_amount = db.Column(db.Integer, default=None) # Minnimum amount to use this Coupon
+    max_amount = db.Column(db.Integer, default=None) # Maximum amount to use this Coupon
