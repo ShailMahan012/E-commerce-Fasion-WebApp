@@ -1,0 +1,60 @@
+{% extends "admin/layout.html" %} {% block head %}
+<link rel="stylesheet" href="/static/admin/form.css">
+{% endblock %} {% block main %}
+<form action="" method="POST">
+    <table>
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Usage Limit</th>
+                <th>Minimum Amount</th>
+                <th>Maximum Amount</th>
+                <th>Status</th>
+            </tr>
+            {% for i in range(2) %} <!-- Only two coupons. Use coupon|length for all coupons -->
+            <tr>
+                <td><input type="text" name="title_{{i}}" placeholder="Title" value="{{coupons[i].title}}"></td>
+                <td><select name="name_{{i}}" autocomplete="off">
+                    <option value="FirstOrder"
+                    {% if coupons[i].name == "FirstOrder" %} selected {% endif %}
+                    >First Order</option>
+                    <option value="Amount"
+                    {% if coupons[i].name == "Amount" %} selected {% endif %}
+                    >Amount</option>
+                </select></td>
+                <td><select name="type_{{i}}" autocomplete="off">
+                    <option value="percentage"
+                    {% if coupons[i].type == "percentage" %} selected {% endif %}
+                    >Percentage</option>
+                    <option value="cash"
+                    {% if coupons[i].type == "cash" %} selected {% endif %}
+                    >Cash</option>
+                </select></td>
+                <td><input type="number" name="amount_{{i}}" placeholder="Discount Amount" value="{{coupons[i].amount}}"></td>
+                <td><input type="number" name="usage_limit_{{i}}" placeholder="Coupon Limit" value="{{coupons[i].usage_limit}}"></td>
+                <td><input type="number" name="min_amount_{{i}}" placeholder="Minimum Requirement" value="{{coupons[i].min_amount}}"></td>
+                <td><input type="number" name="max_amount_{{i}}" placeholder="Maximum Requirement" value="{{coupons[i].max_amount}}"></td>
+                <td>
+                    <select name="status_{{i}}" autocomplete="off">
+                        <option value="1"
+                            {% if coupons[i].status == True %} selected {% endif %}
+                        >True</option>
+                        <option value="0"
+                            {% if coupons[i].status == False %} selected {% endif %}
+                        >False</option>
+                    </select>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="100%">
+                    <input type="submit" class="btn btn-add" value="Filter">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+{% endblock %}

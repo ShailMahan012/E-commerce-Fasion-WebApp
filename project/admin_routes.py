@@ -1,6 +1,6 @@
 # Routes for admin
 from project import app, admin, db
-from project.models import Products, Images, Orders, Cart, Admin, Main_Collection_Home
+from project.models import Products, Images, Orders, Cart, Admin, Main_Collection_Home, Coupons
 from project.get_dict import *
 from flask import render_template, request, session, redirect, json, flash
 from werkzeug.utils import secure_filename
@@ -289,6 +289,13 @@ def fetch_products():
         image = get_images([prd])[0]
         products_dict[prd.id]["image"] = image[0]
     return json.jsonify(products_dict)
+
+
+@admin.route("/coupons")
+@login_required
+def manage_coupons():
+    coupons = Coupons.query.all()
+    return render_template("coupons.html", TITLE="Coupons", coupons=coupons)
 
 
 @admin.route("/login", methods=["GET", "POST"])
