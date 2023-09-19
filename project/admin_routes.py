@@ -291,9 +291,26 @@ def fetch_products():
     return json.jsonify(products_dict)
 
 
-@admin.route("/coupons")
+@admin.route("/coupons", methods=["GET", "POST"])
 @login_required
 def manage_coupons():
+    if request.method == "POST":
+        coupons = Coupons.query.all()
+        for i in range(2): # Only first two coupons
+            coupons[i].title = request.form["title_" + str(i)]
+            coupons[i].name = request.form["name_" + str(i)]
+            coupons[i].type = request.form["type_" + str(i)]
+            coupons[i].amount = request.form["amount_" + str(i)]
+            coupons[i].usage_limit = request.form["usage_limit_" + str(i)]
+            coupons[i].min_amount = request.form["min_amount_" + str(i)]
+            coupons[i].max_amount = request.form["max_amount_" + str(i)]
+            status = request.form["status_" + str(i)]
+            if status == "1":
+                status = True
+            elif status == "0":
+                status = False
+            coupons[i].status = status
+        db.session.commit()
     coupons = Coupons.query.all()
     return render_template("coupons.html", TITLE="Coupons", coupons=coupons)
 
