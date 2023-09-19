@@ -119,3 +119,4 @@ class Coupons(db.Model):
     usage_limit = db.Column(db.Integer, default=None) # Limit per user
     min_amount = db.Column(db.Integer, default=None) # Minnimum amount to use this Coupon
     max_amount = db.Column(db.Integer, default=None) # Maximum amount to use this Coupon
+    status = db.Column(db.Boolean, default=True)
