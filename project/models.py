@@ -35,6 +35,7 @@ class Orders(db.Model):
     __tablename__ = 'Orders'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
 
     f_name = db.Column(db.Text, nullable=False)
     l_name = db.Column(db.Text, nullable=True)

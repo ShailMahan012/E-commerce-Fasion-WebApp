@@ -111,6 +111,7 @@ def cart():
 @login_required
 def checkout():
     if request.method == "POST":
+        user_id = session.get("user_id")
         email = request.form.get("email")
         f_name = request.form.get("f_name")
         l_name = request.form.get("l_name")
@@ -127,7 +128,7 @@ def checkout():
         products = json.loads(request.form.get("products"))
 
         if products:
-            order = Orders(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
+            order = Orders(email=email, user_id=user_id, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
             db.session.add(order)
 
             for prd in products:
