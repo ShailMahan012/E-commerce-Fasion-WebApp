@@ -115,7 +115,7 @@ class Coupons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text, nullable=False)
     name = db.Column(db.Text, nullable=False) # On which thing? PurchaseAmount or FirstOrder
-    type = db.Column(db.Text, nullable=False) # % or cash
+    type = db.Column(db.Text, default=None) # % or cash
     amount = db.Column(db.Integer, nullable=False) # % or cash
     usage_limit = db.Column(db.Integer, default=None) # Limit per user
     min_amount = db.Column(db.Integer, default=None) # Minnimum amount to use this Coupon
