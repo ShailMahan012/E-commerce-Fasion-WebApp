@@ -10,8 +10,8 @@
                 <!-- <th>Type</th> -->
                 <th>Amount</th>
                 <!-- <th>Usage Limit</th> -->
-                <th>Minimum Amount</th>
-                <th>Maximum Amount</th>
+                <th>Minimum Amount of purchase</th>
+                <!-- <th>Maximum Amount</th> -->
                 <th>Status</th>
             </tr>
         </thead>
@@ -45,9 +45,9 @@
                 <!-- <td><input type="number" name="usage_limit_{{i}}" placeholder="Coupon Limit" value="{{coupons[i].usage_limit}}"></td> -->
                 {% if coupons[i].name == "OneProductAmount" %}
                 <td><input type="number" name="min_amount_{{i}}" placeholder="Minimum Requirement" value="{{coupons[i].min_amount}}"></td>
-                <td><input type="number" name="max_amount_{{i}}" placeholder="Maximum Requirement" value="{{coupons[i].max_amount}}"></td>
+                <!-- <td><input type="number" name="max_amount_{{i}}" placeholder="Maximum Requirement" value="{{coupons[i].max_amount}}"></td> -->
                 {% else %}
-                <td></td><td></td>
+                <td></td>
                 {% endif %}
                 <td>
                     <select name="status_{{i}}" autocomplete="off">
