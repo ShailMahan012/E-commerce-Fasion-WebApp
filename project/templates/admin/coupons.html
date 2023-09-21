@@ -19,14 +19,18 @@
             {% for i in range(2) %} <!-- Only two coupons. Use coupon|length for all coupons -->
             <tr>
                 <td><input type="text" name="title_{{i}}" placeholder="Title" value="{{coupons[i].title}}"></td>
-                <td><select name="name_{{i}}" autocomplete="off">
+                <td><input name="name_{{i}}" value="{{coupons[i].name}}" disabled="">
+                    {#
+                    <select name="name_{{i}}" autocomplete="off">
                     <option value="FirstOrder"
                     {% if coupons[i].name == "FirstOrder" %} selected {% endif %}
                     >First Order</option>
                     <option value="OneProductAmount"
                     {% if coupons[i].name == "OneProductAmount" %} selected {% endif %}
                     >OneProductAmount</option>
-                </select></td>
+                    </select>
+                    #}
+                </td>
                 {#
                 <td><select name="type_{{i}}" autocomplete="off">
                     <option value="percentage"
@@ -39,8 +43,12 @@
                 #}
                 <td><input type="number" name="amount_{{i}}" placeholder="Discount Amount" value="{{coupons[i].amount}}"></td>
                 <!-- <td><input type="number" name="usage_limit_{{i}}" placeholder="Coupon Limit" value="{{coupons[i].usage_limit}}"></td> -->
+                {% if coupons[i].name == "OneProductAmount" %}
                 <td><input type="number" name="min_amount_{{i}}" placeholder="Minimum Requirement" value="{{coupons[i].min_amount}}"></td>
                 <td><input type="number" name="max_amount_{{i}}" placeholder="Maximum Requirement" value="{{coupons[i].max_amount}}"></td>
+                {% else %}
+                <td></td><td></td>
+                {% endif %}
                 <td>
                     <select name="status_{{i}}" autocomplete="off">
                         <option value="1"
