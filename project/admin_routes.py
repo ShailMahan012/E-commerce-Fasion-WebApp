@@ -301,7 +301,7 @@ def manage_coupons():
             coupons[i].name = request.form["name_" + str(i)]
             coupons[i].type = request.form["type_" + str(i)]
             coupons[i].amount = request.form["amount_" + str(i)]
-            coupons[i].usage_limit = request.form["usage_limit_" + str(i)]
+            # coupons[i].usage_limit = request.form["usage_limit_" + str(i)]
             coupons[i].min_amount = request.form["min_amount_" + str(i)]
             coupons[i].max_amount = request.form["max_amount_" + str(i)]
             status = request.form["status_" + str(i)]
