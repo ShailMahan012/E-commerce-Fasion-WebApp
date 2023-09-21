@@ -1,6 +1,6 @@
 import base64
-from project.models import Products
-from flask import jsonify
+from project.models import Products, Orders, Coupons
+from flask import jsonify, session
 from project import app
 import requests
 
@@ -41,16 +41,7 @@ def capture_payment(order_id):
 
 
 def gen_order_json(products):
-    if products:
-        total_price = 0
-        for prd in products:
-            ID = prd.get("id")
-            quantity = prd.get("quantity")
-            product = Products.query.get(ID)
-            if product and quantity:
-                price = product.price * quantity
-                total_price += price
-
+    total_price = get_total_price(products)
     paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}]}
 
     return paypal_json
@@ -74,3 +65,31 @@ def generate_access_token():
     access_token = json_data.get("access_token")
 
     return access_token
+
+
+def get_total_price(products):
+    user_id = session.get("user_id")
+    first_order = Orders.query.filter_by(user_id=user_id).first()
+
+    total_price = 0
+    if products:
+        for prd in products:
+            ID = prd.get("id")
+            quantity = prd.get("quantity")
+            product = Products.query.get(ID)
+            if product and quantity:
+                coupon = Coupons.query.filter_by(name="OneProductAmount", status=True).first() # only one coupon
+                discount = True
+                if coupon:
+                    if coupon.min_amount:
+                        if product.price < coupon.min_amount:
+                            discount = False
+                if coupon and discount:
+                    price = product.price * (100-coupon.amount) * quantity / 100 # giving discount of coupon.amount percent
+                else:
+                    price = product.price * quantity
+                total_price += price
+    coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
+    if coupon:
+        total_price = total_price * (100-coupon.amount) / 100
+    return total_price
