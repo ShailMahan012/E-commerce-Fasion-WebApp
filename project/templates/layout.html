@@ -23,7 +23,7 @@
 
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/get_element.js"></script>
-    <script src="/static/js/main.js"></script>
+    <script src="/static/js/cart_indicator.js"></script>
     <title>{{TITLE}}</title>
     {% block head %}
     {% endblock %}
@@ -85,7 +85,7 @@
             <ul class="nav-right">
                 <li class="nav-item" onclick="show_search()"><a class="nav-link" href="#search">search</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart"><i class="fa-regular fa-bag-shopping fa-lg"></i><span id="cart-indicator"></span></a>
+                    <a class="nav-link" href="/cart"><i class="fa-regular fa-bag-shopping fa-lg"></i><span id="cart-indicator">0</span></a>
                 </li>
                 <li class="nav-item">
                     <a href="/user" class="nav-link"><i class="fa-regular fa-user fa-lg"></i></a>
