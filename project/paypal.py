@@ -25,14 +25,13 @@ def capture_payment(order_id):
 
 
 def paypal_order_details(order_id):
-    response = paypal_request(f"/v2/checkout/orders/{order_id}")
+    response = paypal_request(f"/v2/checkout/orders/{order_id}", request_method="GET")
     data = response.json()
-    print(data)
+    return data, response.status_code
 
 
 def gen_paypal_json(products):
     products, total_price = gen_order_json(products)
-    print(products)
     paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], 'application_context': {"products": products}}
 
     return paypal_json
@@ -58,15 +57,18 @@ def generate_access_token():
     return access_token
 
 
-def paypal_request(url, json_data=None):
+def paypal_request(url, json_data=None, request_method="POST"):
     url = BASE_URL + url
     access_token = generate_access_token()
     headers = {
-        "Content-Type": "application/json",
         "Authorization": f"Bearer {access_token}",
     }
-    
     if json_data:
+        headers["Content-Type"] = "application/json"
+    
+    if request_method =="GET":
+        response = requests.get(url, headers=headers)
+    elif json_data:
         response = requests.post(url, headers=headers, json=json_data)
     else:
         response = requests.post(url, headers=headers)

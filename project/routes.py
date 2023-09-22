@@ -1,6 +1,6 @@
 from project import app, db
 from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home
-from project.paypal import create_order, capture_payment
+from project.paypal import create_order, capture_payment, paypal_order_details
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
 from flask import render_template, request, session, redirect, send_file, json, Markup, flash
@@ -153,7 +153,9 @@ def checkout():
 def create_paypal_order():
     products = request.get_json()
     order_response = create_order(products)
-    print(order_response[0].json)
+    order_id = order_response[0]["id"]
+    print(order_id)
+    print(paypal_order_details(order_id))
     return order_response
 
 
