@@ -7,11 +7,6 @@ if (!localStorage.getItem("products")) {
     localStorage.setItem("products", '[]') // make products key with empty array
 }
 
-function get_products() {
-    let products = JSON.parse(localStorage.getItem("products"))
-    return products
-}
-
 
 function save_products(products) {
     localStorage.setItem("products", JSON.stringify(products))
@@ -23,6 +18,7 @@ function add_to_cart(id, quantity) {
     if (find_product(products, id) === -1) // if not found then store it
         products.push({id:id, quantity:quantity})
     save_products(products)
+    cart_indicator_update() // main.js
 }
 
 
@@ -34,6 +30,7 @@ function remove_from_cart(id) {
         products.splice(i, 1)
         save_products(products)
     }
+    cart_indicator_update() // main.js
 }
 
 

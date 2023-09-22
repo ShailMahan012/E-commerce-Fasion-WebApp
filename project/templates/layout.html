@@ -30,6 +30,7 @@
 
 <body onload="after_load()">
     <section id="overlay"></section>
+    <script src="/static/js/main.js"></script>
 
     <section id="header">
         <nav id="nav" class="nav">
@@ -84,7 +85,7 @@
             <ul class="nav-right">
                 <li class="nav-item" onclick="show_search()"><a class="nav-link" href="#search">search</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart"><i class="fa-regular fa-bag-shopping fa-lg"></i></a>
+                    <a class="nav-link" href="/cart"><i class="fa-regular fa-bag-shopping fa-lg"></i><span id="cart-indicator"></span></a>
                 </li>
                 <li class="nav-item">
                     <a href="/user" class="nav-link"><i class="fa-regular fa-user fa-lg"></i></a>
@@ -185,6 +186,7 @@
             $("#copyright-year")[0].innerText = year
         }
         setCopyrightYear()
+        cart_indicator_update() // main.js
     </script>
     <script src="/static/js/subscription.js"></script>
     <script src="/static/js/cookies.js"></script>

@@ -197,6 +197,20 @@ button:hover {
     transition-duration: 1s;
 }
 
+#cart-indicator {
+    position: relative;
+    padding: 0px 7px;
+    padding-top: 5px;
+    border-radius: 50%;
+    background-color: rgb(255, 48, 48);
+    color: white;
+    text-align: center;
+    font-size: smaller;
+
+    top: -13px;
+}
+
+
 /* Animation */
 @keyframes nav-show {
     from {}
