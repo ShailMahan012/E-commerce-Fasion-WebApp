@@ -153,6 +153,7 @@ def checkout():
 def create_paypal_order():
     products = request.get_json()
     order_response = create_order(products)
+    print(order_response[0].json)
     return order_response
 
 
