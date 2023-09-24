@@ -49,6 +49,9 @@ class Orders(db.Model):
     status = db.Column(db.Boolean, nullable=True, default=False)
     date = db.Column(db.Date, nullable=False, default=date.today())
 
+    discount = db.Column(db.Integer, default=None)
+    approved = db.Column(db.Boolean, nullable=False, default=False)
+
     @hybrid.hybrid_property
     def full_name(self):
         return (self.f_name + " " + self.l_name)
@@ -61,6 +64,7 @@ class Cart(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     title = db.Column(db.Text, nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    discount = db.Column(db.Integer, default=None)
 
 class Admin(db.Model):
     __tablename__ = "Admin"
