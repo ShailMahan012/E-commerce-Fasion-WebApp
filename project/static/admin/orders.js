@@ -106,7 +106,7 @@ function create_order_row(i, order, ord_id) {
     let status_td = "<td class='status pending'>PENDING</td>"
     if (order.status) status_td = "<td class='status done'>COMPLETED</td>"
     let row = `
-        <tr onclick="show_order(${ord_id})">
+        <tr onclick="show_order('${ord_id}')">
             <td>${i}</td>
             <td>${order.f_name} ${order.l_name}</td>
             <td>${order.note}</td>

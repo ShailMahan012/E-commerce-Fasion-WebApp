@@ -23,7 +23,7 @@ paypal.Buttons({
       .then((orderData) => {
             localStorage.setItem("products", '[]') // Empty cart after checkout
             const element = document.getElementById('form');
-            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            element.innerHTML = `<div class="row"><h1 class="title">Thanks for payment</h1></div>`
 
         // Successful capture! For dev/demo purposes:
         console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
