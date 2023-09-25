@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/static/css/cookies.css">
     <link rel="stylesheet" href="/static/css/overlay.css">
     <link rel="stylesheet" href="/static/css/subscription.css">
+    <link rel="stylesheet" href="/static/css/msg.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
     <link rel="shortcut icon" href="/static/favicon.webp" type="image/x-icon">
 
@@ -30,6 +31,8 @@
 </head>
 
 <body onload="after_load()">
+    <div id="msg_div" class="alert-home" onclick="hide_msg()"></div>
+    <script src="/static/js/msg_home.js"></script>
     <section id="overlay"></section>
 
     <section id="header">

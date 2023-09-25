@@ -5,6 +5,7 @@
 	border: 1px solid transparent;
 	border-radius: .25rem;
 	text-align: center;
+	z-index: 100;
 }
 
 .alert-danger {
@@ -23,4 +24,14 @@
 	color: #856404;
 	background-color: #fff3cd;
 	border-color: #ffeeba;
+}
+
+
+.alert-home {
+	position: fixed;
+	width: fit-content;
+	right: -100%;
+	top: 20%;
+	cursor: pointer;
+	transition-duration: 400ms;
 }

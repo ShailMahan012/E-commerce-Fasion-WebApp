@@ -53,11 +53,13 @@
         add_to_cart(id, 1)
         btn_add_product.style.display = "none"
         btn_remove_product.style.display = "initial"
+        msg("Item Added to Cart", "primary")
     }
     function remove_product(id) {
         remove_from_cart(id)
         btn_add_product.style.display = "initial"
         btn_remove_product.style.display = "none"
+        msg("Item Removed to Cart", "warning")
     }
 </script>
 {% endblock %}
