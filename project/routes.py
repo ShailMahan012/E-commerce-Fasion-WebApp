@@ -141,7 +141,7 @@ def create_paypal_order():
             ID = prd.get("id")
             quantity = prd.get("quantity")
             discount = prd.get("discount")
-            product = Products.query.get(ID)
+            product = db.session.get(Products, ID)
             if product and quantity:
                 item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price, discount=discount)
                 db.session.add(item)

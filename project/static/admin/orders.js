@@ -6,7 +6,7 @@ const popup = get("popup")
 const overlay = get("overlay")
 const btn_order_status = get("btn_order_status") // button to mark order as completed
 
-const name = get("name")
+const full_name = get("name")
 const email = get("email")
 const phone = get("phone")
 const address = get("address")
@@ -15,7 +15,9 @@ const postal_code = get("postal_code")
 const note = get("note")
 const status = get("status")
 const date = get("date")
+const discount = get("discount")
 const total_price = get("total_price") // total price of full order in popup
+const net_price = get("net_price")
 
 var current_order_id = -1; // GLOBAL variable to be used to mark order
 
@@ -42,11 +44,16 @@ function show_order(ord_id) {
 
     for(let i=0;i<items.length;i++) {
         let item = items[i]
+        let discount = item.discount
         let images = images_json[item.product] // get images of that item
         let quantity = item.quantity
         let prd_total_price = quantity * item.price
-        ord_total_price += prd_total_price
-        let row = create_product_row(i+1, images, item, quantity, prd_total_price) // create row of that one product
+        let net_price = prd_total_price
+        if (discount) {
+            net_price = prd_total_price * (100-discount) / 100
+        }
+        ord_total_price += net_price
+        let row = create_product_row(i+1, images, item, quantity, prd_total_price, net_price) // create row of that one product
         products.innerHTML += row
     }
 
@@ -59,7 +66,7 @@ function show_order(ord_id) {
 
 
 // create one row of product in popup
-function create_product_row(i, images, item, quantity, total_price) {
+function create_product_row(i, images, item, quantity, total_price, net_price) {
     let image_url = "not-found.png"
     if (images.length != 0)
         image_url = images[0].filename
@@ -69,8 +76,10 @@ function create_product_row(i, images, item, quantity, total_price) {
             <td><img alt='IMAGE' class='img' src='/static/product_images/${image_url}'></td>
             <td>${item.title}</td>
             <td>${item.price}</td>
+            <td>${item.discount}%</td>
             <td>${quantity}</td>
             <td>${total_price}</td>
+            <td>${net_price}</td>
         </tr>
     `
             // <td class="category">${item.category}</td>
@@ -79,15 +88,17 @@ function create_product_row(i, images, item, quantity, total_price) {
 
 
 function set_order_data(order, ord_total_price) {
-    name.innerText = order.f_name + ' ' + order.l_name
+    full_name.innerText = order.f_name + ' ' + order.l_name
     email.innerText = order.email
     phone.innerText = order.phone
     address.innerText = order.address
     city.innerText = order.city
     postal_code.innerText = order.postal_code
     note.innerText = order.note
-    total_price.innerText = ord_total_price
     date.innerText = order.date
+    discount.innerText = order.discount + "%"
+    total_price.innerText = ord_total_price
+    net_price.innerText = ord_total_price * (100-order.discount) / 100
     
     let status_txt = "PENDING"
     let btn_status = "Mark As Completed"
@@ -103,6 +114,8 @@ function set_order_data(order, ord_total_price) {
 // create one order row
 function create_order_row(i, order, ord_id) {
     let price = calc_price(order)
+    let discount = order.discount + "%"
+
     let status_td = "<td class='status pending'>PENDING</td>"
     if (order.status) status_td = "<td class='status done'>COMPLETED</td>"
     let row = `
@@ -110,6 +123,7 @@ function create_order_row(i, order, ord_id) {
             <td>${i}</td>
             <td>${order.f_name} ${order.l_name}</td>
             <td>${order.note}</td>
+            <td>${discount}</td>
             <td>${price}</td>
             <td>${order.date}</td>
             ${status_td}
@@ -127,8 +141,10 @@ function calc_price(order) {
         let item = items[i]
         let quantity = item.quantity
         let price = item.price
-        total_price += quantity * price
+        let prd_total_price = quantity * price
+        total_price += prd_total_price * (100-item.discount) / 100
     }
+    total_price = total_price * (100-order.discount) / 100
     return total_price
 }
 

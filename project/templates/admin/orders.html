@@ -13,6 +13,7 @@
     <th>#</th>
     <th>Name</th>
     <th>Note</th>
+    <th>discount</th>
     <th>PRICE</th>
     <th>Date</th>
     <th>STATUS</th>
@@ -41,6 +42,7 @@
     </div>
 </div>
 
+<!-- Order Details -->
 <div id="popup" class="popup">
     <h2>ORDER ID# <span id="ord_id"></span></h2>
     <h3 id="not_found" class="not_found">Not Any Product Found</h3>
@@ -52,8 +54,10 @@
                 <th>title</th>
                 <!-- <th>category</th> -->
                 <th>price</th>
+                <th>discount</th>
                 <th>quantity</th>
                 <th>Total Price</th>
+                <th>Net Price</th>
             </tr>
         </thead>
         <tbody id="products"></tbody>
@@ -69,7 +73,9 @@
         <tr><th>note</th><td id="note"></td></tr>
         <tr><th>status</th><td id="status"></td></tr>
         <tr><th>date</th><td id="date"></td></tr>
-        <tr><th>total price:</th><td id="total_price"></td></tr>
+        <tr><th>discount</th><td id="discount"></td></tr>
+        <tr><th>total price</th><td id="total_price"></td></tr>
+        <tr><th>net price</th><td id="net_price"></td></tr>
     </table>
     <button class="btn btn-add" id="btn_order_status" onclick="mark_order()"></button>
     <br><br>

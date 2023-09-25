@@ -27,7 +27,6 @@ def capture_payment(order_id):
 def gen_paypal_json(products):
     products, total_price = gen_order_json(products)
     paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}]}
-
     return paypal_json, products
 
 
@@ -122,8 +121,10 @@ def gen_order_json(products):
                 total_price += price
 
     coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
-    order = Orders.query.filter_by(user_id=user_id)
+    order = Orders.query.filter_by(user_id=user_id, approved=True).first()
     if coupon and not order:
         total_price = total_price * (100-coupon.amount) / 100
         products.append({"discount": coupon.amount})
+    else:
+        products.append({"discount": None})
     return products, total_price

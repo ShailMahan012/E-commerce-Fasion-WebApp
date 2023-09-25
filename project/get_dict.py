@@ -82,6 +82,9 @@ def get_images_dict(images):
 def get_orders_dict(orders):
     orders_dict = {}
     for o in orders:
+        discount = o.discount
+        if not discount:
+            discount = 0
         order = {
             'f_name': o.f_name,
             'l_name': o.l_name,
@@ -92,7 +95,8 @@ def get_orders_dict(orders):
             'phone': o.phone,
             'note': o.note,
             'date': o.date.strftime("%d %b, %Y"),
-            'status': o.status
+            'status': o.status,
+            'discount': discount
         }
         orders_dict[o.id] = order
     return orders_dict
@@ -103,11 +107,15 @@ def get_cart_dict(cart):
     for i in cart:
         if not cart_dict.get(i.order_id):
             cart_dict[i.order_id] = []
+        discount = i.discount
+        if not discount:
+            discount = 0
         item = {
             'product': i.product_id,
             'quantity': i.quantity,
             'title': i.title,
-            'price': i.price
+            'price': i.price,
+            'discount': discount
         }
         cart_dict[i.order_id].append(item)
     return cart_dict
