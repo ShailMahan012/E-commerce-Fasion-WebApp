@@ -254,7 +254,7 @@ def mark_order(ID, page):
     if order:
         order.status = not order.status
         db.session.commit()
-    return redirect(f"/admin/orders/{page}")
+    return redirect(f"/admin/orders?page={page}")
 
 
 @admin.route("/main_collection_home", methods=["GET", "POST"])
