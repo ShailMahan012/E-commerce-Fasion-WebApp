@@ -20,9 +20,12 @@ app.app_context().push()
 
 
 app.config['paypal'] = {
-    "BASE_URL": "https://api-m.paypal.com",
-    "CLIENT_ID": "AV6qiggsr5K-Bf-ZtuFdyaCk_cQC3mvEh0LUwAqZXcGvY_WhGp1OxLplyK6Hk61V4womA9yaXFiysuIz",
-    "APP_SECRET": "EGt1FVt_xxFJXI7G0OmF3SGCXVgyhjnOImt5SzhYw421BeCJnb5tZ41ZKecZZU8SMRHK3cMPUmtVgDoV",
+    # "BASE_URL": "https://api-m.paypal.com",
+    # "CLIENT_ID": "AV6qiggsr5K-Bf-ZtuFdyaCk_cQC3mvEh0LUwAqZXcGvY_WhGp1OxLplyK6Hk61V4womA9yaXFiysuIz",
+    # "APP_SECRET": "EGt1FVt_xxFJXI7G0OmF3SGCXVgyhjnOImt5SzhYw421BeCJnb5tZ41ZKecZZU8SMRHK3cMPUmtVgDoV",
+    "BASE_URL": "https://api-m.sandbox.paypal.com",
+    "CLIENT_ID": "ATXfygBnUHBmBMPTjmfwlhgqVqtVoSgov3d5eStEpAi1Vxq_ZSVNFyhE-PvsdIUIesvpbOQOiJudzd-B",
+    "APP_SECRET": "EIh57RP1iOqkLQ5jc8SK6mq2uo1ZPB3Ow7_TSoRm_xxGpP7qFjLDKtHO3qzSVEuRla3oFn9Q3CTdY_KT",
     "CURRENCY": "CAD"
 }
 app.config['IMAGE_DIR'] =  'project/static/product_images'

@@ -19,15 +19,24 @@ def create_order(products, invoice):
 
 
 def capture_payment(order_id):
-    response = paypal_request(f"/v2/checkout/orders/{order_id}/capture")
+    # response = paypal_request(f"/v2/checkout/orders/{order_id}/capture", json_data={})
+    url = BASE_URL + f"/v2/checkout/orders/{order_id}/capture"
+    access_token = generate_access_token()
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json"
+    }
+    response = requests.post(url, headers=headers)
+
     data = response.json()
-    return jsonify(data), response.status_code
+    return data, response.status_code
 
 
 def gen_paypal_json(products, invoice):
     products, total_price = gen_order_json(products)
     invoice = f"ORD_{invoice:0>10}"
     paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], "invoice_id": invoice}
+    # paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], "payment_source": { "paypal": { "experience_context": { "payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED", "brand_name": "GRABALTY", "locale": "en-US", "landing_page": "LOGIN", "user_action": "PAY_NOW", "return_url": "https://example.com/returnUrl", "cancel_url": "https://example.com/cancelUrl" } } } }
     return paypal_json, products
 
 

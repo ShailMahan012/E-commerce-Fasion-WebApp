@@ -81,7 +81,10 @@ main {
 #cart-bottom {
     width: 100%;
     margin-top: 30px;
-    text-align: right;
+    /* text-align: right; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .btn-black {
