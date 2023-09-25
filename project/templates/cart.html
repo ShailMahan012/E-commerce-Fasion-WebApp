@@ -2,11 +2,14 @@
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/cart.css" />
 {% endblock %} {% block main %}
-
+<div class="row">
+    <h1 class="title text-center">Cart</h1>
+</div>
 <table id="cart">
     <thead>
         <tr>
             <td colspan="2" class="product-head">Product</td>
+            <td class="discount-cell">Discount</td>
             <td class="quantity-cell">Quantity</td>
             <td class="total-cell">Total</td>
         </tr>

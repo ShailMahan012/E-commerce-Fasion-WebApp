@@ -91,6 +91,9 @@ main {
 .quantity-mobile {
     display: none;
 }
+.discount-mobile {
+    display: none;
+}
 
 @media screen and (max-width: 800px) {
     .product-img {
@@ -104,6 +107,13 @@ main {
     }
     .quantity-cell {
         display: none;
+    }
+    .discount-cell {
+        display: none;
+    }
+    .discount-mobile {
+        display: block;
+        margin: 10px 0;
     }
     .quantity-mobile {
         display: block;

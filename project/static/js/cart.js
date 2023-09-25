@@ -35,7 +35,6 @@ function remove_from_cart(id) {
 
 
 function find_product(products, id) {
-    console.log(products, id)
     for (let i=0;i<products.length;i++) {
         if (products[i].id === id)
             return i // found
@@ -65,8 +64,10 @@ function update_prices() {
     let total = 0
     for (let i=0;i<products.length;i++) {
         let prd = products[i]
+        let discount = prd.discount
         let prd_price_node = get("price_" + prd.id) // Get element where price of current product is stored
         let prd_price = prd.quantity * prd.price
+        if (discount) prd_price = prd_price * (100-discount) / 100
         prd_price_node.innerText = prd_price // update net price in table column for specific product
         total += prd_price
     }
@@ -86,6 +87,7 @@ function delete_product(id) {
 
 
 function make_product(prd, net_price) {
+    if (!prd.discount) prd.discount = 0
     let template = `
         <tr id="product_${prd.id}">
             <td class="img-cell">
@@ -99,12 +101,14 @@ function make_product(prd, net_price) {
                 \$${prd.price}<br>
                 </a>
                 <div class="quantity-mobile">
-                <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
-                <input type="text" name="quantity" class="quantity" id="quantity-m_${prd.id}" value="${prd.quantity}" disabled>
-                <button class="quantity-btn" onclick="update_quantity(${prd.id}, 1)">+</button>
+                    <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
+                    <input type="text" name="quantity" class="quantity" id="quantity-m_${prd.id}" value="${prd.quantity}" disabled>
+                    <button class="quantity-btn" onclick="update_quantity(${prd.id}, 1)">+</button>
                 </div>
+                <div class="discount-mobile">Discount: ${prd.discount}%</div>
                 <button class="clear-btn" onclick="delete_product(${prd.id})">remove</button>
             </td>
+            <td class="discount-cell">${prd.discount}%</td>
             <td class="quantity-cell">
                 <button class="quantity-btn" onclick="update_quantity(${prd.id}, -1)">-</button>
                 <input type="text" name="quantity" class="quantity" id="quantity_${prd.id}" value="${prd.quantity}" disabled>
@@ -127,6 +131,9 @@ function display_products(all_products) {
     for (let i=0;i<all_products.length;i++) {
         let prd = all_products[i]
         let net_price = prd.price * prd.quantity
+        if (prd.discount) {
+            net_price = net_price * (100 - prd.discount) / 100
+        }
         total_products_price += net_price
         let product = make_product(prd, net_price)
         tbody_prooducts.innerHTML += product
@@ -156,6 +163,8 @@ function fetch_products() {
                 prd['quantity'] = products_quantity[prd.id]
                 let localStorage_prd = products[find_product(products, prd.id)] // Get product with prd.id
                 localStorage_prd.price = prd.price // add or update price of products in localStorage
+
+                localStorage_prd.discount = prd.discount
                 all_products.push(prd)
             }
             display_products(all_products) // Display all products in table
