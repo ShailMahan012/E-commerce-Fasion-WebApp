@@ -11,8 +11,8 @@ APP_SECRET = paypal["APP_SECRET"]
 CURRENCY = paypal["CURRENCY"]
 
 
-def create_order(products):
-    data, products = gen_paypal_json(products)
+def create_order(products, invoice):
+    data, products = gen_paypal_json(products, invoice)
     response = paypal_request("/v2/checkout/orders", json_data=data)
     data = response.json()
     return products, data, response.status_code
@@ -24,9 +24,10 @@ def capture_payment(order_id):
     return jsonify(data), response.status_code
 
 
-def gen_paypal_json(products):
+def gen_paypal_json(products, invoice):
     products, total_price = gen_order_json(products)
-    paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}]}
+    invoice = f"ORD_{invoice:0>10}"
+    paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], "invoice_id": invoice}
     return paypal_json, products
 
 

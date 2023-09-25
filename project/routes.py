@@ -119,10 +119,8 @@ def checkout():
 def create_paypal_order():
     user_id = session.get("user_id")
     products = json.loads(request.form.get("products"))
-    products, order_response, response_code = create_order(products)
-    order_id = order_response["id"]
-
     if products:
+
         email = request.form.get("email")
         f_name = request.form.get("f_name")
         l_name = request.form.get("l_name")
@@ -134,9 +132,15 @@ def create_paypal_order():
         if not note:
             note = None
 
-        order = Orders(id=order_id, discount=products.pop().get('discount'), approved=False, user_id=user_id, email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
+        order = Orders(approved=False, user_id=user_id, email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
         db.session.add(order)
+        db.session.commit()
 
+        products, order_response, response_code = create_order(products, invoice=order.id) # PayPal
+        order_id = order_response["id"] # PayPal ID
+        order.discount = products.pop().get('discount')
+
+        # add all products to Cart table one by one
         for prd in products:
             ID = prd.get("id")
             quantity = prd.get("quantity")
@@ -155,8 +159,9 @@ def capture_paypal_order():
     order_id = request.get_json().get("orderID")
     response, response_code = capture_payment(order_id)
     if response_code in (200, 201):
-        order_id = response.get("id")
-        order = db.session.get(Orders, order_id)
+        invoice_id = response.get("invoice_id")
+        invoice_id = int(invoice_id[4:])
+        order = db.session.get(Orders, invoice_id)
         order.approved = True
         db.session.commit()
     return response, response_code
