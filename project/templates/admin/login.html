@@ -7,13 +7,14 @@
     <link rel="shortcut icon" href="/static/favicon.webp" type="image/x-icon">
     <link rel="stylesheet" href="/static/css/login.css">
     <link rel="stylesheet" href="/static/css/msg.css">
+    <script src="/static/js/get_element.js"></script>
 </head>
 <body>
     <main class="main">
         <div id="msg_div" class="alert" role="alert"></div>
         <form action="" method="POST">
             <img src="/static/GRABALTY-final.png" alt="GRABALTY" class="gr-logo">
-            <input type="text" name="uname" placeholder="Username" class="form-field">
+            <input type="text" name="uname" placeholder="Username" class="form-field" autocomplete="off">
             <input type="password" name="password" placeholder="Password" class="form-field">
             <button type="submit" class="form-field">LOGIN</button>
             <a class="link" href="/">Go to Homepage</a>

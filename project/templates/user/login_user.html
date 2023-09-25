@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/login.css">
     <link rel="stylesheet" href="/static/css/home.css">
     <link rel="stylesheet" href="/static/css/msg.css">
+    <script src="/static/js/get_element.js"></script>
 </head>
 <body>
     <main class="main">
@@ -16,7 +17,7 @@
         {% if PAGE == "LOGIN" %}
         <form action="" method="POST">
             <img src="/static/GRABALTY-final.png" alt="GRABALTY" class="gr-logo">
-            <input type="email" name="email" placeholder="Email Address" class="form-field" required>
+            <input type="email" name="email" placeholder="Email Address" class="form-field" required autocomplete="off">
             <input type="password" name="password" placeholder="Password" class="form-field" required>
             <button type="submit" class="form-field">LOGIN</button>
             <a href="/user/signup" class="link">Do not have account?</a>
