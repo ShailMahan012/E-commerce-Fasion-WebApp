@@ -1,4 +1,4 @@
-const msg_div = document.getElementById("msg_div")
+const msg_div = get("msg_div")
 
 // Show message with message and alert type like danger, primary and warning etc
 function msg(m, type) {

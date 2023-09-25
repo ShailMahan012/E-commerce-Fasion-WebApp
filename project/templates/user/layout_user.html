@@ -37,7 +37,7 @@
             <ul class="nav-right">
                 <li class="nav-item"><a class="nav-link" href="/user/logout">Logout</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart"><i class="fa-regular fa-bag-shopping fa-lg"></i></a>
+                    <a class="nav-link" href="/cart"><i class="fa-regular fa-bag-shopping fa-lg"></i><span id="cart-indicator">0</span></a>
                 </li>
             </ul>
         </nav>
@@ -57,6 +57,10 @@
     {% block main %}
     {% endblock %}
 </main>
+    <script src="/static/js/cart_indicator.js"></script>
+    <script>
+        cart_indicator_update() // main.js
+    </script>
     <script src="/static/js/header.js"></script>
 </body>
 </html>
