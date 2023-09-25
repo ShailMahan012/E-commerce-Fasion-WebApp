@@ -1,6 +1,6 @@
 from project import app, db
 from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home
-from project.paypal import create_order, capture_payment, paypal_order_details
+from project.paypal import create_order, capture_payment
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
 from flask import render_template, request, session, redirect, send_file, json, Markup, flash
@@ -107,43 +107,9 @@ def cart():
     return render_template("cart.html", TITLE="YOUR CART")
 
 
-@app.route("/checkout", methods=["GET", "POST"])
+@app.route("/checkout")
 @login_required
 def checkout():
-    if request.method == "POST":
-        user_id = session.get("user_id")
-        email = request.form.get("email")
-        f_name = request.form.get("f_name")
-        l_name = request.form.get("l_name")
-        
-        address = request.form.get("address")
-
-        city = request.form.get("city")
-        postal_code = request.form.get("postal_code")
-        phone = request.form.get("phone")
-        note = request.form.get("note")
-        if not note:
-            note = None
-
-        products = json.loads(request.form.get("products"))
-
-        if products:
-            order = Orders(email=email, user_id=user_id, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
-            db.session.add(order)
-
-            for prd in products:
-                ID = prd.get("id")
-                quantity = prd.get("quantity")
-                product = Products.query.get(ID)
-                if product and quantity:
-                    item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price)
-                    db.session.add(item)
-
-            db.session.commit()
-            return "True"
-
-        return "False"
-
     user_id = session.get("user_id")
     user = db.session.get(Users, user_id)
     return render_template("checkout.html", TITLE="CHECKOUT HERE", client_id=CLIENT_ID, currency=CURRENCY, user=user)
@@ -151,19 +117,49 @@ def checkout():
 
 @app.route("/create-paypal-order", methods=["POST"])
 def create_paypal_order():
-    products = request.get_json()
-    order_response = create_order(products)
-    order_id = order_response[0]["id"]
-    print(order_id)
-    print(paypal_order_details(order_id))
-    return order_response
+    user_id = session.get("user_id")
+    products = json.loads(request.form.get("products"))
+    products, order_response, response_code = create_order(products)
+    order_id = order_response["id"]
+
+    if products:
+        email = request.form.get("email")
+        f_name = request.form.get("f_name")
+        l_name = request.form.get("l_name")
+        address = request.form.get("address")
+        city = request.form.get("city")
+        postal_code = request.form.get("postal_code")
+        phone = request.form.get("phone")
+        note = request.form.get("note")
+        if not note:
+            note = None
+
+        order = Orders(id=order_id, discount=products.pop().get('discount'), approved=False, user_id=user_id, email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
+        db.session.add(order)
+
+        for prd in products:
+            ID = prd.get("id")
+            quantity = prd.get("quantity")
+            discount = prd.get("discount")
+            product = Products.query.get(ID)
+            if product and quantity:
+                item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price, discount=discount)
+                db.session.add(item)
+
+        db.session.commit()
+    return {'id': order_response.get("id")}, response_code
 
 
 @app.route("/capture-paypal-order", methods=["POST"])
 def capture_paypal_order():
     order_id = request.get_json().get("orderID")
-    response = capture_payment(order_id)
-    return response
+    response, response_code = capture_payment(order_id)
+    if response_code in (200, 201):
+        order_id = response.get("id")
+        order = db.session.get(Orders, order_id)
+        order.approved = True
+        db.session.commit()
+    return response, response_code
 
 
 @app.route("/fetch/products", methods=["POST"])

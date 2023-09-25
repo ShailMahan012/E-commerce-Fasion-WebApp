@@ -12,10 +12,10 @@ CURRENCY = paypal["CURRENCY"]
 
 
 def create_order(products):
-    data = gen_paypal_json(products)
+    data, products = gen_paypal_json(products)
     response = paypal_request("/v2/checkout/orders", json_data=data)
     data = response.json()
-    return data, response.status_code
+    return products, data, response.status_code
 
 
 def capture_payment(order_id):
@@ -24,17 +24,11 @@ def capture_payment(order_id):
     return jsonify(data), response.status_code
 
 
-def paypal_order_details(order_id):
-    response = paypal_request(f"/v2/checkout/orders/{order_id}", request_method="GET")
-    data = response.json()
-    return data, response.status_code
-
-
 def gen_paypal_json(products):
     products, total_price = gen_order_json(products)
-    paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], 'application_context': {"products": products}}
+    paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}]}
 
-    return paypal_json
+    return paypal_json, products
 
 
 def generate_access_token():
@@ -128,7 +122,8 @@ def gen_order_json(products):
                 total_price += price
 
     coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
-    if coupon:
+    order = Orders.query.filter_by(user_id=user_id)
+    if coupon and not order:
         total_price = total_price * (100-coupon.amount) / 100
         products.append({"discount": coupon.amount})
     return products, total_price

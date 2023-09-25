@@ -1,15 +1,11 @@
 paypal.Buttons({
   // Order is created on the server and the order id is returned
   createOrder() {
-    return fetch("/create-paypal-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: localStorage.getItem("products"),
-    })
-      .then((response) => response.json())
+    var form = gen_order_form()
+    if (form != -1) {
+    return send_data(form, '/create-paypal-order')
       .then((order) => order.id);
+    }
   },
   // Finalize the transaction on the server after payer approval
   onApprove(data) {
@@ -25,15 +21,10 @@ paypal.Buttons({
     })
       .then((response) => response.json())
       .then((orderData) => {
-        var form = gen_order_form()
-        if (form != -1) {
-          send_data(form, CHECKOUT_URL).then(result => {
             localStorage.setItem("products", '[]') // Empty cart after checkout
-            console.log(result)
-            const element = document.getElementById('paypal-button-container');
+            const element = document.getElementById('form');
             element.innerHTML = '<h3>Thank you for your payment!</h3>';
-          })
-        }
+
         // Successful capture! For dev/demo purposes:
         console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
         const transaction = orderData.purchase_units[0].payments.captures[0];

@@ -39,7 +39,7 @@ a {
     width: 100%;
     padding: 30px;
     background-color: 0;
-    position: absolute;
+    position: fixed;
     left: 0;
     z-index: 101;
     transition-duration: 500ms;

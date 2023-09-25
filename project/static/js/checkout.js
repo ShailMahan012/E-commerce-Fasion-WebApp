@@ -65,7 +65,7 @@ async function send_data(form, url) {
         body: form,
     })
         .then((result) => {
-            return result.text()
+            return result.json()
         })
         .then(text => {
             output = text
