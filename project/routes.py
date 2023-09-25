@@ -1,6 +1,6 @@
 from project import app, db
 from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home
-from project.paypal import create_order, capture_payment
+from project.paypal import create_order, capture_payment, gen_order_json
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
 from flask import render_template, request, session, redirect, send_file, json, Markup, flash
@@ -177,6 +177,7 @@ def fetch_products():
         products = get_product_dict(products)
         for i in range(len(products)):
             products[i]['img'] = images[i]
+        products = gen_order_json(products)[0]
         return json.jsonify(products)
     except ValueError:
         print("fetch_products: JSON Decode ERROR")

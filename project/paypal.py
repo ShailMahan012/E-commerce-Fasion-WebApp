@@ -106,8 +106,10 @@ def gen_order_json(products):
         for i, prd in enumerate(products):
             ID = prd.get("id")
             quantity = prd.get("quantity")
+            if not quantity:
+                quantity = 0
             product = Products.query.get(ID)
-            if product and quantity:
+            if product:
                 coupon = Coupons.query.filter_by(name="OneProductAmount", status=True).first() # only one coupon
                 discount = True
                 if coupon:

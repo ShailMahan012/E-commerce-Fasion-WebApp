@@ -35,6 +35,7 @@ function remove_from_cart(id) {
 
 
 function find_product(products, id) {
+    console.log(products, id)
     for (let i=0;i<products.length;i++) {
         if (products[i].id === id)
             return i // found
@@ -150,7 +151,7 @@ function fetch_products() {
         products_id = JSON.stringify(products_id)
         $.post("/fetch/products", { id: products_id }, function (result) {
             // result is json array returned by server which contains data of all products availabe in cart
-            for (let i=0;i<result.length;i++) {
+            for (let i=0;i<result.length-1;i++) {
                 let prd = result[i] // Get i element of product from given by server using API
                 prd['quantity'] = products_quantity[prd.id]
                 let localStorage_prd = products[find_product(products, prd.id)] // Get product with prd.id

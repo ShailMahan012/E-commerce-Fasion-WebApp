@@ -45,10 +45,10 @@ def get_product_dict(products):
         product = {
             'id': prd.id,
             'title': prd.title,
-            'category': prd.category,
+            # 'category': prd.category,
             'price': prd.price,
-            'details': prd.details,
-            'core_collection': prd.core_collection,
+            # 'details': prd.details,
+            # 'core_collection': prd.core_collection,
         }
         products_dict.append(product)
     return products_dict
