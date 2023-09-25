@@ -10,24 +10,25 @@
 </div>
 <div id="form">
     <div class="row input-row">
-        <div class="column"><input class="form-input" type="text" name="f_name" id="f_name" placeholder="First Name" value="{{user.f_name}}" required></div>
-        <div class="column"><input class="form-input" type="text" name="l_name" id="l_name" placeholder="Last Name" value="{{user.l_name}}"></div>
+        <div class="column"><label class="input-label">First Name</label><input class="form-input" type="text" name="f_name" id="f_name" placeholder="First Name" value="{{user.f_name}}" required></div>
+        <div class="column"><label class="input-label">Last Name</label><input class="form-input" type="text" name="l_name" id="l_name" placeholder="Last Name" value="{{user.l_name}}"></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input class="form-input" type="email" name="email" id="email" placeholder="Email Address" value="{{user.email}}" required></div>
+        <div class="column"><label class="input-label">Email</label><input class="form-input" type="email" name="email" id="email" placeholder="Email Address" value="{{user.email}}" required></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input class="form-input" type="text" name="address" id="address" placeholder="Full Address" value="{{user.address}}" required></div>
+        <div class="column"><label class="input-label">Full Address</label><input class="form-input" type="text" name="address" id="address" placeholder="Full Address" value="{{user.address}}" required></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input class="form-input" type="text" name="city" id="city" placeholder="City" value="{{user.city}}" required></div>
-        <div class="column"><input class="form-input" type="text" name="postal_code" id="postal_code" placeholder="Postal Code" value="{{user.postal_code}}" required></div>
+        <div class="column"><label class="input-label">City</label><input class="form-input" type="text" name="city" id="city" placeholder="City" value="{{user.city}}" required></div>
+        <div class="column"><label class="input-label">Postal Code</label><input class="form-input" type="text" name="postal_code" id="postal_code" placeholder="Postal Code" value="{{user.postal_code}}" required></div>
     </div>
     <div class="row input-row">
-        <div class="column"><input class="form-input" type="text" name="phone" id="phone" placeholder="Phone" value="{{user.phone}}" required></div>
+        <div class="column"><label class="input-label">Contact Number</label><input class="form-input" type="text" name="phone" id="phone" placeholder="Contact Number" value="{{user.phone}}" required></div>
     </div>
     <div class="row">
         <div class="column">
+            <label class="input-label">Note</label>
             <textarea class="form-input" name="note" id="note" cols="30" rows="10" placeholder="You can add any note here for us about your order"></textarea>
         </div>
     </div>
