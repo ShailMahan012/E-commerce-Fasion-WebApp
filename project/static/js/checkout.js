@@ -32,7 +32,13 @@ function checkout() {
 function validate_form() {
     for (const key in inputs) {
         let input = inputs[key];
-        if (!input.checkValidity()) {
+        if (key == "country") {
+            if (!input.value) {
+                msg("Select Your Country", "danger")
+                return false
+            }
+        }
+        else if (!input.checkValidity()) {
             input.reportValidity();
             console.log("VALIDITY ISSUE: ", input)
             return false;
