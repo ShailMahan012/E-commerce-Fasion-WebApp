@@ -169,11 +169,8 @@ def create_paypal_order():
 def capture_paypal_order():
     order_id = request.get_json().get("orderID")
     response, response_code = capture_payment(order_id)
-    print("OrderID:", order_id)
-    print("Response", response)
-    print("Response_code", response_code)
     if response_code in (200, 201):
-        invoice_id = response.get("invoice_id")
+        invoice_id = response["purchase_units"][0]["payments"]["captures"][0]["invoice_id"]
         invoice_id = int(invoice_id[4:])
         order = db.session.get(Orders, invoice_id)
         order.approved = True

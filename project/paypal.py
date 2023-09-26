@@ -35,8 +35,7 @@ def capture_payment(order_id):
 def gen_paypal_json(products, invoice):
     products, total_price = gen_order_json(products)
     invoice = f"ORD_{invoice:0>10}"
-    paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], "invoice_id": invoice}
-    # paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}}], "payment_source": { "paypal": { "experience_context": { "payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED", "brand_name": "GRABALTY", "locale": "en-US", "landing_page": "LOGIN", "user_action": "PAY_NOW", "return_url": "https://example.com/returnUrl", "cancel_url": "https://example.com/cancelUrl" } } } }
+    paypal_json = {"intent": "CAPTURE", "purchase_units": [{"amount": {"currency_code": CURRENCY, "value": total_price}, "invoice_id": invoice}]}
     return paypal_json, products
 
 
@@ -76,6 +75,11 @@ def paypal_request(url, json_data=None, request_method="POST"):
     else:
         response = requests.post(url, headers=headers)
     return response
+
+
+def paypal_order_detail(order_id):
+    response = paypal_request(f'/v2/checkout/orders/{order_id}', request_method="GET")
+    return response.json(), response.status_code
 
 
 def get_total_price(products):
