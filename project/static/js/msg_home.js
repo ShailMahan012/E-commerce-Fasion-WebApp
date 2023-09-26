@@ -5,6 +5,7 @@ function msg(m, type) {
     msg_div.innerHTML = m
     msg_div.className = "alert-home alert alert-" + type
     msg_div.style.right = "30px"
+    setTimeout(()=> {hide_msg()}, 5000)
 }
 
 
