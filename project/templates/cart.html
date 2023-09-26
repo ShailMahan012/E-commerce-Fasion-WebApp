@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block head %}
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/cart.css" />
+<link rel="stylesheet" href="/static/css/ribbon.css">
 {% endblock %} {% block main %}
 <div class="row">
     <h1 class="title text-center">Cart</h1>
@@ -20,6 +21,9 @@
 
 <div id="cart-bottom">
     <div id="cart-left">
+        {% if coupon %}
+            <div class="ribbon-box"><div class="ribbon">{{coupon.title}}</div></div>
+        {% endif %}
     </div>
     <div id="cart-right">
         Total: $<span id="total_price">0</span><br>

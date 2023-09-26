@@ -97,7 +97,9 @@ main {
 .discount-mobile {
     display: none;
 }
-
+#cart-left {
+    width: 100%;
+}
 @media screen and (max-width: 800px) {
     .product-img {
         width: 80px;
@@ -132,5 +134,11 @@ main {
     }
     #main {
         padding: 5px;
+    }
+    #cart-bottom {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
     }
 }

@@ -1,5 +1,5 @@
 from project import app, db
-from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home
+from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home, Coupons
 from project.paypal import create_order, capture_payment, gen_order_json
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
@@ -92,7 +92,8 @@ def product(id):
     if product:
         images = get_images([product]) # get_images accept list of prodoucts
         if images: images = images[0] # save only first item because we only gave one product (2d list to 1d list)
-        return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup)
+        coupon = Coupons.query.filter_by(name="OneProductAmount", status=True).first()
+        return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup, coupon=coupon)
     return redirect("/")
 
 
@@ -104,7 +105,8 @@ def product(id):
 
 @app.route("/cart")
 def cart():
-    return render_template("cart.html", TITLE="YOUR CART")
+    coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
+    return render_template("cart.html", TITLE="YOUR CART", coupon=coupon)
 
 
 @app.route("/checkout")

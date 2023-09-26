@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block head %}
 <link rel="stylesheet" href="/static/css/home.css" />
 <link rel="stylesheet" href="/static/css/product.css" />
+<link rel="stylesheet" href="/static/css/ribbon.css">
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 {% endblock %} {% block main %}
 
@@ -19,6 +20,9 @@
         <div class="details">
             {{Markup(product.details)}}
         </div>
+        {% if coupon %}
+            <div class="ribbon-box"><div class="ribbon">{{coupon.title}}</div></div>
+        {% endif %}
         <button class="btn btn-black" id="add_product" onclick="add_product({{product.id}})">ADD TO CART</button>
         <button class="btn btn-black" id="remove_product" onclick="remove_product({{product.id}})">REMOVE FROM CART</button>
     </div>
