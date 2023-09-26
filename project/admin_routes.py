@@ -191,7 +191,7 @@ def admin_images_fetch():
 def orders():
     page = request.args.get("page")
     if not page: page = 1
-    orders = Orders.query.paginate(page=int(page), per_page=PER_PAGE)
+    orders = Orders.query.filter_by(approved=True).paginate(page=int(page), per_page=PER_PAGE)
     orders_dict = get_orders_dict(orders.items)
     cart = Cart.query.filter(Cart.order_id.in_((list(orders_dict.keys())))).all()
 
@@ -222,7 +222,7 @@ def filtered_orders(page=1):
     end_date = request.args.get("end_date")
     status = request.args.get("status")
 
-    orders = Orders.query
+    orders = Orders.query.filter_by(approved=True)
     if invoice_id:
         invoice_id = int(invoice_id[4:])
         orders = orders.filter_by(id=invoice_id)
