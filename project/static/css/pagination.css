@@ -22,6 +22,6 @@
 
 .pagination .active {
     color: white;
-    border: 1px solid rgb(0, 0, 122);
-    background-color: rgb(29, 29, 255);
+    border: 1px solid rgb(32, 32, 32);
+    background-color: rgb(75, 75, 75);
 }
