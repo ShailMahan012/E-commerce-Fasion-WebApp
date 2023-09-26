@@ -91,6 +91,7 @@ def get_orders_dict(orders):
             'email': o.email,
             'address': o.address,
             'city': o.city,
+            'country': o.country,
             'postal_code': o.postal_code,
             'phone': o.phone,
             'note': o.note,

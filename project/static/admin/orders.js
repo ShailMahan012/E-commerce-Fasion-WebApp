@@ -11,6 +11,7 @@ const email = get("email")
 const phone = get("phone")
 const address = get("address")
 const city = get("city")
+const country = get("country")
 const postal_code = get("postal_code")
 const note = get("note")
 const status = get("status")
@@ -93,6 +94,7 @@ function set_order_data(order, ord_total_price) {
     phone.innerText = order.phone
     address.innerText = order.address
     city.innerText = order.city
+    country.innerText = order.country
     postal_code.innerText = order.postal_code
     note.innerText = order.note
     date.innerText = order.date
