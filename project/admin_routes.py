@@ -215,6 +215,7 @@ def filter_orders():
 def filtered_orders(page=1):
     page = request.args.get("page")
     if not page: page = 1
+    invoice_id = request.args.get("invoice_id")
     name = request.args.get("name")
     email = request.args.get("email")
     start_date = request.args.get("start_date")
@@ -222,16 +223,20 @@ def filtered_orders(page=1):
     status = request.args.get("status")
 
     orders = Orders.query
-    if name:
-        orders = orders.filter(Orders.full_name.ilike(f"%{name}%"))
-    if email:
-        orders = orders.filter(Orders.email.ilike(f"%{email}%"))
-    if start_date:
-        orders = orders.filter(Orders.date>=start_date)
-    if end_date:
-        orders = orders.filter(Orders.date>=end_date)
-    if status:
-        orders = orders.filter(Orders.status==status)
+    if invoice_id:
+        invoice_id = int(invoice_id[4:])
+        orders = orders.filter_by(id=invoice_id)
+    else:
+        if name:
+            orders = orders.filter(Orders.full_name.ilike(f"%{name}%"))
+        if email:
+            orders = orders.filter(Orders.email.ilike(f"%{email}%"))
+        if start_date:
+            orders = orders.filter(Orders.date>=start_date)
+        if end_date:
+            orders = orders.filter(Orders.date>=end_date)
+        if status:
+            orders = orders.filter(Orders.status==status)
 
     orders = orders.paginate(page=int(page), per_page=PER_PAGE)
     orders_dict = get_orders_dict(orders.items)

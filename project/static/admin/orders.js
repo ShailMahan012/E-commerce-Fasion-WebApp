@@ -41,7 +41,7 @@ function show_order(ord_id) {
     let order = orders_json[ord_id] // get specific order with its id
     let items = order.items // get all products/items of that order
     let ord_total_price = 0
-    order_id.innerText = ord_id // show order id in popup
+    order_id.innerText = `ORD_${ord_id.toString().padStart(10, '0')}`; // show order id in popup
 
     for(let i=0;i<items.length;i++) {
         let item = items[i]
