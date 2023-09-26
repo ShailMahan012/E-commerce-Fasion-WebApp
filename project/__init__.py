@@ -31,7 +31,7 @@ app.config['paypal'] = {
     "CURRENCY": "CAD"
 }
 app.config['IMAGE_DIR'] =  'project/static/product_images'
-app.config['TITLE'] = "GRABALTY"
+app.config['TITLE'] = "Grabalty® Official Site : Athleisure Lifestyle & Fashion Brand"
 app.config['PER_PAGE'] = 15
 
 from project import routes, admin_routes, user_routes
