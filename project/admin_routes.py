@@ -11,7 +11,7 @@ from time import time
 
 
 IMAGE_DIR = app.config['IMAGE_DIR']
-PER_PAGE = app.config['PER_PAGE']
+PER_PAGE = app.config['PER_PAGE']["admin"]
 
 
 def login_required(f):

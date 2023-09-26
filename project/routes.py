@@ -12,7 +12,7 @@ db.create_all()
 
 TITLE = app.config['TITLE']
 IMAGE_DIR = app.config['IMAGE_DIR']
-PER_PAGE = app.config['PER_PAGE']
+PER_PAGE = app.config['PER_PAGE']['products']
 paypal = app.config["paypal"]
 CLIENT_ID = paypal["CLIENT_ID"]
 CURRENCY = paypal["CURRENCY"]

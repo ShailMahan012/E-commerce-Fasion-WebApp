@@ -32,7 +32,10 @@ app.config['paypal'] = {
 }
 app.config['IMAGE_DIR'] =  'project/static/product_images'
 app.config['TITLE'] = "Grabalty® Official Site : Athleisure Lifestyle & Fashion Brand"
-app.config['PER_PAGE'] = 15
+app.config['PER_PAGE'] = {
+    "admin": 15,
+    "products": 6
+}
 
 from project import routes, admin_routes, user_routes
 app.register_blueprint(admin)
