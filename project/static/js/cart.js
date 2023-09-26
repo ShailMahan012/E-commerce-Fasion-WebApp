@@ -71,7 +71,7 @@ function update_prices() {
         prd_price_node.innerText = prd_price // update net price in table column for specific product
         total += prd_price
     }
-    total_price.innerText = total // Update total price of all elements
+    total_price.innerText = total * (100-discount) / 100// Update total price of all elements
 }
 
 
@@ -139,7 +139,7 @@ function display_products(all_products) {
         tbody_prooducts.innerHTML += product
     }
 
-    total_price.innerText = total_products_price
+    total_price.innerText = total_products_price * (100-discount) / 100
 }
 
 

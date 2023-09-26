@@ -105,7 +105,15 @@ def product(id):
 
 @app.route("/cart")
 def cart():
-    coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
+    user_id = session.get("user_id")
+    if user_id:
+        coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
+        order = Orders.query.filter_by(user_id=user_id, approved=True).first()
+        if order:
+            coupon = None
+    else:
+        coupon = None
+
     return render_template("cart.html", TITLE="YOUR CART", coupon=coupon)
 
 
