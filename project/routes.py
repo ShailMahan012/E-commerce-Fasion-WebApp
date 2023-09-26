@@ -136,13 +136,14 @@ def create_paypal_order():
         l_name = request.form.get("l_name")
         address = request.form.get("address")
         city = request.form.get("city")
+        country = request.form.get("country")
         postal_code = request.form.get("postal_code")
         phone = request.form.get("phone")
         note = request.form.get("note")
         if not note:
             note = None
 
-        order = Orders(approved=False, user_id=user_id, email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone, note=note)
+        order = Orders(approved=False, user_id=user_id, email=email, f_name=f_name, l_name=l_name, address=address, city=city, country=country, postal_code=postal_code, phone=phone, note=note)
         db.session.add(order)
         db.session.commit()
 

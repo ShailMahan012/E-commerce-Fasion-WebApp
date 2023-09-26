@@ -42,6 +42,7 @@ class Orders(db.Model):
 
     address = db.Column(db.Text, nullable=False)
     city = db.Column(db.Text, nullable=False)
+    country = db.Column(db.Text, nullable=False)
     postal_code = db.Column(db.Text, nullable=False)
     phone = db.Column(db.Text, nullable=False)
 
@@ -99,6 +100,7 @@ class Users(db.Model):
 
     address = db.Column(db.Text, nullable=False)
     city = db.Column(db.Text, nullable=False)
+    country = db.Column(db.Text, nullable=False)
     postal_code = db.Column(db.Text, nullable=False)
     phone = db.Column(db.Text, nullable=False)
     password_hash = db.Column(db.Text, nullable=False)

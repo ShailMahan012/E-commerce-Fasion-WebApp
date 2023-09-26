@@ -3,6 +3,7 @@ const l_name = get('l_name')
 const email = get('email')
 const address = get('address')
 const city = get('city')
+const country = get('country')
 const postal_code = get('postal_code')
 const phone = get('phone')
 const note = get('note')
@@ -16,6 +17,7 @@ const inputs = {
     email: email,
     address: address,
     city: city,
+    country: country,
     postal_code: postal_code,
     phone: phone,
     note: note

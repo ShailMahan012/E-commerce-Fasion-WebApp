@@ -40,6 +40,7 @@ def update_info():
         address = request.form.get("address")
 
         city = request.form.get("city")
+        country = request.form.get("country")
         postal_code = request.form.get("postal_code")
         phone = request.form.get("phone")
 
@@ -48,6 +49,7 @@ def update_info():
         user.l_name = l_name
         user.address = address
         user.city = city
+        user.country = country
         user.postal_code = postal_code
         user.phone = phone
         db.session.commit()
