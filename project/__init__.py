@@ -25,9 +25,6 @@ app.config['paypal'] = {
     "CLIENT_ID": "AV6qiggsr5K-Bf-ZtuFdyaCk_cQC3mvEh0LUwAqZXcGvY_WhGp1OxLplyK6Hk61V4womA9yaXFiysuIz",
     "APP_SECRET": "EGt1FVt_xxFJXI7G0OmF3SGCXVgyhjnOImt5SzhYw421BeCJnb5tZ41ZKecZZU8SMRHK3cMPUmtVgDoV",
     # "BASE_URL": "https://api-m.sandbox.paypal.com",
-    # My sanbox
-    # "CLIENT_ID": "ATXfygBnUHBmBMPTjmfwlhgqVqtVoSgov3d5eStEpAi1Vxq_ZSVNFyhE-PvsdIUIesvpbOQOiJudzd-B",
-    # "APP_SECRET": "EIh57RP1iOqkLQ5jc8SK6mq2uo1ZPB3Ow7_TSoRm_xxGpP7qFjLDKtHO3qzSVEuRla3oFn9Q3CTdY_KT",
     # Grabalty sandbox
     # "CLIENT_ID": "AaYITUxB_0he79pMHBsHSgs2c6IGRjkbbRJJ5H47mh4GcYbkeiJ60uzXRtgt4-YmmLmiC33yhJ4rrXQm",
     # "APP_SECRET": "EAe0WivXOobHvPhrsVS9ObDaEaaR9pWgPXnRg5UO57m3caAqNWZd_kQf1QvgSDefqW7zurVWYtYZ8Dc-",
