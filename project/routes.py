@@ -66,7 +66,7 @@ def category(cat, page=1):
     search = request.args.get('search_input')
     if not search:
         search = ""
-    products = Products.query.filter(Products.title.like(f"%{search}%"), Products.category==cat)
+    products = Products.query.filter(Products.title.like(f"%{search}%"), Products.category==cat.lower())
     count = products.count()
 
     products = products.paginate(page=page, per_page=PER_PAGE)
