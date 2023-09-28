@@ -1,0 +1,4 @@
+flask
+flask_sqlalchemy
+urllib3==1.26.6
+requests
