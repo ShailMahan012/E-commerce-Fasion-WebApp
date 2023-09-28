@@ -87,11 +87,12 @@ def signup():
         address = request.form.get("address")
 
         city = request.form.get("city")
+        country = request.form.get("country")
         postal_code = request.form.get("postal_code")
         phone = request.form.get("phone")
         password = request.form.get("password")
         if not Users.query.filter_by(email=email).first():
-            user = Users(email=email, f_name=f_name, l_name=l_name, address=address, city=city, postal_code=postal_code, phone=phone)
+            user = Users(email=email, f_name=f_name, l_name=l_name, address=address, city=city, country=country, postal_code=postal_code, phone=phone)
             user.set_password(password)
             db.session.add(user)
             db.session.commit()
