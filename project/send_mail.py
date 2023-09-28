@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 def send_mail(receiver_email, subject, content):
-    smtp_server = "premium297.web-hosting.com"
+    smtp_server = "grabaltyofficial.com"
     sender_email = "noreply@grabaltyofficial.com"
     password = "noreply012"
 
@@ -84,3 +84,4 @@ def sub_letter(receiver_email):
 """
     send_mail(receiver_email, "Thanks For Subscribing", content)
 
+sub_letter("shailmahan012@gmail.com")
