@@ -83,5 +83,3 @@ def sub_letter(receiver_email):
 </html>
 """
     send_mail(receiver_email, "Thanks For Subscribing", content)
-
-sub_letter("shailmahan012@gmail.com")
