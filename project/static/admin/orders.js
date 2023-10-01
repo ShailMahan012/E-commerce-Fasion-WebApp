@@ -79,6 +79,7 @@ function create_product_row(i, images, item, quantity, total_price, net_price) {
             <td>${item.price}</td>
             <td>${item.discount}%</td>
             <td>${quantity}</td>
+            <td>${item.size}</td>
             <td>${total_price}</td>
             <td>${net_price}</td>
         </tr>

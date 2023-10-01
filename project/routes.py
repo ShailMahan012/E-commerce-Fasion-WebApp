@@ -130,7 +130,6 @@ def create_paypal_order():
     user_id = session.get("user_id")
     products = json.loads(request.form.get("products"))
     if products:
-
         email = request.form.get("email")
         f_name = request.form.get("f_name")
         l_name = request.form.get("l_name")
@@ -156,9 +155,10 @@ def create_paypal_order():
             ID = prd.get("id")
             quantity = prd.get("quantity")
             discount = prd.get("discount")
+            size = prd.get("size")
             product = db.session.get(Products, ID)
             if product and quantity:
-                item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price, discount=discount)
+                item = Cart(order_id=order.id, product_id=ID, quantity=quantity, title=product.title, price=product.price, discount=discount, size=size)
                 db.session.add(item)
 
         db.session.commit()

@@ -66,6 +66,7 @@ class Cart(db.Model):
     title = db.Column(db.Text, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     discount = db.Column(db.Integer, default=None)
+    size = db.Column(db.Text)
 
 class Admin(db.Model):
     __tablename__ = "Admin"

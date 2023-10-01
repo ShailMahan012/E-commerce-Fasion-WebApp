@@ -116,7 +116,8 @@ def get_cart_dict(cart):
             'quantity': i.quantity,
             'title': i.title,
             'price': i.price,
-            'discount': discount
+            'discount': discount,
+            'size': i.size
         }
         cart_dict[i.order_id].append(item)
     return cart_dict
