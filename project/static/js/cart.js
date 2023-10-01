@@ -13,10 +13,10 @@ function save_products(products) {
 }
 
 
-function add_to_cart(id, quantity) {
+function add_to_cart(id, quantity, size) {
     let products = get_products()
     if (find_product(products, id) === -1) // if not found then store it
-        products.push({id:id, quantity:quantity})
+        products.push({id:id, quantity:quantity, size:size})
     save_products(products)
     cart_indicator_update() // main.js
 }

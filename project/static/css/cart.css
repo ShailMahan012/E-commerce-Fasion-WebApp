@@ -138,6 +138,7 @@ main {
     }
     #cart-bottom {
         flex-direction: column;
+        align-items: unset;
     }
     .btn {
         width: 100%;

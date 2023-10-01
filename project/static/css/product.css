@@ -37,7 +37,22 @@
 }
 .details {
 }
-
+.coupon {
+    margin-bottom: 25px !important;
+}
+.product-sizes {
+    margin-bottom: 20px !important;
+}
+.product-sizes input[type="radio"] {
+    display: none;
+}
+.product-sizes label {
+    border: 1px solid rgba(80, 80, 80, 0.5);
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition-duration: 200ms;
+}
 @media screen and (max-width: 560px) {
     .row {
         flex-direction: column;

@@ -17,11 +17,27 @@
     <div class="column column-right">
         <div class="title"><h1>{{product.title}}</h1></div>
         <div class="price">{{product.price}} CAD</div>
+        <div class="size">
+            Size:
+        </div>
+        <div class="product-sizes">
+            <label for="XS" onclick="size(this)">XS</label>
+
+            <label for="S" onclick="size(this)">S</label>
+
+            <label for="M" onclick="size(this)">M</label>
+
+            <label for="L" onclick="size(this)">L</label>
+
+            <label for="XL" onclick="size(this)">XL</label>
+        </div>
         <div class="details">
             {{Markup(product.details)}}
         </div>
         {% if coupon %}
+        <div class="coupon">
             <div class="ribbon-box"><div class="ribbon">{{coupon.title}}</div></div>
+        </div>
         {% endif %}
         <button class="btn btn-black" id="add_product" onclick="add_product({{product.id}})">ADD TO CART</button>
         <button class="btn btn-black" id="remove_product" onclick="remove_product({{product.id}})">REMOVE FROM CART</button>
@@ -43,6 +59,8 @@
     var btn_add_product = document.getElementById("add_product")
     var btn_remove_product = document.getElementById("remove_product")
     var prd_id = {{product.id}}
+    var prd_size = "S"
+    const size_labels = document.querySelectorAll(".product-sizes label")
 
     if (find_product(get_products(), prd_id) != -1) {
         btn_add_product.style.display = "none"
@@ -54,7 +72,7 @@
     }
 
     function add_product(id) {
-        add_to_cart(id, 1)
+        add_to_cart(id, 1, prd_size)
         btn_add_product.style.display = "none"
         btn_remove_product.style.display = "initial"
         msg("Item Added to Cart", "primary")
@@ -64,6 +82,15 @@
         btn_add_product.style.display = "initial"
         btn_remove_product.style.display = "none"
         msg("Item Removed to Cart", "warning")
+    }
+    function size(element) {
+        for (let i=0;i<size_labels.length;i++) {
+            size_labels[i].style.border = ""
+        }
+        element.style.border = "1px solid black"
+        prd_size = element.attributes["for"].value
+        remove_product(prd_id)
+        add_product(prd_id)
     }
 </script>
 {% endblock %}
