@@ -33,11 +33,6 @@
 
 <script src="/static/js/cart.js"></script>
 <script>
-    {% if coupon %}
-    const discount = {{coupon.amount}}
-    {% else %}
-        discount = 0
-    {% endif %}
     fetch_products()
 </script>
 {% endblock %}

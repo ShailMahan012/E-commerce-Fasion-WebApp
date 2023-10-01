@@ -1,6 +1,6 @@
 const tbody_prooducts = get('products')
 const total_price = get('total_price')
-
+discount = 0;
 
 // Check if products key exist in localStorage or not
 if (!localStorage.getItem("products")) {
@@ -167,6 +167,7 @@ function fetch_products() {
                 localStorage_prd.discount = prd.discount
                 all_products.push(prd)
             }
+            discount = result[result.length-1].discount
             display_products(all_products) // Display all products in table
             save_products(products) // Update products in localStorage
         })

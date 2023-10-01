@@ -86,7 +86,7 @@ def get_total_price(products):
     user_id = session.get("user_id")
     first_order = Orders.query.filter_by(user_id=user_id).first()
 
-    total_price = 0
+    net_price = 0
     if products:
         for prd in products:
             ID = prd.get("id")
@@ -103,18 +103,18 @@ def get_total_price(products):
                     price = product.price * (100-coupon.amount) * quantity / 100 # giving discount of coupon.amount percent
                 else:
                     price = product.price * quantity
-                total_price += price
+                net_price += price
     coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
     if coupon:
-        total_price = total_price * (100-coupon.amount) / 100
-    return total_price
+        net_price = net_price * (100-coupon.amount) / 100
+    return net_price
 
 
 def gen_order_json(products):
     user_id = session.get("user_id")
     first_order = Orders.query.filter_by(user_id=user_id).first()
 
-    total_price = 0
+    net_price = 0
     if products:
         for i, prd in enumerate(products):
             ID = prd.get("id")
@@ -134,13 +134,17 @@ def gen_order_json(products):
                     products[i]["discount"] = coupon.amount
                 else:
                     price = product.price * quantity
-                total_price += price
+                net_price += price
 
-    coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
+    discount = 0
+    f_coupon = Coupons.query.filter_by(name="FirstOrder", status=True).first()
+    order_coupon = Coupons.query.filter_by(name="Order", status=True).first()
     order = Orders.query.filter_by(user_id=user_id, approved=True).first()
-    if coupon and not order:
-        total_price = total_price * (100-coupon.amount) / 100
-        products.append({"discount": coupon.amount})
-    else:
-        products.append({"discount": None})
-    return products, total_price
+
+    if order_coupon:
+        discount += order_coupon.amount
+    if f_coupon and not order:
+        discount += f_coupon.amount
+    net_price = net_price * (100-discount) / 100
+    products.append({"discount": discount})
+    return products, net_price
