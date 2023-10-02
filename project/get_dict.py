@@ -137,3 +137,9 @@ def get_cart_images(items):
             images_list.append(image)
         images_dict[product_id] = images_list
     return images_dict
+
+def get_variant_dict(variants):
+    dict_variants = []
+    for i in variants:
+        dict_variants.append({"id": i[1]})
+    return dict_variants

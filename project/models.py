@@ -16,6 +16,12 @@ class Products(db.Model):
     def __str__(self):
         return f"{self.title}, {self.price}, {self.core_collection}"
 
+class Variant(db.Model):
+    __tablename__ = 'Variant'
+    id = db.Column(db.Integer, primary_key=True)
+    prd_1 = db.Column(db.Integer)
+    prd_2 = db.Column(db.Integer)
+
 class Main_Collection_Home(db.Model):
     __tablename__ = "Main_Collection_Home"
     id = db.Column(db.Integer, primary_key=True)

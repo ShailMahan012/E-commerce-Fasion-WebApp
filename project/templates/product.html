@@ -17,6 +17,21 @@
     <div class="column column-right">
         <div class="title"><h1>{{product.title}}</h1></div>
         <div class="price">{{product.price}} CAD</div>
+        <div class="color">
+            Color:
+        </div>
+        <div class="variant-list">
+            <div class="variant variant-active">
+                <img src="/static/product_images/{{images[0]}}" alt=" ">
+            </div>
+            {% for i in variants %}
+                <a href="/product/{{i['id']}}">
+                <div class="variant">
+                    <img src="/static/product_images/{{i['img']}}" alt=" ">
+                </div>
+                </a>
+            {% endfor %}
+        </div>
         <div class="size">
             Size:
         </div>

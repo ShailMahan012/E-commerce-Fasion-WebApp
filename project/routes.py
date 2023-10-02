@@ -1,5 +1,5 @@
 from project import app, db
-from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home, Coupons
+from project.models import Products, Images, Orders, Cart, Sub_Emails, Users, Main_Collection_Home, Coupons, Variant
 from project.paypal import create_order, capture_payment, gen_order_json
 from project.get_dict import *
 from project.send_mail import send_mail, sub_letter
@@ -92,8 +92,15 @@ def product(id):
     if product:
         images = get_images([product]) # get_images accept list of prodoucts
         if images: images = images[0] # save only first item because we only gave one product (2d list to 1d list)
-        coupon = Coupons.query.filter_by(name="OneProductAmount", status=True).first()
-        return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup, coupon=coupon)
+        coupon = Coupons.query.filter_by(name="Order", status=True).first()
+
+        variants = Variant.query.with_entities(Variant.id, Variant.prd_2).filter_by(prd_1=id).all()
+        variants = get_variant_dict(variants)
+        var_images = []
+        for i, _ in enumerate(variants):
+            image = Images.query.with_entities(Images.filename).filter_by(product_id=variants[i]["id"]).order_by("order").first()
+            variants[i]["img"] = image.filename
+        return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup, coupon=coupon, variants=variants)
     return redirect("/")
 
 
