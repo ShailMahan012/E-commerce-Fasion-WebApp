@@ -70,7 +70,7 @@ def search_products():
     search = request.args.get('search_input')
     if search:
         search = search.strip()
-        products = Products.query.filter(Products.title.like(f"%{search}%")).limit(4).all()
+        products = Products.query.filter(Products.title.like(f"%{search}%")).limit(2).all()
         images = [x[0] for x in get_images(products)]
         products = get_product_dict(products)
         for i in range(len(products)):
