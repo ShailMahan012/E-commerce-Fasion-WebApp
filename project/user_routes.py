@@ -88,7 +88,7 @@ def login():
             session["user_id"] = user.id
             return redirect(redirect_path)
         flash("Incorrect Information!", "danger")
-    return render_template("login_user.html", PAGE="Grabalty | LOGIN")
+    return render_template("login_user.html", TITLE="Grabalty | LOGIN", PAGE="LOGIN")
 
 
 @user.route("/signup", methods=["GET", "POST"])
@@ -114,7 +114,7 @@ def signup():
             return redirect("/user/login")
 
         flash("Account with this email already exist!", "warning")
-    return render_template("login_user.html", PAGE="Grabalty | SIGNUP")
+    return render_template("login_user.html", TITLE="Grabalty | SIGNUP", PAGE="SIGNUP")
 
 
 @user.route("/logout")
