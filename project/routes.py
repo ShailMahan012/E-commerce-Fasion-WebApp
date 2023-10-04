@@ -45,6 +45,11 @@ def items():
     return render_template("items.html", TITLE=TITLE)
 
 
+@app.route("/terms")
+def terms():
+    return render_template("terms.html", TITLE="Grabalty | Terms of services")
+
+
 @app.route("/search")
 @app.route("/search/<int:page>")
 def search(page=1):

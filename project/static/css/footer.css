@@ -27,6 +27,11 @@
 }
 
 
+.bottom-links > a {
+    font-size: 13px;
+    text-decoration: underline !important;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
     #footer {

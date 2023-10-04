@@ -1,0 +1,26 @@
+.title {
+    text-align: center;
+    margin: 120px 0 20px 0;
+}
+
+.terms {
+    padding: 0 20%;
+}
+
+.one-term {
+    margin-bottom: 30px;
+}
+
+.term-heading {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+
+@media screen and (max-width:800px) {
+    .terms {
+        padding: 0 50px;
+        font-size: small;
+    }
+}
