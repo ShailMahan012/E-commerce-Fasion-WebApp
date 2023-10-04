@@ -22,7 +22,7 @@ def user_page():
     user_id = session.get("user_id")
     user = db.session.get(Users, user_id)
     if user:
-        return render_template("user.html", TITLE="User", user=user)
+        return render_template("user.html", TITLE="Grabalty | User", user=user)
     flash("User not found!", "danger")
     return redirect("/user/logout")
 
@@ -59,6 +59,20 @@ def update_info():
     return redirect("/user/logout")
 
 
+@user.route("/track_order", methods=["GET", "POST"])
+@login_required
+def track_order():
+    if request.method == "POST":
+        email = request.form["email"]
+        invoice = request.form["invoice"]
+        if len(invoice) > 4:
+            invoice = invoice[4:]
+            flash("Order not found", "danger")
+        else:
+            flash("Invalid invoice number", "danger")
+    return render_template("track_order.html", TITLE="Grabalty | Track Order")
+
+
 @user.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -74,7 +88,7 @@ def login():
             session["user_id"] = user.id
             return redirect(redirect_path)
         flash("Incorrect Information!", "danger")
-    return render_template("login_user.html", PAGE="LOGIN")
+    return render_template("login_user.html", PAGE="Grabalty | LOGIN")
 
 
 @user.route("/signup", methods=["GET", "POST"])
@@ -100,7 +114,7 @@ def signup():
             return redirect("/user/login")
 
         flash("Account with this email already exist!", "warning")
-    return render_template("login_user.html", PAGE="SIGNUP")
+    return render_template("login_user.html", PAGE="Grabalty | SIGNUP")
 
 
 @user.route("/logout")
