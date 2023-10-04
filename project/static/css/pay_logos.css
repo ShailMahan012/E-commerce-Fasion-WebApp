@@ -1,0 +1,20 @@
+.pay-logos {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.list-payment {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40%;
+}
+
+@media screen and (max-width: 1100px){
+    .list-payment {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
