@@ -1,0 +1,38 @@
+#searched-product-row {
+    justify-content: space-around;
+    padding: 20px 0px;
+}
+#search {
+    background-color: white;
+}
+#search .column {
+    flex-grow: unset;
+}
+.searched-product {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.searched-product-img {
+    width: 100%;
+    max-width: 200px;
+}
+
+.searched-product-title {
+    margin-top: 10px;
+    text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+    #searched-product-row {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .searched-product {
+        width: 100px;
+    }
+}

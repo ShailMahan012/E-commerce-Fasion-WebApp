@@ -60,6 +60,21 @@ def search(page=1):
     return render_template("items.html", TITLE=TITLE, products=products, images=images, search=search, count=count, page_name="search")
 
 
+@app.route("/search/products")
+def search_products():
+    search = request.args.get('search_input')
+    if search:
+        search = search.strip()
+        products = Products.query.filter(Products.title.like(f"%{search}%")).limit(4).all()
+        images = [x[0] for x in get_images(products)]
+        products = get_product_dict(products)
+        for i in range(len(products)):
+            products[i]['img'] = images[i]
+    else:
+        products = []
+    return json.jsonify(products)
+
+
 @app.route("/category/<string:cat>/search")
 @app.route("/category/<string:cat>/search/<int:page>")
 def category(cat, page=1):

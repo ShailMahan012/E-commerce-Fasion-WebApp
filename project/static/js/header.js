@@ -56,27 +56,36 @@ function pos_search() {
         let top;
 
         // nav2 height is 0. Which means nav2 is hidden and there is no toggling navbar
+        // For Desktop
         if (nav2.clientHeight === 0) {
             if (search_show) {
                 top = 0
             }
             else {
-                top = -nav.clientHeight
+                // top = -nav.clientHeight
+                top = -search.clientHeight
             }
         }
+        // For desktop
         else {
             // if nav is going to open then set search box right bellow the opened navbar
             if (nav_show) {
                 if (search_show) {
+                    nav.style.display = "none";
                     top = nav.clientHeight
+                    // top = 0
                 }
                 else {
-                    top = nav.clientHeight - nav2.clientHeight - search.clientHeight
+                    // top = nav.clientHeight - nav2.clientHeight - search.clientHeight
+                    top = -search.clientHeight
+                    nav.style.display = "flex";
                 }
             }
             // if nav is going to close then set search box position with negative navbar height so that it will completely hidden
             else {
-                top = -nav2.clientHeight
+                // top = -nav2.clientHeight
+                top = -search.clientHeight
+                nav.style.display = "flex";
             }
         }
         search.style.transform = `translateY(${top}px)`

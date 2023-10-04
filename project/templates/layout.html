@@ -1,7 +1,7 @@
 <!-- 
     wave Hi, I’m Shail Murtaza.
     I have created this website from scratch without help of any framework on front end.
-
+    GITHUB: https://github.com/ShailMurtaza
     📫 How to reach me ? shailmurtaza@gmail.com
     📫 How to reach me ? (WhatsApp) +92 321 6295534
     📫 How to reach me ? (Telegram Username) @ShailMurtaza
@@ -28,6 +28,7 @@
     <title>{{TITLE}}</title>
     {% block head %}
     {% endblock %}
+    <link rel="stylesheet" href="/static/css/search.css">
 </head>
 
 <body onload="after_load()">
@@ -112,6 +113,7 @@
                     <div class="column-3"><button type="button" class="btn-search" onclick="hide_search()"><i
                                 class="fal fa-times"></i></button></div>
                 </div>
+                <div class="row" id="searched-product-row"></div>
             </form>
             <nav id="nav2" class="nav">
                 <ul class="nav-left">
@@ -194,6 +196,7 @@
     <script src="/static/js/subscription.js"></script>
     <script src="/static/js/cookies.js"></script>
     <script src="/static/js/header.js"></script>
+    <script src="/static/js/search.js"></script>
 </body>
 
 </html>
