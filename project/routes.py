@@ -119,7 +119,8 @@ def product(id):
         var_images = []
         for i, _ in enumerate(variants):
             image = Images.query.with_entities(Images.filename).filter_by(product_id=variants[i]["id"]).order_by("order").first()
-            variants[i]["img"] = image.filename
+            if image:
+                variants[i]["img"] = image.filename
         return render_template("product.html", TITLE=TITLE, product=product, images=images, Markup=Markup, coupon=coupon, variants=variants)
     return redirect("/")
 

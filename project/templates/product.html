@@ -86,17 +86,19 @@
         btn_remove_product.style.display = "none"
     }
 
-    function add_product(id) {
+    function add_product(id, alert=true) {
+        remove_product(prd_id)
         add_to_cart(id, 1, prd_size)
         btn_add_product.style.display = "none"
         btn_remove_product.style.display = "initial"
+        if (alert)
         msg("Item Added to Cart", "primary")
     }
     function remove_product(id) {
         remove_from_cart(id)
         btn_add_product.style.display = "initial"
         btn_remove_product.style.display = "none"
-        msg("Item Removed to Cart", "warning")
+        // msg("Item Removed to Cart", "warning")
     }
     function size(element) {
         for (let i=0;i<size_labels.length;i++) {
@@ -104,8 +106,10 @@
         }
         element.style.border = "1px solid black"
         prd_size = element.attributes["for"].value
-        remove_product(prd_id)
-        add_product(prd_id)
+        let prd_index = find_product(get_products(), prd_id)
+        if (prd_index != -1) {
+            add_product(prd_id, alert=false)
+        }
     }
 </script>
 {% endblock %}
