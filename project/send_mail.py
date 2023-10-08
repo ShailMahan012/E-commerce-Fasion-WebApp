@@ -83,3 +83,63 @@ def sub_letter(receiver_email):
 </html>
 """
     send_mail(receiver_email, "Thanks For Subscribing", content)
+
+def password_reset_mail(code, receiver_email):
+    content = f"""<html>
+    <head>
+        <title>Code</title>
+        <style>
+            body, html {{
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: #d1d1d1;
+            }}
+            #container {{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 50px;
+            }}
+            .line {{
+                background-color: #c8c8c8;
+                height: 1px;
+                width: 100%;
+                border: none;
+                outline: none;
+            }}
+            .icon {{
+                width: 130px;
+            }}
+            a {{
+                text-decoration: underline;
+                color: black;
+            }}
+            .letter {{
+                text-align: center;
+                margin: 8px 0px;
+                color: black;
+            }}
+            .image {{
+                text-align: center;
+                width: 100%;
+            }}
+        </style>
+    </head>
+    <body>
+        <main id="container">
+            <div class="image">
+                <a href="https://grabaltyofficial.com"><img class="icon" src="http://grabaltyofficial.com/static/GRABALTY-final.png" alt="GRABALTY"></a>
+            </div>
+            <hr class="line">
+            <p class="letter">
+                Your Code: <strong>{code}</strong>
+            </p>
+            <p class="letter">
+                We hope to see you again on <a target="_blank" href="https://grabaltyofficial.com">grabaltyofficial.com</a>.
+            </p>
+        </main>
+    </body>
+</html>
+"""
+    send_mail(receiver_email, "Password Reset Code", content)

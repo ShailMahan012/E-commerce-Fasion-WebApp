@@ -1,8 +1,8 @@
 # Routes for user
 from project import app, user, db
+from project.send_mail import password_reset_mail
 from project.models import Users
 from flask import render_template, request, session, redirect, json, flash
-# from werkzeug.utils import secure_filename
 from functools import wraps
 from base64 import b64encode, b64decode
 
@@ -115,6 +115,32 @@ def signup():
 
         flash("Account with this email already exist!", "warning")
     return render_template("login_user.html", TITLE="Grabalty | SIGNUP", PAGE="SIGNUP")
+
+
+@user.route("/reset_password", methods=["GET", "POST"])
+def forgot_password():
+    if request.method == "POST":
+        data = request.get_json()
+        if data.get("email"):
+            email = data.get("email").get("email")
+            code = data.get("email").get("code")
+            user = Users.query.filter_by(email=email).first()
+            if user and code:
+                password_reset_mail(code, email)
+                return "true"
+            elif not user:
+                return "Not Found"
+        elif data.get("password"):
+            email = data.get("password").get("email")
+            password = data.get("password").get("password")
+            if email and password:
+                user = Users.query.filter_by(email=email).first()
+                if user:
+                    user.set_password(password)
+                    db.session.commit()
+                    return "true"
+        return "false"
+    return render_template("reset_password.html", TITLE="Grabalty | Password Reset")
 
 
 @user.route("/logout")
