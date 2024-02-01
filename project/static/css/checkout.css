@@ -14,7 +14,7 @@ main {
 }
 
 .form-input:focus {
-    border-color:rgb(111, 111, 111);
+    border-color: rgb(111, 111, 111);
 }
 
 .column {
@@ -36,7 +36,9 @@ a {
 
 #paypal-button-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 30px;
     background-color: 0;
@@ -47,12 +49,17 @@ a {
     top: -500px;
 }
 
-#paypal-button {
+#paypal-button-inner-container {
     width: 50%;
     padding: 20px;
     background-color: white;
     border: none;
     border-radius: 2%;
+    overflow-y: scroll;
+}
+#close_btn {
+    margin-bottom: 5px;
+    width: 100%;
 }
 .input-label {
     background-color: white;
@@ -71,8 +78,11 @@ a {
     main {
         padding: 30px;
     }
-    #paypal-button {
-        width: initial;
+    #paypal-button-container {
+        padding: 20px;
+    }
+    #paypal-button-inner-container {
+        width: 100%;
     }
     .btn-black {
         width: 100%;

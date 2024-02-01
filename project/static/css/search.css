@@ -4,6 +4,7 @@
 }
 #search {
     background-color: white;
+    transform: translateY(-150%);
 }
 #search .column {
     flex-grow: unset;

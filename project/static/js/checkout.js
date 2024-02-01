@@ -87,17 +87,21 @@ async function send_data(form, url) {
 
 function show_paypal() {
     overlay.style.display = "block"
+    paypal_container.style.display = null
     setTimeout(()=> {
         overlay.style.opacity = "1"
         paypal_container.style.top = "10px"
+        paypal_container.style.bottom = "0"
     }, 200)
     
 }
 
 function hide_paypal() {
     overlay.style.opacity = "0"
-    paypal_container.style.top = "-500px"
+    paypal_container.style.top = null
+    paypal_container.style.bottom = null
     setTimeout(()=> {
+        paypal_container.style.display = "none"
         overlay.style.display = "none"
     }, 200)
     
