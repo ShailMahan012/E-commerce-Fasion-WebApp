@@ -47,7 +47,7 @@ a {
 }
 
 .column h1 {
-    font-size: 4em;
+    font-size: 2em;
 }
 .column h2 {
     font-size: 1.5em;
@@ -145,6 +145,9 @@ a {
         padding: 13px;
         font-size: 0.7em;
     }
+	.column h1 {
+		font-size: 1em;
+}
 }
 
 /* Responsive END */

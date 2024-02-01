@@ -34,7 +34,8 @@ def index():
     product_ids = list(map(lambda prd: prd.product_id, Main_Collection_Home.query.all())) # get only product_ids from table
     for i in product_ids:
         product = db.session.get(Products, i)
-        main_collection.append(product)
+        if product:
+            main_collection.append(product)
     images = get_images(main_collection)
     main_collection = get_product_dict(main_collection)
     return render_template("home.html", TITLE=TITLE, main_collection=main_collection, images=images)
